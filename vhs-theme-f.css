@@ -1,0 +1,985 @@
+/* Direction F — Bent (CSS only)
+   Circuit-bending inspired. No footage, stills, or textures from the video work.
+   Palette and smear shapes nod to the reference sheet; every mark is
+   CSS / SVG: posterized color-band headings, CRT bezels, a generated
+   smear field, and a hover databend. */
+@import url("fonts/vhs-fonts.css");
+
+:root {
+  --bg: #050506;
+  --surface: #0c0c10;
+  --surface-2: #14141a;
+  --text: #f3eef8;
+  --muted: #b7aec0;
+  --line: #2a2434;
+  --accent: #ff4ae0;
+  --accent-2: #ffa0f2;
+  --bent-blue: #3a48ff;
+  --bent-green: #00d040;
+  --bent-orange: #e07a38;
+  --bent-navy: #0020f0;
+  --ink: #07060a;
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  --smear: linear-gradient(180deg,
+      #050506 0 10%,
+      #0020f0 10% 16%,
+      #f050f0 16% 34%,
+      #3a48ff 34% 40%,
+      #050506 40% 58%,
+      #00d040 58% 62%,
+      #e07a38 62% 66%,
+      #ff4ae0 66% 70%,
+      #050506 70% 100%);
+}
+
+html { background: var(--bg); }
+
+/* Full-viewport CRT grain on html and body so short pages never fall
+   through to a solid black void, including the side gutters. The
+   colorful smear stays only on the homepage hero. */
+html[data-vhs="f"],
+html[data-vhs="f"] body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.25) 0 1px, transparent 1px 3px),
+    var(--noise),
+    linear-gradient(180deg, #050506, #0a0a0e);
+  background-attachment: fixed;
+  background-size: auto, 180px 180px, auto;
+}
+html[data-vhs="f"] body {
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+  font-family: "IBM Plex Sans", Inter, ui-sans-serif, "Segoe UI", sans-serif;
+}
+html[data-vhs="f"] main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+}
+html[data-vhs="f"] .site-header,
+html[data-vhs="f"] footer {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: none;
+}
+/* Homepage: hero grows to fill leftover height; marquee stays in
+   normal flow at the bottom of main, just above the footer. */
+html[data-vhs="f"][data-page="home"] .hero--text {
+  flex: 1 1 auto;
+  max-width: none;
+  width: 100%;
+  align-content: start;
+}
+@media (min-width: 761px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: end;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-status {
+    position: static;
+    margin: 0 0 0 clamp(16px, 2vw, 32px);
+  }
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+/* ---------- Bent header: magenta / blue / green hairlines ---------- */
+.site-header {
+  background: #050506 !important;
+  border-bottom: 0 !important;
+  box-shadow:
+    0 2px 0 var(--accent),
+    0 4px 0 var(--bent-blue),
+    0 6px 0 var(--bent-green);
+  min-height: 76px;
+  backdrop-filter: none;
+}
+.brand {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow: 3px 0 0 var(--bent-blue), -3px 0 0 var(--accent);
+}
+.brand span { color: var(--accent); }
+
+.site-nav a {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d8d0e0;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+@media (max-width: 760px) {
+  .site-nav { display: none; }
+  .site-nav.open { display: flex; }
+  .site-nav {
+    background: #0a0a0e;
+    border-color: var(--accent);
+  }
+}
+@media (min-width: 761px) {
+  .site-nav { display: flex; }
+}
+
+.skip-link { background: var(--accent); color: #fff; }
+.menu-toggle { color: #fff; }
+
+/* ---------- Hero: generated smear field + CRT curvature, no clip ---------- */
+.hero--text {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* Hug the hero content. A near-viewport min-height turned the smear
+     into an empty band of its own and pushed the marquee off-screen. */
+  min-height: 0;
+  align-items: start;
+  padding-top: clamp(16px, 2.2vw, 36px);
+  padding-bottom: clamp(16px, 2vw, 28px);
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,.62) 100%),
+    var(--smear);
+  background-size: auto, 100% 180%;
+  background-position: 0 0, 50% 0%;
+  animation: smear-drift 10s linear infinite;
+}
+@keyframes smear-drift {
+  0%   { background-position: 0 0, 50% 0%; }
+  100% { background-position: 0 0, 50% 100%; }
+}
+.hero--text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg,
+      rgba(5,5,6,.96) 0%,
+      rgba(5,5,6,.95) 54%,
+      rgba(5,5,6,.4) 68%,
+      rgba(5,5,6,.1) 100%);
+}
+/* Horizontal smear / wavy tear, painted in CSS — not a still, not a plaid */
+.hero--text::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: min(42%, 560px);
+  z-index: 1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(180deg,
+      #ff4ae0 0 22px,
+      #3a48ff 22px 40px,
+      #0020f0 40px 52px,
+      transparent 52px 70px,
+      #00d040 70px 82px,
+      #e07a38 82px 92px,
+      #ff4ae0 92px 108px,
+      transparent 108px 140px),
+    var(--noise);
+  background-size: auto, 180px 180px;
+  mix-blend-mode: screen;
+  opacity: .8;
+  clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%, 12% 84%, 24% 70%, 6% 54%, 22% 38%, 8% 20%);
+  animation: bent-tear 5.5s steps(4, end) infinite;
+}
+@keyframes bent-tear {
+  0%, 100% { transform: translateX(0); filter: hue-rotate(0deg); }
+  25%      { transform: translateX(8px); filter: hue-rotate(18deg); }
+  50%      { transform: translateX(-6px); filter: hue-rotate(-10deg); }
+  75%      { transform: translateX(3px); filter: hue-rotate(6deg); }
+}
+
+.hero-copy, .hero-status, .freelance-alert { z-index: 2; }
+
+.eyebrow,
+.project-kicker,
+.cap-index,
+.timeline-date,
+.status-card p,
+.edu-label,
+.edu-school,
+.section-number {
+  font-family: "Share Tech Mono", ui-monospace, monospace !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+/* Posterized color-band headings + a generated glitch slice */
+.hero h1,
+h2 {
+  font-family: "IBM Plex Sans", Inter, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    #ff4ae0 0 22%,
+    #3a48ff 22% 44%,
+    #00d040 44% 62%,
+    #f3eef8 62% 100%
+  );
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(5px 0 0 rgba(58,72,255,.75)) drop-shadow(-5px 0 0 rgba(255,74,224,.75));
+}
+.hero h1 span {
+  color: transparent;
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+h3 { font-family: "IBM Plex Sans", Inter, sans-serif; color: #f3eef8; }
+
+/* Name glitch: the previous bent-slice only nudged a static color
+   bar for ~12% of a 3.6s loop, so the letters themselves never moved. */
+.hero h1 {
+  position: relative;
+  overflow: visible;
+  background-size: 100% 140%;
+  background-position: 0 0;
+  filter: none;
+  text-shadow:
+    5px 0 0 rgba(58,72,255,.8),
+    -5px 0 0 rgba(255,74,224,.8);
+  animation:
+    name-bands 1.15s steps(4, end) infinite,
+    name-rgb 0.42s steps(2, end) infinite;
+}
+.hero h1::before,
+.hero h1::after {
+  content: "James\A Fischer.";
+  white-space: pre;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-transform: none;
+  text-align: inherit;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  filter: none;
+  pointer-events: none;
+  overflow: visible;
+}
+.hero h1::before {
+  color: #3a48ff;
+  text-shadow: none;
+  clip-path: inset(12% -8% 58% -8%);
+  animation: name-slice-a 0.85s steps(2, end) infinite;
+}
+.hero h1::after {
+  color: #00d040;
+  text-shadow: none;
+  clip-path: inset(48% -8% 14% -8%);
+  animation: name-slice-b 0.7s steps(2, end) infinite;
+}
+@keyframes name-rgb {
+  0%   { text-shadow: 5px 0 0 rgba(58,72,255,.85), -4px 0 0 rgba(255,74,224,.85); }
+  25%  { text-shadow: -6px 1px 0 rgba(58,72,255,.9), 7px 0 0 rgba(255,74,224,.9); }
+  50%  { text-shadow: 8px -1px 0 rgba(0,208,64,.75), -5px 1px 0 rgba(255,74,224,.9); }
+  75%  { text-shadow: -7px 0 0 rgba(58,72,255,.85), 4px 2px 0 rgba(255,74,224,.8); }
+  100% { text-shadow: 5px 0 0 rgba(58,72,255,.85), -4px 0 0 rgba(255,74,224,.85); }
+}
+@keyframes name-bands {
+  0%   { background-position: 0 0; background-size: 100% 140%; }
+  25%  { background-position: 10px 18%; background-size: 130% 180%; }
+  50%  { background-position: -14px -8%; background-size: 100% 200%; }
+  75%  { background-position: 8px 28%; background-size: 140% 160%; }
+  100% { background-position: 0 0; background-size: 100% 140%; }
+}
+@keyframes name-slice-a {
+  0%   { transform: translate(0, 0); clip-path: inset(12% -8% 58% -8%); }
+  16%  { transform: translate(16px, -2px); clip-path: inset(8% -8% 62% -8%); }
+  32%  { transform: translate(-18px, 1px); clip-path: inset(20% -8% 46% -8%); }
+  48%  { transform: translate(10px, 2px); clip-path: inset(6% -8% 70% -8%); }
+  64%  { transform: translate(-8px, 0); clip-path: inset(24% -8% 40% -8%); }
+  72%  { transform: translate(34px, -5px) skewX(-10deg); clip-path: inset(10% -12% 50% -12%); }
+  80%  { transform: translate(-36px, 4px) skewX(8deg); clip-path: inset(30% -12% 20% -12%); }
+  88%  { transform: translate(8px, 0); clip-path: inset(14% -8% 56% -8%); }
+  100% { transform: translate(0, 0); clip-path: inset(12% -8% 58% -8%); }
+}
+@keyframes name-slice-b {
+  0%   { transform: translate(0, 0); clip-path: inset(48% -8% 14% -8%); }
+  18%  { transform: translate(-14px, 1px); clip-path: inset(52% -8% 10% -8%); }
+  36%  { transform: translate(20px, -2px); clip-path: inset(40% -8% 22% -8%); }
+  54%  { transform: translate(-10px, 0); clip-path: inset(58% -8% 8% -8%); }
+  66%  { transform: translate(-32px, 5px) skewX(9deg); clip-path: inset(36% -12% 18% -12%); }
+  74%  { transform: translate(30px, -3px) skewX(-7deg); clip-path: inset(50% -12% 6% -12%); }
+  86%  { transform: translate(-6px, 1px); clip-path: inset(46% -8% 16% -8%); }
+  100% { transform: translate(0, 0); clip-path: inset(48% -8% 14% -8%); }
+}
+
+.hero-role {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: clamp(0.78rem, 1.1vw, 0.92rem);
+  color: var(--bent-green);
+  margin: clamp(12px, 1.8vw, 22px) 0 8px;
+}
+.hero-intro { color: #dcd4e6; max-width: 640px; }
+.hero--text .eyebrow { margin: 0 0 10px; }
+.hero--text .hero-actions { margin-top: clamp(14px, 1.8vw, 22px); }
+.hero--text .hero-links { margin-top: clamp(12px, 1.6vw, 20px); }
+@media (min-width: 761px) {
+  .hero--text h1 {
+    font-size: clamp(3.8rem, 6.5vw + 2vh, 6.8rem);
+  }
+}
+
+/* Large monitors: scale the hero copy so it fills the left column
+   and sits in the vertical center. 1024x768 and 1280x800 keep the
+   tighter sizes above so the marquee stays on the first screen. */
+@media (min-width: 1440px) and (min-height: 880px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    align-content: center;
+    grid-template-columns: minmax(0, 58%) auto 1fr;
+    padding-top: clamp(28px, 3vw, 56px);
+    padding-bottom: clamp(28px, 3vw, 56px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-copy {
+    max-width: none;
+    width: 100%;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-status {
+    margin-left: clamp(20px, 1.5vw, 32px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text::after {
+    width: min(44%, 980px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text::before {
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+      linear-gradient(90deg,
+        rgba(5,5,6,.96) 0%,
+        rgba(5,5,6,.9) 50%,
+        rgba(5,5,6,.4) 64%,
+        rgba(5,5,6,.08) 100%);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text h1 {
+    font-size: clamp(6.8rem, 6.8vw + 1.2vh, 8.5rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .eyebrow {
+    margin: 0 0 16px;
+    font-size: clamp(0.8rem, 0.55vw + 0.45rem, 1rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero-role {
+    font-size: clamp(0.88rem, 0.55vw + 0.5rem, 1.12rem);
+    margin: clamp(18px, 1.8vw, 32px) 0 10px;
+  }
+  html[data-vhs="f"][data-page="home"] .hero-intro {
+    max-width: none;
+    font-size: clamp(1.12rem, 0.7vw + 0.55rem, 1.42rem);
+    line-height: 1.55;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-actions {
+    margin-top: clamp(22px, 2vw, 36px);
+    gap: 14px 16px;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .button {
+    min-height: 54px;
+    padding: 0 24px;
+    font-size: clamp(0.92rem, 0.4vw + 0.55rem, 1.08rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-links {
+    margin-top: clamp(16px, 1.5vw, 28px);
+    font-size: clamp(0.92rem, 0.35vw + 0.55rem, 1.08rem);
+    gap: 12px 28px;
+  }
+}
+@media (min-width: 1920px) and (min-height: 1000px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    grid-template-columns: minmax(0, 60%) auto 1fr;
+    padding-top: clamp(36px, 3.2vw, 72px);
+    padding-bottom: clamp(36px, 3.2vw, 72px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text h1 {
+    font-size: clamp(8.2rem, 6.4vw + 1.5vh, 10.6rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .eyebrow {
+    margin: 0 0 20px;
+    font-size: clamp(0.9rem, 0.45vw + 0.5rem, 1.08rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero-role {
+    font-size: clamp(1rem, 0.5vw + 0.55rem, 1.22rem);
+    margin: clamp(22px, 2vw, 40px) 0 14px;
+  }
+  html[data-vhs="f"][data-page="home"] .hero-intro {
+    font-size: clamp(1.22rem, 0.55vw + 0.6rem, 1.55rem);
+    line-height: 1.55;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-actions {
+    margin-top: clamp(28px, 2.2vw, 44px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .button {
+    min-height: 58px;
+    padding: 0 28px;
+    font-size: clamp(1rem, 0.3vw + 0.65rem, 1.15rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-links {
+    margin-top: clamp(20px, 1.6vw, 32px);
+    font-size: clamp(1rem, 0.28vw + 0.62rem, 1.15rem);
+  }
+}
+
+.button {
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.button-primary { background: var(--accent); color: #fff; }
+.button-primary:hover { background: var(--accent-2); color: #1a0a16; }
+.button-secondary {
+  border: 1px solid var(--bent-blue);
+  color: #fff;
+  background: rgba(0,0,0,.4);
+  box-shadow: 3px 0 0 var(--accent), -3px 0 0 var(--bent-green);
+}
+.button-secondary:hover { background: rgba(58,72,255,.18); }
+
+.status-card {
+  background: rgba(5,5,6,.84);
+  border: 2px solid var(--accent);
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  box-shadow: 5px 0 0 var(--bent-blue), -5px 0 0 var(--bent-green);
+}
+.status-card p { color: var(--bent-green); }
+.status-dot {
+  background: var(--accent);
+  border-radius: 0;
+  box-shadow: 0 0 0 4px rgba(255,74,224,.2);
+}
+
+.marquee {
+  position: relative;
+  z-index: 2;
+  background: #0a0a0e;
+  color: #f3eef8;
+  border: 0;
+  border-top: 3px solid var(--accent);
+  box-shadow:
+    0 -3px 0 var(--bent-blue),
+    0 3px 0 var(--bent-green);
+  overflow: hidden;
+}
+.marquee-track {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: #f3eef8;
+}
+.marquee-track + .marquee-track {
+  border-top: 1px solid rgba(58, 72, 255, .55);
+  color: var(--accent);
+}
+.marquee i {
+  color: var(--bent-green);
+  font-style: normal;
+}
+
+/* Broken-CRT card frames with bent-color edges */
+.project-card,
+.about-panel,
+.education-card,
+.edu-panel,
+.personal-grid article {
+  border-radius: 18px 18px 12px 12px;
+  background: var(--surface);
+  border: 8px solid #16141c;
+  outline: 1px solid #000;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,.28),
+    0 0 0 1px #2a2a32,
+    7px 0 0 -1px rgba(58,72,255,.75),
+    -7px 0 0 -1px rgba(255,74,224,.75),
+    0 8px 0 -2px rgba(0,208,64,.4);
+  overflow: hidden;
+}
+.venture-card { border-radius: 18px 18px 12px 12px; }
+
+.tags li,
+.edu-chips li,
+.edu-school {
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-color: #3a3244;
+}
+
+.metric-row strong,
+.cap-index,
+.timeline-date,
+.edu-minor,
+.degree span,
+.contact h2 span,
+.text-link { color: var(--accent); }
+
+/* About photo in a CRT bezel — face unfiltered */
+.about-portrait {
+  border-radius: 20px 20px 14px 14px;
+  border: 12px solid #1a1a20;
+  box-shadow:
+    inset 0 0 0 1px #000,
+    0 0 0 1px #444,
+    8px 0 0 -2px var(--bent-blue),
+    -8px 0 0 -2px var(--accent),
+    0 10px 0 -3px var(--bent-green);
+  background: #0a0a0c;
+  overflow: hidden;
+  position: relative;
+}
+.about-portrait img { filter: none; }
+
+footer {
+  border: 0;
+  border-top: 10px solid #000;
+  border-image: linear-gradient(90deg, #ff4ae0 0 20%, #3a48ff 20% 40%, #00d040 40% 55%, #e07a38 55% 70%, #0020f0 70% 100%) 10 stretch;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  background: #050506;
+}
+.footer-links a:hover,
+.contact-email:hover { color: var(--accent); }
+
+/* Databend hover — never on cards that hold Graphic Art (click-to-play)
+   videos. Ambient loops (data-ambient, e.g. the Radmin capture) still shake. */
+@media (any-hover: hover) {
+  .project-card:not(:has(video:not([data-ambient]))),
+  .about-panel,
+  .education-card,
+  .personal-grid article {
+    transition: none;
+  }
+  .project-card:not(:has(video:not([data-ambient]))):hover,
+  .about-panel:hover,
+  .education-card:hover,
+  .personal-grid article:hover {
+    animation: databend .32s steps(2, end) 1;
+  }
+  .button:hover { transform: none; }
+}
+@keyframes databend {
+  0%   { transform: translateX(0); filter: none; }
+  20%  { transform: translateX(7px) skewX(-2deg); filter: hue-rotate(50deg) saturate(1.5); }
+  45%  { transform: translateX(-6px); filter: hue-rotate(-25deg) contrast(1.3); }
+  70%  { transform: translateX(3px) skewX(1deg); filter: saturate(1.4); }
+  100% { transform: none; filter: none; }
+}
+
+
+/* Keep Graphic Art videos uncropped and under the nav */
+.media-stage-art video { object-fit: contain; }
+main, .venture-media, .media-stage { position: relative; z-index: 0; }
+.site-header { z-index: 1000; }
+
+@media (max-width: 760px) {
+  .hero--text {
+    min-height: 0;
+    padding-top: 12px;
+    padding-bottom: 10px;
+  }
+  .hero--text .hero-status { margin-top: 8px; }
+  .hero--text .freelance-alert { margin-top: 12px; }
+  .marquee-track { padding-top: 8px; padding-bottom: 8px; }
+  .brand {
+    text-shadow: 1px 0 0 var(--bent-blue), -1px 0 0 var(--accent);
+    overflow: visible;
+    padding-left: 2px;
+    letter-spacing: 0.06em;
+  }
+  .hero--text::after { width: 36%; opacity: .4; }
+  .hero--text::before {
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, rgba(5,5,6,.2), rgba(5,5,6,.55)),
+      linear-gradient(90deg, rgba(5,5,6,.9) 0 70%, rgba(5,5,6,.35) 100%);
+  }
+}
+
+
+/* ========================================================================
+   Per-page motion (CSS/SVG only, no footage). Layers sit behind main
+   (z-index: 0) so they never cover nav, photos, or Graphic Art videos.
+   ======================================================================== */
+html[data-vhs="f"] main { position: relative; z-index: 1; isolation: isolate; }
+
+/* ----- About: rolling tracking band behind the layout ----- */
+html[data-vhs="f"][data-page="about"] body::before {
+  content: "";
+  position: fixed;
+  left: -2%;
+  right: -2%;
+  height: 28px;
+  top: -32px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.9) 0 1px,
+      rgba(255,74,224,.35) 1px 3px,
+      rgba(58,72,255,.4) 3px 5px,
+      rgba(255,255,255,.15) 5px 8px,
+      transparent 8px 12px),
+    linear-gradient(180deg,
+      rgba(255,74,224,.85) 0 2px,
+      #f4f1ea 2px 40%,
+      #fff 40% 62%,
+      rgba(58,72,255,.9) 62% 100%);
+  opacity: .9;
+  animation: page-track-roll 6.5s linear infinite;
+}
+@keyframes page-track-roll {
+  0%   { top: -36px; }
+  100% { top: 108%; }
+}
+
+/* ----- Projects: circuit-trace pulse in the margins ----- */
+html[data-vhs="f"][data-page="projects"] body::before,
+html[data-vhs="f"][data-page="projects"] body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: min(12vw, 140px);
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='400' viewBox='0 0 120 400'><g fill='none' stroke-width='1.4' stroke-linecap='square'><path stroke='%23ff4ae0' d='M20 0 V50 H70 V110 H20 V170 H90 V230 H40 V300 H70 V400'/><path stroke='%233a48ff' d='M50 0 V40 H100 V90 H50 V150 H15 V220 H80 V280 H50 V400'/><path stroke='%2300d040' d='M90 0 V70 H40 V130 H100 V200 H60 V270 H100 V400'/></g></svg>");
+  background-repeat: repeat-y;
+  background-size: 100% 400px;
+  opacity: .55;
+  animation: trace-pulse 4s linear infinite;
+}
+html[data-vhs="f"][data-page="projects"] body::before { left: 0; }
+html[data-vhs="f"][data-page="projects"] body::after { right: 0; transform: scaleX(-1); animation-duration: 5.2s; animation-direction: reverse; }
+@keyframes trace-pulse {
+  0%   { background-position: 0 0; filter: drop-shadow(0 0 0 transparent); }
+  50%  { background-position: 0 200px; filter: drop-shadow(0 0 6px rgba(255,74,224,.45)); }
+  100% { background-position: 0 400px; filter: drop-shadow(0 0 0 transparent); }
+}
+
+/* ----- Graphic Art: scanline sweep on section intros only (never on videos) ----- */
+html[data-vhs="f"][data-page="graphic-art"] .section-intro {
+  position: relative;
+  overflow: hidden;
+}
+html[data-vhs="f"][data-page="graphic-art"] .section-intro::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 42%;
+  top: -42%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,74,224,.28) 38%,
+    rgba(255,255,255,.22) 50%,
+    rgba(58,72,255,.3) 62%,
+    transparent 100%);
+  animation: scan-sweep 5.5s ease-in-out infinite;
+}
+html[data-vhs="f"][data-page="graphic-art"] .section-intro > * { position: relative; z-index: 1; }
+@keyframes scan-sweep {
+  0%   { top: -42%; }
+  100% { top: 110%; }
+}
+
+/* ----- Experience: oscilloscope waveforms behind the timeline ----- */
+html[data-vhs="f"][data-page="experience"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .16;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='160' viewBox='0 0 400 160'><path fill='none' stroke='%2300d040' stroke-width='1.6' d='M0 80 C 25 20, 50 140, 80 80 S 140 20, 160 80 S 220 140, 240 80 S 300 20, 320 80 S 380 140, 400 80'/><path fill='none' stroke='%23ff4ae0' stroke-width='1.2' opacity='.8' d='M0 80 C 30 140, 60 20, 90 80 S 150 140, 180 80 S 240 20, 270 80 S 330 140, 360 80 S 390 20, 400 80'/></svg>");
+  background-repeat: repeat;
+  background-size: 400px 160px;
+  animation: wave-scroll 8s linear infinite;
+}
+@keyframes wave-scroll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* ----- Education: chroma / RGB plate drift ----- */
+html[data-vhs="f"][data-page="education"] body::before,
+html[data-vhs="f"][data-page="education"] body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: min(9vw, 110px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: .4;
+}
+html[data-vhs="f"][data-page="education"] body::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(255,74,224,.45), transparent 100%);
+  animation: chroma-drift 7s ease-in-out infinite alternate;
+}
+html[data-vhs="f"][data-page="education"] body::after {
+  right: 0;
+  left: auto;
+  background: linear-gradient(270deg, rgba(58,72,255,.45), transparent 100%);
+  animation: chroma-drift 7s ease-in-out infinite alternate-reverse;
+}
+html[data-vhs="f"][data-page="education"] #education {
+  padding-top: clamp(28px, 3.5vw, 48px);
+}
+@keyframes chroma-drift {
+  from { transform: translateX(-24px); }
+  to   { transform: translateX(24px); }
+}
+
+/* ----- Blog: vertical-hold / interlace drift ----- */
+html[data-vhs="f"][data-page="blog"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0 11px,
+      rgba(255,74,224,.14) 11px 12px,
+      transparent 12px 23px,
+      rgba(58,72,255,.14) 23px 24px
+    );
+  background-size: 100% 240px;
+  animation: hold-roll 6s linear infinite;
+  opacity: .45;
+}
+@keyframes hold-roll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 240px; }
+}
+
+/* ----- Contact: phosphor bloom + creeping color-bar ----- */
+html[data-vhs="f"][data-page="contact"],
+html[data-vhs="f"][data-page="contact"] body {
+  overflow-x: hidden;
+}
+html[data-vhs="f"][data-page="contact"] .contact {
+  position: relative;
+  overflow-x: hidden;
+}
+html[data-vhs="f"][data-page="contact"] .contact::before {
+  content: "";
+  position: absolute;
+  inset: -8% 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 30% 40%, rgba(255,74,224,.22), rgba(58,72,255,.08) 42%, transparent 68%);
+  animation: phosphor-bloom 4.5s ease-in-out infinite;
+}
+html[data-vhs="f"][data-page="contact"] .contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 8px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    #ff4ae0 0 20%, #3a48ff 20% 40%, #00d040 40% 55%, #e07a38 55% 70%, #0020f0 70% 100%);
+  background-size: 200% 100%;
+  animation: bar-creep 6s linear infinite;
+}
+html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-index: 1; }
+@keyframes phosphor-bloom {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.08); }
+}
+@keyframes bar-creep {
+  0%   { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (max-width: 760px) {
+  html[data-vhs="f"][data-page="projects"] body::before,
+  html[data-vhs="f"][data-page="projects"] body::after {
+    width: 18px;
+    opacity: .35;
+  }
+}
+
+
+/* Radmin card: shake the card with transform only and tint the copy, but
+   never put a filter on an ancestor of the ambient video. Filters on a
+   video's ancestor force it off the GPU video layer, and Chromium/WebView2
+   on Windows can freeze the frame. */
+@media (any-hover: hover) {
+  .project-card.radmin-card.radmin-card:hover { animation: databend-shift .32s steps(2, end) 1; }
+  .project-card.radmin-card:hover > :not(.radmin-figure) { animation: databend-tint .32s steps(2, end) 1; }
+}
+@keyframes databend-shift {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(7px) skewX(-2deg); }
+  45%  { transform: translateX(-6px); }
+  70%  { transform: translateX(3px) skewX(1deg); }
+  100% { transform: none; }
+}
+@keyframes databend-tint {
+  0%   { filter: none; }
+  20%  { filter: hue-rotate(50deg) saturate(1.5); }
+  45%  { filter: hue-rotate(-25deg) contrast(1.3); }
+  70%  { filter: saturate(1.4); }
+  100% { filter: none; }
+}
+.radmin-card video[data-ambient] { transform: translateZ(0); backface-visibility: hidden; }
+
+/* Graphic Art video cards shake too, the Radmin way. The card
+   moves with transform only; the colour flicker runs on the text side
+   (meta + content), never on .venture-media or any ancestor of the video,
+   and the video sits on its own compositing layer (portfolio-v12.css). */
+@media (any-hover: hover) {
+  .project-card:has(.media-stage-art video:not([data-ambient])) { transition: none; }
+  .project-card:has(.media-stage-art video:not([data-ambient])):hover { animation: databend-shift .32s steps(2, end) 1; }
+  .project-card:has(.media-stage-art video:not([data-ambient])):hover > :not(.venture-media) { animation: databend-tint .32s steps(2, end) 1; }
+}
+
+/* -------------------------------------------------------------------------
+   Homepage freelance availability alert. Lives in the hero's unused
+   right-hand column (the 1fr "deadspace") on wide screens; stacks
+   under the current-focus card on phones. Does not move other hero
+   content.
+   ------------------------------------------------------------------------- */
+.freelance-alert {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-sizing: border-box;
+  max-width: 20rem;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 15px;
+  background: rgba(5,5,6,.88);
+  border: 2px solid var(--accent);
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  box-shadow: 5px 0 0 var(--bent-blue), -5px 0 0 var(--bent-green);
+}
+.freelance-alert-led {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  margin-top: 3px;
+  background: var(--bent-green);
+  box-shadow: 0 0 0 4px rgba(0, 208, 64, .22);
+  animation: freelance-led 1.6s steps(2, end) infinite;
+}
+@keyframes freelance-led {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .28; }
+}
+.freelance-alert-body { min-width: 0; }
+.freelance-alert-kicker {
+  margin: 0 0 5px;
+  color: var(--bent-green);
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.freelance-alert-copy {
+  margin: 0 0 8px;
+  color: #f3eef8;
+  font-size: .82rem;
+  font-weight: 400;
+  letter-spacing: .03em;
+  line-height: 1.4;
+}
+.freelance-alert-mail {
+  color: var(--accent);
+  font-size: .72rem;
+  letter-spacing: .03em;
+  word-break: break-all;
+}
+.freelance-alert-mail:hover,
+.freelance-alert-mail:focus-visible {
+  color: var(--accent-2);
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .freelance-alert {
+    max-width: none;
+  }
+}
+
+/* Mid-width desktops: the 1fr deadspace is too narrow for the badge,
+   so park it in the vertical space above the current-focus card.
+   The copy still spans both rows; the status card stays bottom-aligned. */
+@media (min-width: 761px) and (max-width: 1439px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-copy {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-status {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    width: auto;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .freelance-alert {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+    width: min(20rem, 100%);
+    margin: 0 0 16px clamp(16px, 2vw, 32px);
+  }
+}
+
+/* Wide desktops: sit the alert in the unused 1fr column, top-right. */
+@media (min-width: 1440px) {
+  html[data-vhs="f"][data-page="home"] .hero--text .freelance-alert {
+    justify-self: end;
+    align-self: start;
+    width: min(20rem, 100%);
+    margin: 0 clamp(12px, 2vw, 40px) 0 12px;
+  }
+}

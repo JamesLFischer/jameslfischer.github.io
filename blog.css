@@ -1,0 +1,187 @@
+/* Blog index (post cards) and single post pages.
+   Loaded only by Blog.html and blog/*.html, after the shared CSS.
+   The Blog page motion (vertical-hold drift) comes from vhs-theme-f.css
+   through data-page="blog", which every post page also sets. */
+
+/* ---------- Index: compact grid of post cards ---------- */
+.blog-index { margin-top: clamp(36px, 5vw, 64px); }
+.post-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.post-card { position: relative; }
+.post-card > a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 18px 18px 12px 12px;
+  background: var(--surface, #111016);
+  border: 8px solid #16141c;
+  outline: 1px solid #000;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,.28),
+    0 0 0 1px #2a2a32,
+    7px 0 0 -1px rgba(58,72,255,.75),
+    -7px 0 0 -1px rgba(255,74,224,.75),
+    0 8px 0 -2px rgba(0,208,64,.4);
+  overflow: hidden;
+}
+.post-card > a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.post-thumb {
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.post-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.post-thumb--date-night img { object-position: center 60%; }
+.post-thumb--none {
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(90deg, #ff4ae0 0 14%, #3a48ff 14% 28%, #00d040 28% 42%, #e07a38 42% 56%, #0020f0 56% 70%, #16141c 70% 100%);
+  opacity: .55;
+}
+.post-thumb--none span {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: .16em;
+  font-size: .8rem;
+  color: #fff;
+  background: #000;
+  padding: 4px 10px;
+}
+.post-card-body { display: flex; flex-direction: column; gap: 10px; padding: 18px 20px 20px; flex: 1; }
+.post-card .cap-index { font-size: .72rem; }
+.post-card h3 {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.32rem);
+  line-height: 1.22;
+  letter-spacing: -.02em;
+}
+.post-card .post-date {
+  margin: 0;
+  color: var(--muted);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.post-card .post-excerpt {
+  margin: 0;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.post-card .post-read {
+  margin-top: auto;
+  padding-top: 6px;
+  color: var(--accent);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: .74rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+@media (any-hover: hover) {
+  .post-card > a:hover { animation: databend .32s steps(2, end) 1; }
+  .post-card > a:hover h3 { color: var(--accent-2, #ffa0f2); }
+}
+
+/* Pager (VCR OSD style); hidden until there is more than one page. */
+.post-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 36px;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: .8rem;
+}
+.post-pager[hidden] { display: none; }
+.post-pager button {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--accent);
+  background: #0b0a0e;
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.post-pager button:disabled { color: #5d5566; cursor: default; }
+.post-pager output { color: var(--muted); }
+
+/* ---------- Single post page ---------- */
+.post-page .post-crumb {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+.post-page .post-crumb:hover { text-decoration: underline; }
+.capability-grid article.blog-post h1 {
+  margin: 10px 0 8px;
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
+  line-height: 1.14;
+  letter-spacing: -.03em;
+}
+.post-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 44rem;
+  margin: 36px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.post-nav a,
+.post-nav span {
+  display: block;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  background: #0b0a0e;
+  text-decoration: none;
+  line-height: 1.4;
+}
+.post-nav a { color: var(--accent); }
+.post-nav a:hover { border-color: var(--accent); }
+.post-nav span { color: #5d5566; }
+.post-nav small { display: block; color: var(--muted); font-size: .68rem; margin-bottom: 4px; }
+.post-nav .post-nav-back { text-align: center; }
+.post-nav .post-nav-next { text-align: right; }
+
+@media (max-width: 1080px) {
+  .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .post-grid { grid-template-columns: 1fr; gap: 22px; }
+  .post-thumb { aspect-ratio: 16 / 9; }
+  .post-nav { grid-template-columns: 1fr; }
+  .post-nav .post-nav-back,
+  .post-nav .post-nav-next { text-align: left; }
+}
+.post-card[hidden] { display: none; }
+
+/* The theme centres each section at its content width; give the index a
+   fixed column so the card grid has room and stays centred like other pages. */
+html[data-vhs="f"] main > .blog-home.section { width: 100%; max-width: 1240px; }
