@@ -900,3 +900,30 @@ html { scroll-padding-top: 88px; }
   .venture-media { height: 220px; }
   .wicked-media { height: min(80vw, 320px); }
 }
+
+/* v14: each venture is a full-width horizontal panel (Education panel language) */
+.venture-grid { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 28px; margin-top: 56px; }
+.venture-grid .venture-card { display: grid; grid-template-columns: minmax(260px, .8fr) 2fr; height: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.venture-grid .venture-media { height: auto; min-height: 100%; padding: clamp(28px, 3.5vw, 52px); background: linear-gradient(160deg, var(--surface-2), var(--surface)); border-right: 1px solid var(--line); border-bottom: 0; display: flex; align-items: center; justify-content: center; }
+.venture-grid .venture-media::after { display: none; }
+.venture-grid .media-stage { width: 100%; height: auto; display: flex; align-items: center; justify-content: center; background: none; }
+.venture-grid .media-stage img { width: 100%; max-width: 300px; height: auto; max-height: 340px; object-fit: contain; border-radius: 10px; position: static; transform: none; }
+.venture-grid .media-stage-logo img { max-width: 220px; border-radius: 50%; }
+.venture-grid .media-stage-wordmark img { max-width: 340px; border-radius: 6px; }
+.venture-grid .venture-body { padding: clamp(28px, 3.5vw, 52px); gap: 16px; align-content: center; }
+.venture-grid .venture-body > p:not(.project-kicker) { max-width: 68ch; }
+.venture-grid .server-ui { max-width: 520px; }
+.venture-grid .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.venture-grid .community-stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 620px; }
+@media (max-width: 760px) {
+  .venture-grid .venture-card { grid-template-columns: 1fr; }
+  .venture-grid .venture-media { border-right: 0; border-bottom: 1px solid var(--line); min-height: 0; padding: 26px; }
+  .venture-grid .media-stage img { max-height: 260px; }
+  .venture-grid .venture-body { padding: 24px; }
+  .venture-grid .community-stack { grid-template-columns: 1fr; }
+}
+.venture-grid .venture-card { grid-template-columns: minmax(280px, 1fr) 2fr; }
+.venture-grid .venture-media::before { display: none; }
+.venture-grid .media-stage-art img { max-width: 100%; }
+.venture-grid .media-stage-wordmark img { max-width: 100%; }
+@media (max-width: 760px) { .venture-grid .venture-card { grid-template-columns: 1fr; } }
