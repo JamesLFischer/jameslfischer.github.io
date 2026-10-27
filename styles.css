@@ -830,3 +830,35 @@ html { scroll-padding-top: 88px; }
 .edu-school { display: inline-block; align-self: flex-start; margin: 0 0 14px; padding: 6px 12px; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; line-height: 1.4; }
 .edu-meta { margin: 16px 0 0; }
 .education-logo-stage .education-logo { width: min(60%, 200px); }
+
+/* Education panel v10 — horizontal */
+.about { grid-template-columns: 1fr; }
+.edu-panel { display: grid; grid-template-columns: minmax(240px, .8fr) 2fr; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.edu-id { padding: clamp(28px, 3.5vw, 52px); background: linear-gradient(160deg, var(--surface-2), var(--surface)); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: flex-start; }
+.edu-crest { width: 92px; height: 92px; margin: 18px 0 22px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.02); }
+.edu-crest img { width: 64px; height: auto; }
+.edu-id h3 { margin: 0 0 14px; font-size: clamp(1.6rem, 2.4vw, 2.3rem); letter-spacing: -.04em; line-height: 1.1; }
+.edu-id .edu-school { margin: 0; }
+.edu-main { padding: clamp(28px, 3.5vw, 52px); display: grid; gap: 30px; align-content: center; min-width: 0; }
+.edu-label { margin: 0 0 8px; color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.edu-degree-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.edu-degree { margin: 0; font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 800; letter-spacing: -.03em; }
+.edu-minor { margin: 6px 0 0; color: var(--accent); font-weight: 700; }
+.edu-honor { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border: 1px solid rgba(86,245,198,.35); border-radius: 10px; background: rgba(86,245,198,.06); }
+.edu-honor-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--bg); font-size: 1rem; }
+.edu-honor strong { display: block; font-size: .95rem; }
+.edu-honor small { color: var(--muted); font-size: .8rem; }
+.edu-timeline { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .85rem; font-weight: 700; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
+.edu-line { flex: 1; min-width: 24px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--line)); }
+.edu-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex: none; }
+.edu-dot-open { background: transparent; border: 2px solid var(--accent); }
+.edu-chips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.edu-chips li { padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-2); font-size: .82rem; font-weight: 600; }
+@media (max-width: 860px) {
+  .edu-panel { grid-template-columns: 1fr; }
+  .edu-id { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 480px) {
+  .edu-chips { grid-template-columns: 1fr 1fr; }
+  .edu-timeline { font-size: .78rem; gap: 8px; }
+}
