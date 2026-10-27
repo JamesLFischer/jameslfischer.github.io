@@ -825,3 +825,8 @@ html { scroll-padding-top: 88px; }
 .project-content > .project-kicker + p { margin-top: 10px; }
 .venture-body > .project-kicker + .tags { margin-top: -4px; }
 .venture-body > .server-ui + .project-kicker { margin-top: 12px; }
+
+/* Education card details */
+.edu-school { display: inline-block; align-self: flex-start; margin: 0 0 14px; padding: 6px 12px; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; line-height: 1.4; }
+.edu-meta { margin: 16px 0 0; }
+.education-logo-stage .education-logo { width: min(60%, 200px); }
