@@ -811,3 +811,17 @@ footer p { margin: 0; }
   .community-stack-item span { text-align: left; }
   .server-panel h4 { margin-top: 22px; }
 }
+
+/* Layout fixes: sticky-nav offset, nav overflow guard, subsection label spacing */
+html { scroll-padding-top: 88px; }
+.site-header { gap: 20px; }
+.site-nav { min-width: 0; }
+.site-nav a { white-space: nowrap; }
+@media (min-width: 761px) {
+  .site-nav { overflow-x: auto; scrollbar-width: none; }
+  .site-nav::-webkit-scrollbar { display: none; }
+}
+.project-content > p + .project-kicker { margin-top: 32px; }
+.project-content > .project-kicker + p { margin-top: 10px; }
+.venture-body > .project-kicker + .tags { margin-top: -4px; }
+.venture-body > .server-ui + .project-kicker { margin-top: 12px; }
