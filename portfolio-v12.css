@@ -927,3 +927,29 @@ html { scroll-padding-top: 88px; }
 .venture-grid .media-stage-art img { max-width: 100%; }
 .venture-grid .media-stage-wordmark img { max-width: 100%; }
 @media (max-width: 760px) { .venture-grid .venture-card { grid-template-columns: 1fr; } }
+/* v15: tighten venture panels — less padding, image fills its column, two-column body on desktop */
+.venture-grid { gap: 20px; margin-top: 40px; }
+.venture-grid .venture-card { grid-template-columns: minmax(240px, .78fr) 2.2fr; }
+.venture-grid .venture-media { padding: 22px; min-height: 0; }
+.venture-grid .media-stage { height: 100%; }
+.venture-grid .media-stage img { max-width: 100%; max-height: 300px; }
+.venture-grid .media-stage-logo img { width: min(100%, 230px); }
+.venture-grid .venture-body { padding: 28px 32px; gap: 12px; align-content: center; }
+.venture-grid .venture-body > p:not(.project-kicker) { max-width: none; }
+@media (min-width: 1024px) {
+  .venture-grid .venture-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); column-gap: 32px; row-gap: 10px; align-items: start; grid-template-rows: auto auto 1fr; }
+  .venture-grid .venture-body > h3 { margin-top: -2px; }
+  .venture-grid .venture-body > * { grid-column: 1; }
+  .venture-grid .venture-body > .server-ui,
+  .venture-grid .venture-body > .community-stack { grid-column: 2; grid-row: 1 / span 3; align-self: center; max-width: none; margin: 0; }
+  .venture-grid .venture-body > .server-ui + .project-kicker { margin-top: 6px; }
+  .venture-grid .venture-body > .project-kicker:not(:first-child), .venture-grid .venture-body > .tags { grid-column: 1 / -1; }
+  .venture-grid .community-stack { grid-template-columns: 1fr; gap: 10px; }
+}
+@media (max-width: 760px) {
+  .venture-grid .venture-card { grid-template-columns: 1fr; }
+  .venture-grid .venture-media { padding: 18px; }
+  .venture-grid .media-stage img { max-height: 220px; }
+  .venture-grid .media-stage-logo img { width: 180px; }
+  .venture-grid .venture-body { padding: 20px; }
+}
