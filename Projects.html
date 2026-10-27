@@ -12,6 +12,7 @@
   <title>Projects | James Fischer</title>
   <link rel="stylesheet" href="portfolio-v12.css">
   <script defer src="script.js"></script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -20,7 +21,6 @@
     <a class="brand" href="index.html" aria-label="James Fischer home">JF<span>.</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-      <a href="Work.html">Work</a>
       <a href="Projects.html" aria-current="page">Projects</a>
       <a href="Graphic-Art.html">Graphic Art</a>
       <a href="Experience.html">Experience</a>
@@ -40,6 +40,50 @@
       </div>
     </section>
     <section class="project-grid" aria-label="Technical projects">
+      <article class="project-card project-featured reveal">
+        <div class="project-meta">
+          <span>Academic AI Project</span>
+          <span>2026</span>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">Bayesian reasoning</p>
+          <h3>Escape Room Pathfinder</h3>
+          <p>Built a probabilistic pathfinding environment that maintains a belief distribution over a grid and updates its estimate of an exit location from noisy sensor observations. The agent uses those beliefs to guide decisions under uncertainty.</p>
+          <ul class="tags" aria-label="Technologies and concepts">
+            <li>Python</li><li>Bayesian inference</li><li>Search</li><li>Probability</li>
+          </ul>
+        </div>
+        <div class="project-graphic terminal-card" aria-hidden="true">
+          <div class="terminal-top"><span></span><span></span><span></span></div>
+          <pre><code>$ agent --belief-update
+sensor: noisy_exit_signal
+prior: 0.0025 / cell
+posterior: normalized
+
+&gt; strongest belief
+[ 14, 07 ]  0.318
+[ 13, 07 ]  0.201
+[ 14, 08 ]  0.144
+
+status: reasoning under uncertainty_</code></pre>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-meta">
+          <span>IT Operations</span>
+          <span>2026</span>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">Infrastructure automation</p>
+          <h3>VM Fleet Administration</h3>
+          <p>Developed repeatable command-line procedures and scripts for maintaining a large fleet of Linux virtual machines, including remote audits, software deployment, configuration checks, and troubleshooting.</p>
+          <ul class="tags"><li>Linux</li><li>Bash</li><li>VMware ESXi</li><li>SSH</li></ul>
+        </div>
+        <div class="metric-row" aria-label="Project highlights">
+          <div><strong>Dozens</strong><span>of Linux VMs</span></div>
+          <div><strong>Repeatable</strong><span>admin workflows</span></div>
+        </div>
+      </article>
       <article class="project-card reveal">
         <div class="project-meta">
           <span>Infrastructure</span>
@@ -67,6 +111,23 @@
           <p>This site: a hand-built, multi-page portfolio hosted on GitHub Pages, with responsive layouts, a mobile menu, and lightweight video loops for the Graphic Art work.</p>
           <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>GitHub Pages</li></ul>
           <a class="text-link" href="https://github.com/JamesLFischer/jameslfischer.github.io" target="_blank" rel="noopener">View the source on GitHub ↗</a>
+        </div>
+      </article>
+      <article class="project-card reveal">
+        <div class="project-meta">
+          <span>Graphic Art</span>
+          <span>2025–2026</span>
+        </div>
+        <div class="venture-media">
+          <div class="media-stage media-stage-art">
+            <img src="media/graphic-art-lead.webp" alt="Circuit-bent video playing on a CRT television in vivid pink and blue" width="1280" height="720" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">VHS · CRT · circuit bending</p>
+          <h3>Graphic Art</h3>
+          <p>Analog video work shot on VHS with a Sony CCD-TRV68 camcorder, digitized to my laptop, and pushed through CRT televisions and circuit-bent signals.</p>
+          <a class="text-link" href="Graphic-Art.html">See the Graphic Art page →</a>
         </div>
       </article>
     </section>
