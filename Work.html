@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="James Fischer — Computer Science student and IT Operations Manager in Seattle. Portfolio featuring software, infrastructure, automation, and business experience.">
+  <meta name="theme-color" content="#0b0d10">
+  <meta property="og:title" content="James Fischer | Software & IT Operations">
+  <meta property="og:description" content="Software, infrastructure, automation, and business-minded problem solving.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="james-fischer.jpg">
+  <title>Work | James Fischer</title>
+  <link rel="stylesheet" href="portfolio-v12.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="James Fischer home">JF<span>.</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="Work.html" aria-current="page">Work</a>
+      <a href="Graphic-Art.html">Graphic Art</a>
+      <a href="Experience.html">Experience</a>
+      <a href="About.html">About</a>
+      <a href="Blog.html">Blog</a>
+      <a href="Contact.html">Contact</a>
+      <a class="nav-resume" href="James-Fischer-Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section section-intro reveal" id="work">
+      <div class="section-number">01</div>
+      <div class="section-heading">
+        <p class="eyebrow">Selected work</p>
+        <h2>Things I’ve built,<br>automated, and improved.</h2>
+      </div>
+    </section>
+
+    <section class="project-grid" aria-label="Selected projects">
+      <article class="project-card project-featured reveal">
+        <div class="project-meta">
+          <span>Academic AI Project</span>
+          <span>2026</span>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">Bayesian reasoning</p>
+          <h3>Escape Room Pathfinder</h3>
+          <p>Built a probabilistic pathfinding environment that maintains a belief distribution over a grid and updates its estimate of an exit location from noisy sensor observations. The agent uses those beliefs to guide decisions under uncertainty.</p>
+          <ul class="tags" aria-label="Technologies and concepts">
+            <li>Python</li><li>Bayesian inference</li><li>Search</li><li>Probability</li>
+          </ul>
+        </div>
+        <div class="project-graphic terminal-card" aria-hidden="true">
+          <div class="terminal-top"><span></span><span></span><span></span></div>
+          <pre><code>$ agent --belief-update
+sensor: noisy_exit_signal
+prior: 0.0025 / cell
+posterior: normalized
+
+&gt; strongest belief
+[ 14, 07 ]  0.318
+[ 13, 07 ]  0.201
+[ 14, 08 ]  0.144
+
+status: reasoning under uncertainty_</code></pre>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-meta">
+          <span>IT Operations</span>
+          <span>2026</span>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">Infrastructure automation</p>
+          <h3>VM Fleet Administration</h3>
+          <p>Developed repeatable command-line procedures and scripts for maintaining a large fleet of Linux virtual machines, including remote audits, software deployment, configuration checks, and troubleshooting.</p>
+          <ul class="tags"><li>Linux</li><li>Bash</li><li>VMware ESXi</li><li>SSH</li></ul>
+        </div>
+        <div class="metric-row" aria-label="Project highlights">
+          <div><strong>Dozens</strong><span>of Linux VMs</span></div>
+          <div><strong>Repeatable</strong><span>admin workflows</span></div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-meta">
+          <span>Infrastructure</span>
+          <span>2026</span>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">DNS + automation</p>
+          <h3>Multi-Domain Verification Deployment</h3>
+          <p>Automated TXT-record deployment across a 25-domain ownership-verification project while preserving existing production DNS configurations and validating the resulting records.</p>
+          <ul class="tags"><li>DNS</li><li>eNom</li><li>Automation</li><li>Cloud platforms</li></ul>
+        </div>
+        <div class="metric-row" aria-label="Project highlights">
+          <div><strong>25</strong><span>domains updated</span></div>
+          <div><strong>Preserved</strong><span>existing DNS records</span></div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-meta">
+          <span>Graphic Art</span>
+          <span>2025–2026</span>
+        </div>
+        <div class="venture-media">
+          <div class="media-stage media-stage-art">
+            <img src="media/graphic-art-lead.webp" alt="Circuit-bent video playing on a CRT television in vivid pink and blue" width="1280" height="720" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">VHS · CRT · circuit bending</p>
+          <h3>Graphic Art</h3>
+          <p>Analog video work shot on VHS with a Sony CCD-TRV68 camcorder, digitized to my laptop, and pushed through CRT televisions and circuit-bent signals.</p>
+          <a class="text-link" href="Graphic-Art.html">See the Graphic Art page →</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>Designed & built by James Fischer.</p>
+    <p>Seattle, WA · <span id="year">2026</span></p>
+  </footer>
+</body>
+</html>

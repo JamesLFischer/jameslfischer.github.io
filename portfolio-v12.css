@@ -825,3 +825,16 @@ html { scroll-padding-top: 88px; }
 .project-content > .project-kicker + p { margin-top: 10px; }
 .venture-body > .project-kicker + .tags { margin-top: -4px; }
 .venture-body > .server-ui + .project-kicker { margin-top: 12px; }
+
+/* Multi-page: active nav item + looping clips in media stages */
+.site-nav a[aria-current="page"] { color: var(--accent); }
+.media-stage-art video {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(0,0,0,.45);
+}
+.project-featured .venture-media { border: 1px solid var(--line); border-radius: 10px; height: auto; min-height: 260px; }
