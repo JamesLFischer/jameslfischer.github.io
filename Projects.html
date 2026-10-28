@@ -10,8 +10,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="james-fischer.jpg">
   <title>Projects | James Fischer</title>
-  <link rel="stylesheet" href="portfolio-v12.css?v=14">
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="portfolio-v12.css?v=30">
+  <script defer src="script.js?v=30"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -19,7 +19,7 @@
 
   <header class="site-header" id="top">
     <a class="brand" href="index.html" aria-label="James Fischer home">JF<span>.</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span class="menu-icon" aria-hidden="true"></span></button>
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
       <a href="index.html">Home</a>
       <a href="Projects.html" aria-current="page">Projects</a>
@@ -29,7 +29,7 @@
       <a href="About.html">About</a>
       <a href="Blog.html">Blog</a>
       <a href="Contact.html">Contact</a>
-      <a class="nav-resume" href="James-Fischer-Resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <a href="James-Fischer-Resume.pdf" target="_blank" rel="noopener">Resume</a>
     </nav>
   </header>
 
@@ -42,6 +42,28 @@
       </div>
     </section>
     <section class="project-grid" aria-label="Technical projects">
+      <article class="project-card project-featured reveal" id="band-for-band">
+        <div class="project-meta">
+          <span>Game · Coming Soon</span>
+          <span>2026</span>
+        </div>
+        <div class="project-content">
+          <p class="project-kicker">Social game · ElevenLabs voices</p>
+          <h3>Band for Band</h3>
+          <p>An upcoming social game where players go "band for band," putting their balances head to head to see who's really holding. Each character in the arena, including Chud, Samantha, Daquan and Pardeep, has a custom voice I built with ElevenLabs, synced to animated intro clips.</p>
+          <ul class="tags" aria-label="Technologies and concepts">
+            <li>Game design</li><li>ElevenLabs</li><li>AI voice</li>
+          </ul>
+          <!-- Related posts: add one <li> per Blog post tagged data-project="band-for-band" (newest first). -->
+          <div class="related-posts">
+            <p class="project-kicker">Related posts</p>
+            <ul>
+              <li><a class="text-link" href="Blog.html#band-for-band-announce">Coming soon: Band for Band →</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bfb-soon" role="note"><span class="bfb-soon-label">Trailer</span><strong>Coming soon</strong><span>Character renders in progress.</span></div>
+      </article>
       <article class="project-card project-featured reveal">
         <div class="project-meta">
           <span>Academic AI Project</span>

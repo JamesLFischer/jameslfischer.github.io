@@ -10,8 +10,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="james-fischer.jpg">
   <title>Blog | James Fischer</title>
-  <link rel="stylesheet" href="portfolio-v12.css">
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="portfolio-v12.css?v=30">
+  <script defer src="script.js?v=30"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -19,7 +19,7 @@
 
   <header class="site-header" id="top">
     <a class="brand" href="index.html" aria-label="James Fischer home">JF<span>.</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span class="menu-icon" aria-hidden="true"></span></button>
     <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
       <a href="index.html">Home</a>
       <a href="Projects.html">Projects</a>
@@ -29,7 +29,7 @@
       <a href="About.html">About</a>
       <a href="Blog.html" aria-current="page">Blog</a>
       <a href="Contact.html">Contact</a>
-      <a class="nav-resume" href="James-Fischer-Resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <a href="James-Fischer-Resume.pdf" target="_blank" rel="noopener">Resume</a>
     </nav>
   </header>
 
@@ -41,10 +41,21 @@
         <h2 id="blog-title">Notes from the<br>server room.</h2>
       </div>
       <div class="capability-grid">
-        <article>
-          <span class="cap-index">—</span>
-          <h3>Coming soon</h3>
-          <p>New posts are on the way.</p>
+        <!--
+          Project back-link pattern (reuse for every project post):
+            1. Give the post article an id and data-project="<project-id>" (the id of the card on Projects.html).
+            2. End the post with the .project-backlink block below, pointing to Projects.html#<project-id>.
+            3. Add the post to that card's "Related posts" list on Projects.html.
+        -->
+        <article id="band-for-band-announce" data-project="band-for-band">
+          <span class="cap-index">01</span>
+          <h3>Coming soon: Band for Band</h3>
+          <p><em>October 2026</em></p>
+          <p>I'm building Band for Band, a social game where players put their bands up and compare balances head to head. The cast is voiced with ElevenLabs: I designed a custom voice for each character and synced it to their arena intros. The trailer is on the way once the character renders are final.</p>
+          <div class="project-backlink">
+            <span>Part of the <strong>Band for Band</strong> project</span>
+            <a class="backlink-button" href="Projects.html#band-for-band">View the project →</a>
+          </div>
         </article>
       </div>
     </section>
