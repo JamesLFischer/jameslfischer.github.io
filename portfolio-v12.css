@@ -1004,3 +1004,32 @@ html { scroll-padding-top: 88px; }
 .edu-facts .edu-focus { display: flex; flex-wrap: wrap; gap: 6px; }
 .edu-facts .edu-focus span { display: inline-block; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--accent); font-size: .74rem; font-weight: 700; }
 @media (max-width: 860px) { .edu-facts { margin-top: 22px; padding-top: 0; } }
+
+/* Desktop: full-width evenly spaced top row (no logo, no menu icon). Mobile keeps hamburger. */
+@media (min-width: 901px) {
+  .site-header { justify-content: center; gap: 0; }
+  .site-header .brand, .site-header .menu-toggle { display: none; }
+  .site-nav, .site-nav.open {
+    position: static; display: flex; flex-direction: row; align-items: stretch;
+    justify-content: space-between; width: 100%; max-width: var(--max); margin: 0 auto;
+    padding: 0; gap: 0; background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible;
+  }
+  .site-nav a {
+    position: relative; flex: 1 1 0; width: auto; text-align: center;
+    padding: 28px 4px 26px; font-size: .78rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: #9aa3ab;
+  }
+  .site-nav a::after {
+    content: ""; position: absolute; left: 50%; bottom: 18px; width: 18px; height: 2px;
+    background: var(--accent); border-radius: 2px; transform: translateX(-50%) scaleX(0);
+    transition: transform .25s ease;
+  }
+  .site-nav a:hover, .site-nav a:focus-visible { color: var(--text); }
+  .site-nav a:hover::after, .site-nav a:focus-visible::after { transform: translateX(-50%) scaleX(.6); }
+  .site-nav a[aria-current="page"] { color: var(--text); }
+  .site-nav a[aria-current="page"]::after { transform: translateX(-50%) scaleX(1); }
+  .site-nav a + a::before {
+    content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: 12px;
+    transform: translateY(-50%); background: rgba(255,255,255,.08);
+  }
+}
