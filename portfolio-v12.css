@@ -1044,3 +1044,17 @@ html { scroll-padding-top: 88px; }
     transform: translateY(-50%); background: rgba(255,255,255,.08);
   }
 }
+
+/* Video cards: footage fills the media box edge to edge (no padding, no bars). */
+.venture-media:has(video) { padding: 0; }
+.venture-media:has(video) .media-stage { display: block; }
+.media-stage-art video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+}
