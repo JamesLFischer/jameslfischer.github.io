@@ -448,6 +448,17 @@ footer {
   font-size: .72rem;
 }
 footer p { margin: 0; }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  color: #6f7a83;
+  font-size: .72rem;
+  font-weight: 700;
+}
+.footer-links a:hover { color: var(--text); }
+.hero-links a[href*="x.com"] { text-transform: none; }
 
 .reveal {
   opacity: 0;
