@@ -1058,3 +1058,11 @@ html { scroll-padding-top: 88px; }
   border-radius: 0;
   box-shadow: none;
 }
+
+/* Still-image art cards: same edge-to-edge fill as video cards. */
+.venture-media:has(.media-stage-still) { padding: 0; }
+.media-stage-still { display: block; }
+.media-stage-art.media-stage-still img {
+  display: block; width: 100%; height: 100%; max-width: none; max-height: none;
+  object-fit: cover; border-radius: 0; box-shadow: none;
+}
