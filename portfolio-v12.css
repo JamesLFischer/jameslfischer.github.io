@@ -1071,23 +1071,24 @@ html { scroll-padding-top: 88px; }
 .project-featured .venture-media:has(.media-stage-still) { padding: 0; overflow: hidden; }
 .project-featured .venture-media:has(.media-stage-still) .media-stage { position: absolute; inset: 0; }
 
-/* Capabilities strip: desktop keeps static rows; phones get a continuous two-way marquee.
-   To add a skill: add <span>SKILL</span><i>◆</i> to BOTH .marquee-run copies of a row in index.html. */
-.marquee-dup { display: none; }
-.marquee-run > i:last-child { display: none; }
-.marquee-run { display: contents; }
+/* Capabilities strip: continuous two-way marquee on every screen size.
+   Each row holds 6 identical copies (1 + 5 aria-hidden dups); the -50% loop needs the copies identical.
+   To add a skill: add <span>SKILL</span><i>◆</i> to ALL 6 copies of that row in index.html. */
 @keyframes marquee-right { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0,0,0); } }
 @keyframes marquee-left  { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+.marquee { padding: 3px 0; }
+.marquee-track { min-width: 0; width: max-content; gap: 0; justify-content: flex-start;
+  animation: marquee-right 30s linear infinite; will-change: transform; }
+.marquee-track + .marquee-track { animation-name: marquee-left; animation-duration: 36s; border-top: 1px solid rgba(6,17,13,.18); }
+.marquee-run, .marquee-dup { display: flex; align-items: center; gap: 28px; padding-right: 28px; flex: none; }
 @media (max-width: 760px) {
-  .marquee { padding: 3px 0; }
-  .marquee-track { min-width: 0; width: max-content; padding: 10px 0; gap: 0; justify-content: flex-start; font-size: .74rem;
-    animation: marquee-right 18s linear infinite; will-change: transform; }
-  .marquee-track + .marquee-track { animation-name: marquee-left; animation-duration: 22s; border-top: 1px solid rgba(6,17,13,.18); }
-  .marquee-run > i:last-child { display: inline; }
-  .marquee-run, .marquee-dup { display: flex; align-items: center; gap: 18px; padding-right: 18px; flex: none; }
+  .marquee-track { padding: 10px 0; padding-left: 0; font-size: .74rem; animation-duration: 18s; }
+  .marquee-track + .marquee-track { animation-duration: 22s; }
+  .marquee-run, .marquee-dup { gap: 18px; padding-right: 18px; }
 }
-@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
-  .marquee-track { animation-duration: 60s; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation-duration: 90s; }
+  .marquee-track + .marquee-track { animation-duration: 100s; }
 }
 
 /* Art video cards: per-video play/pause toggle. */
