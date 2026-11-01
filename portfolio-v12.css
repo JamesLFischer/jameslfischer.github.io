@@ -1086,9 +1086,16 @@ html { scroll-padding-top: 88px; }
   .marquee-track + .marquee-track { animation-duration: 22s; }
   .marquee-run, .marquee-dup { gap: 18px; padding-right: 18px; }
 }
+/* The global reduced-motion rule above (line ~537) forces every animation to .01ms x1 with !important,
+   which froze the strip for anyone with Reduce Motion on. James wants the strip moving everywhere,
+   so the marquee is exempted with matching !important overrides (same speeds as normal). */
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation-duration: 90s; }
-  .marquee-track + .marquee-track { animation-duration: 100s; }
+  .marquee-track { animation-duration: 30s !important; animation-iteration-count: infinite !important; }
+  .marquee-track + .marquee-track { animation-duration: 36s !important; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
+  .marquee-track { animation-duration: 18s !important; }
+  .marquee-track + .marquee-track { animation-duration: 22s !important; }
 }
 
 /* Art video cards: per-video play/pause toggle. */
