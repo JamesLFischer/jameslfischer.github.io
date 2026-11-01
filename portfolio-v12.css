@@ -1089,3 +1089,17 @@ html { scroll-padding-top: 88px; }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
   .marquee-track { animation-duration: 60s; }
 }
+
+/* Art video cards: per-video play/pause toggle. */
+.media-stage-art { position: relative; }
+.media-stage-art video { cursor: pointer; }
+.video-toggle {
+  position: absolute; right: 12px; bottom: 12px; z-index: 3;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  font: 700 .8rem/1 system-ui, sans-serif; letter-spacing: -.1em;
+  color: #06110d; background: var(--accent); border: 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,.45); cursor: pointer; opacity: .9;
+}
+.video-toggle:hover, .video-toggle:focus-visible { opacity: 1; outline: 2px solid #fff; outline-offset: 2px; }
+.is-paused .video-toggle { width: 52px; height: 52px; font-size: 1.05rem; letter-spacing: 0; }
