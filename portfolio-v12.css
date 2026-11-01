@@ -1071,19 +1071,21 @@ html { scroll-padding-top: 88px; }
 .project-featured .venture-media:has(.media-stage-still) { padding: 0; overflow: hidden; }
 .project-featured .venture-media:has(.media-stage-still) .media-stage { position: absolute; inset: 0; }
 
-/* Capabilities strip: desktop keeps static rows; phones get a smooth looping marquee. */
-.marquee-run { display: contents; }
+/* Capabilities strip: desktop keeps static rows; phones get a continuous two-way marquee.
+   To add a skill: add <span>SKILL</span><i>◆</i> to BOTH .marquee-run copies of a row in index.html. */
 .marquee-dup { display: none; }
 .marquee-run > i:last-child { display: none; }
+.marquee-run { display: contents; }
+@keyframes marquee-right { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0,0,0); } }
+@keyframes marquee-left  { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 @media (max-width: 760px) {
-  .marquee { padding: 2px 0; }
-  .marquee-track { min-width: 0; width: max-content; padding: 11px 0; gap: 0; justify-content: flex-start; font-size: .72rem;
-    animation: marquee-scroll 28s linear infinite; will-change: transform; }
-  .marquee-track + .marquee-track { animation-direction: reverse; animation-duration: 32s; }
+  .marquee { padding: 3px 0; }
+  .marquee-track { min-width: 0; width: max-content; padding: 10px 0; gap: 0; justify-content: flex-start; font-size: .74rem;
+    animation: marquee-right 18s linear infinite; will-change: transform; }
+  .marquee-track + .marquee-track { animation-name: marquee-left; animation-duration: 22s; border-top: 1px solid rgba(6,17,13,.18); }
   .marquee-run > i:last-child { display: inline; }
   .marquee-run, .marquee-dup { display: flex; align-items: center; gap: 18px; padding-right: 18px; flex: none; }
-  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; overflow-x: auto; width: auto; }
+  .marquee-track { animation-duration: 60s; }
 }
