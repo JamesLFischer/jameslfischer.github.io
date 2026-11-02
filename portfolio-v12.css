@@ -1130,3 +1130,12 @@ html { scroll-padding-top: 88px; }
 main, .venture-media, .media-stage { position: relative; z-index: 0; }
 .video-toggle { z-index: 1; }
 section[id], article[id], [id] { scroll-margin-top: 96px; }
+
+/* t86u: compact Skull World page */
+.sesh-hero { min-height: 0; align-items: center; }
+.sesh-hero .project-shot { margin-bottom: 0; }
+.project-grid.sesh-tight { padding-bottom: clamp(40px, 5vw, 72px); }
+.section-intro.sesh-stack-intro { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(36px, 4vw, 56px); }
+.sesh-stack-card { grid-column: 1 / -1; min-height: 0; }
+.sesh-stack-card h3 { margin-bottom: 16px; }
+@media (max-width: 760px) { .sesh-hero .project-shot { margin-bottom: 24px; } }
