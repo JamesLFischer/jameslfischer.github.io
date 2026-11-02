@@ -1121,3 +1121,5 @@ html { scroll-padding-top: 88px; }
 .video-toggle:hover, .video-toggle:focus-visible { opacity: 1; }
 /* Portrait (9:16) phone clips: full frame, capped height so the card does not tower over its row. */
 .venture-media.is-portrait:has(.media-stage-art video) { width: min(100%, 315px); margin-inline: auto; }
+.section-lede{max-width:46rem;margin-top:1.25rem;line-height:1.6;opacity:.85}
+.section-lede .text-link{display:inline;margin-right:.75rem}
