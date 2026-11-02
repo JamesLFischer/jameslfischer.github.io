@@ -1,0 +1,105 @@
+→ crawling http://localhost:8765/Graphic-Art.html http://localhost:8765/Projects.html
+[200] http://localhost:8765/Graphic-Art.html
+[200] http://localhost:8765/Projects.html
+[200] http://localhost:8765/script.js?v=34
+[200] http://localhost:8765/index.html
+[200] http://localhost:8765/portfolio-v12.css?v=40
+[200] http://localhost:8765/Experience.html
+[200] http://localhost:8765/favicon.svg
+[200] http://localhost:8765/media/p6-poster.webp
+[200] http://localhost:8765/About.html
+[200] http://localhost:8765/Education.html
+[200] http://localhost:8765/jibbletes-foundation-crop.png
+[200] http://localhost:8765/wicked-hand.png
+[200] http://localhost:8765/wicked-castle-hand.png
+[200] http://localhost:8765/media/sesh/third-person.webp
+[200] http://localhost:8765/media/portfolio-home.webp
+[200] http://localhost:8765/wicked-profile.jpg
+[200] http://localhost:8765/media/sesh/emerge-spawns.webp
+[200] http://localhost:8765/media/sesh/ads-scope.webp
+[200] http://localhost:8765/Blog.html
+[200] http://localhost:8765/Contact.html
+[200] http://localhost:8765/James-Fischer-Resume.pdf
+[200] http://localhost:8765/media/graphic-art-lead.webp
+[200] http://localhost:8765/media/p2-poster.webp
+[200] http://localhost:8765/media/p2.mp4
+[200] http://localhost:8765/media/sesh/skeletons.webp
+[200] http://localhost:8765/media/sesh/skeleton-vault.webp
+[200] http://localhost:8765/media/sesh/survival-rounds.webp
+[200] http://localhost:8765/media/sesh/mystery-box.webp
+[200] http://localhost:8765/media/sesh/perk-skeletons.webp
+[200] http://localhost:8765/media/sesh/woods.webp
+[200] http://localhost:8765/media/silent-hill-crt.webp
+[200] http://localhost:8765/media/p3.mp4
+[200] http://localhost:8765/media/p3-poster.webp
+[200] http://localhost:8765/media/snow-street.webp
+[200] http://localhost:8765/media/p1-poster.webp
+[200] http://localhost:8765/media/p1.mp4
+[200] http://localhost:8765/media/p5.mp4
+[200] http://localhost:8765/media/cb-loop-1-poster.webp
+[200] http://localhost:8765/media/cb-loop-1.mp4
+[200] http://localhost:8765/media/p5-poster.webp
+[200] http://localhost:8765/media/sesh/town.webp
+[200] http://localhost:8765/media/crt-rust-1.mp4
+[200] http://localhost:8765/media/p6.mp4
+[200] http://localhost:8765/media/crt-rust-4-poster.webp
+[200] http://localhost:8765/media/crt-rust-3-poster.webp
+[200] http://localhost:8765/media/crt-rust-4.mp4
+[200] http://localhost:8765/media/crt-rust-3.mp4
+[200] http://localhost:8765/media/crt-rust-2-poster.webp
+[200] http://localhost:8765/media/crt-rust-1-poster.webp
+[200] http://localhost:8765/media/crt-rust-2.mp4
+
+  [200] http://localhost:8765/Graphic-Art.html
+  [200] http://localhost:8765/Projects.html
+http://localhost:8765/Graphic-Art.html
+  [200] http://localhost:8765/script.js?v=34
+  [200] http://localhost:8765/index.html
+  [200] http://localhost:8765/portfolio-v12.css?v=40
+  [200] http://localhost:8765/Experience.html
+  [200] http://localhost:8765/favicon.svg
+  [200] http://localhost:8765/media/p6-poster.webp
+  [200] http://localhost:8765/About.html
+  [200] http://localhost:8765/Education.html
+  [200] http://localhost:8765/media/sesh/third-person.webp
+  [200] http://localhost:8765/media/sesh/emerge-spawns.webp
+  [200] http://localhost:8765/media/sesh/ads-scope.webp
+  [200] http://localhost:8765/Blog.html
+  [200] http://localhost:8765/Contact.html
+  [200] http://localhost:8765/James-Fischer-Resume.pdf
+  [200] http://localhost:8765/media/graphic-art-lead.webp
+  [200] http://localhost:8765/media/p2-poster.webp
+  [200] http://localhost:8765/media/p2.mp4
+  [200] http://localhost:8765/media/sesh/skeletons.webp
+  [200] http://localhost:8765/media/sesh/skeleton-vault.webp
+  [200] http://localhost:8765/media/sesh/survival-rounds.webp
+  [200] http://localhost:8765/media/sesh/mystery-box.webp
+  [200] http://localhost:8765/media/sesh/perk-skeletons.webp
+  [200] http://localhost:8765/media/sesh/woods.webp
+  [200] http://localhost:8765/media/silent-hill-crt.webp
+  [200] http://localhost:8765/media/p3.mp4
+  [200] http://localhost:8765/media/p3-poster.webp
+  [200] http://localhost:8765/media/snow-street.webp
+  [200] http://localhost:8765/media/p1-poster.webp
+  [200] http://localhost:8765/media/p1.mp4
+  [200] http://localhost:8765/media/p5.mp4
+  [200] http://localhost:8765/media/cb-loop-1-poster.webp
+  [200] http://localhost:8765/media/cb-loop-1.mp4
+  [200] http://localhost:8765/media/p5-poster.webp
+  [200] http://localhost:8765/media/sesh/town.webp
+  [200] http://localhost:8765/media/crt-rust-1.mp4
+  [200] http://localhost:8765/media/p6.mp4
+  [200] http://localhost:8765/media/crt-rust-4-poster.webp
+  [200] http://localhost:8765/media/crt-rust-3-poster.webp
+  [200] http://localhost:8765/media/crt-rust-4.mp4
+  [200] http://localhost:8765/media/crt-rust-3.mp4
+  [200] http://localhost:8765/media/crt-rust-2-poster.webp
+  [200] http://localhost:8765/media/crt-rust-1-poster.webp
+  [200] http://localhost:8765/media/crt-rust-2.mp4
+http://localhost:8765/Projects.html
+  [200] http://localhost:8765/jibbletes-foundation-crop.png
+  [200] http://localhost:8765/wicked-hand.png
+  [200] http://localhost:8765/wicked-castle-hand.png
+  [200] http://localhost:8765/media/portfolio-home.webp
+  [200] http://localhost:8765/wicked-profile.jpg
+✓ Successfully scanned 50 links in 8.014 seconds.
