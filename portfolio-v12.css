@@ -1123,3 +1123,10 @@ html { scroll-padding-top: 88px; }
 .venture-media.is-portrait:has(.media-stage-art video) { width: min(100%, 315px); margin-inline: auto; }
 .section-lede{max-width:46rem;margin-top:1.25rem;line-height:1.6;opacity:.85}
 .section-lede .text-link{display:inline;margin-right:.75rem}
+/* t70u: sticky header never overlays content; skip link only visible on keyboard focus. */
+.site-header { background: #0b0d10; backdrop-filter: none; z-index: 1000; }
+.skip-link { top: 16px; transform: translateY(-200%); opacity: 0; pointer-events: none; z-index: 1001; }
+.skip-link:focus, .skip-link:focus-visible { transform: none; opacity: 1; pointer-events: auto; }
+main, .venture-media, .media-stage { position: relative; z-index: 0; }
+.video-toggle { z-index: 1; }
+section[id], article[id], [id] { scroll-margin-top: 96px; }
