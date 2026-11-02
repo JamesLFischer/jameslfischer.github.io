@@ -1111,3 +1111,11 @@ html { scroll-padding-top: 88px; }
 }
 .video-toggle:hover, .video-toggle:focus-visible { opacity: 1; outline: 2px solid #fff; outline-offset: 2px; }
 .is-paused .video-toggle { width: 52px; height: 52px; font-size: 1.05rem; letter-spacing: 0; }
+
+/* Art video cards: frame matches the footage aspect (all art clips are 16:9 per ffprobe),
+   so the whole picture shows edge to edge with no crop and no bars. Override with --video-ar if a clip differs. */
+.venture-media:has(.media-stage-art video) { height: auto; aspect-ratio: var(--video-ar, 16 / 9); padding: 0; }
+.venture-media:has(.media-stage-art video) .media-stage { position: absolute; inset: 0; }
+.media-stage-art video { width: 100%; height: 100%; object-fit: contain; }
+.video-toggle { width: 34px; height: 34px; right: 10px; bottom: 10px; opacity: .75; }
+.video-toggle:hover, .video-toggle:focus-visible { opacity: 1; }
