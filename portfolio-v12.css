@@ -1139,3 +1139,8 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 .sesh-stack-card { grid-column: 1 / -1; min-height: 0; }
 .sesh-stack-card h3 { margin-bottom: 16px; }
 @media (max-width: 760px) { .sesh-hero .project-shot { margin-bottom: 24px; } }
+
+/* Skull World grid: center a lone last card instead of leaving it orphaned left */
+@media (min-width: 761px) {
+  #sesh-work > .project-card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 9px); }
+}
