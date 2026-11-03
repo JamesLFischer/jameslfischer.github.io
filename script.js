@@ -49,6 +49,12 @@ document.querySelectorAll('.media-stage-art video').forEach((video) => {
   const stage = video.closest('.venture-media') || video.closest('.media-stage');
   if (!stage || stage.querySelector('.video-toggle')) return;
   video.removeAttribute('controls');
+  video.removeAttribute('autoplay');
+  video.autoplay = false;
+  video.pause();
+  video.muted = false;
+  video.defaultMuted = false;
+  video.removeAttribute('muted');
   video.disablePictureInPicture = true;
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -63,7 +69,7 @@ document.querySelectorAll('.media-stage-art video').forEach((video) => {
   const toggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (video.paused) { video.muted = true; video.play().catch(sync); } else { video.pause(); }
+    if (video.paused) { video.muted = false; video.volume = 1; video.play().catch(sync); } else { video.pause(); }
   };
   btn.addEventListener('click', toggle);
   video.addEventListener('click', toggle);
