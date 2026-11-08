@@ -1,6 +1,6 @@
 # James Fischer — Portfolio
 
-Personal portfolio for James Fischer, hosted with GitHub Pages.
+Personal portfolio, hosted with GitHub Pages.
 
 ## Local preview
 
