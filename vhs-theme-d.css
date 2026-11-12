@@ -1,0 +1,335 @@
+/* Direction D — Bent
+   Circuit-bending glitch drawn from James's CRT work: magenta/blue smear
+   (cb-loop-1), neon forest (cb-gopro-1), wavy scanline tear (cb-gopro-4).
+   Hero uses the actual cb-gopro-1 clip. Headings posterize into color
+   bands. Cards sit in a broken CRT bezel. Hover is a databend. */
+@import url("fonts/vhs-fonts.css");
+
+:root {
+  --bg: #050506;
+  --surface: #0c0c10;
+  --surface-2: #14141a;
+  --text: #f3eef8;
+  --muted: #b7aec0;
+  --line: #2a2434;
+  --accent: #ff4ae0;
+  --accent-2: #ffa0f2;
+  --bent-blue: #3a48ff;
+  --bent-green: #00d040;
+  --bent-orange: #e07a38;
+  --ink: #07060a;
+}
+
+html { background: var(--bg); }
+body {
+  background:
+    linear-gradient(180deg, rgba(5,5,6,.88), rgba(5,5,6,.94)),
+    url("theme-media/bent-screen.webp") center top / 140% auto no-repeat,
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: "IBM Plex Sans", Inter, ui-sans-serif, "Segoe UI", sans-serif;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+/* ---------- Bent header ---------- */
+.site-header {
+  background: #050506 !important;
+  border-bottom: 0 !important;
+  box-shadow:
+    0 2px 0 var(--accent),
+    0 4px 0 var(--bent-blue),
+    0 6px 0 var(--bent-green);
+  min-height: 76px;
+}
+.brand {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow: 3px 0 0 var(--bent-blue), -3px 0 0 var(--accent);
+}
+.brand span { color: var(--accent); }
+
+.site-nav a {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d8d0e0;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+@media (max-width: 760px) {
+  .site-nav {
+    background: #0a0a0e;
+    border-color: var(--accent);
+  }
+}
+
+.skip-link { background: var(--accent); color: #fff; }
+
+/* ---------- Hero: actual cb-gopro-1 clip ---------- */
+.hero--text {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: calc(100vh - 76px);
+  padding-top: clamp(40px, 6vw, 88px);
+  padding-bottom: clamp(56px, 6vw, 96px);
+}
+.hero--text::before {
+  background:
+    linear-gradient(90deg,
+      rgba(5,5,6,.88) 0%,
+      rgba(5,5,6,.72) 34%,
+      rgba(5,5,6,.28) 58%,
+      rgba(5,5,6,.15) 100%),
+    linear-gradient(180deg, rgba(5,5,6,.15), rgba(5,5,6,.5));
+  z-index: 1;
+}
+
+.deck-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.deck-stage img,
+.deck-stage video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 50%;
+  filter: contrast(1.2) saturate(1.25) brightness(.72);
+  display: block;
+}
+.deck-stage video { position: absolute; inset: 0; }
+/* Wavy tear fringe along the right of the hero, from cb-gopro-4 */
+.deck-stage::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: min(38%, 520px);
+  background: url("theme-media/bent-tear.webp") right center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: .38;
+  pointer-events: none;
+}
+
+.hero-copy, .hero-status { z-index: 2; }
+
+.eyebrow,
+.project-kicker,
+.cap-index,
+.timeline-date,
+.status-card p,
+.edu-label,
+.edu-school,
+.section-number {
+  font-family: "Share Tech Mono", ui-monospace, monospace !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+/* Posterized, color-banded headings — palette from cb-loop-1 / cb-gopro-1 */
+.hero h1,
+h2 {
+  font-family: "IBM Plex Sans", Inter, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    #ff4ae0 0 24%,
+    #3a48ff 24% 48%,
+    #00d040 48% 66%,
+    #f3eef8 66% 100%
+  );
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(5px 0 0 rgba(58,72,255,.75)) drop-shadow(-5px 0 0 rgba(255,74,224,.75));
+}
+.hero h1 span {
+  color: transparent;
+  background-image: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+h3 { font-family: "IBM Plex Sans", Inter, sans-serif; color: #f3eef8; }
+
+/* A smear from his bent Toshiba screen cuts through the title */
+.hero h1 { position: relative; }
+.hero h1::after {
+  content: "";
+  position: absolute;
+  left: -6%;
+  width: 72%;
+  top: 44%;
+  height: 30px;
+  background: url("theme-media/bent-screen.webp") 50% 40% / 140% auto no-repeat;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: .9;
+}
+
+.hero-role {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: clamp(0.78rem, 1.1vw, 0.92rem);
+  color: var(--bent-green);
+}
+.hero-intro { color: #dcd4e6; max-width: 640px; }
+
+.button {
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.button-primary { background: var(--accent); color: #fff; }
+.button-primary:hover { background: var(--accent-2); color: #1a0a16; }
+.button-secondary {
+  border: 1px solid var(--bent-blue);
+  color: #fff;
+  background: rgba(0,0,0,.4);
+  box-shadow: 3px 0 0 var(--accent), -3px 0 0 var(--bent-green);
+}
+.button-secondary:hover { background: rgba(58,72,255,.18); }
+
+.status-card {
+  background: rgba(5,5,6,.8);
+  border: 2px solid var(--accent);
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  box-shadow: 5px 0 0 var(--bent-blue), -5px 0 0 var(--bent-green);
+}
+.status-card p { color: var(--bent-green); }
+.status-dot {
+  background: var(--accent);
+  border-radius: 0;
+  box-shadow: 0 0 0 4px rgba(255,74,224,.2);
+}
+
+.marquee {
+  background: var(--accent);
+  color: #1a0a16;
+  border: 0;
+  box-shadow: 0 -3px 0 var(--bent-blue), 0 3px 0 var(--bent-green);
+}
+.marquee-track {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+
+/* Broken-CRT card frames with bent-color edges */
+.project-card,
+.about-panel,
+.education-card,
+.edu-panel,
+.personal-grid article {
+  border-radius: 16px 16px 10px 10px;
+  background: var(--surface);
+  border: 8px solid #16141c;
+  outline: 1px solid #000;
+  box-shadow:
+    0 0 0 1px #2a2a32,
+    7px 0 0 -1px rgba(58,72,255,.7),
+    -7px 0 0 -1px rgba(255,74,224,.7),
+    0 8px 0 -2px rgba(0,208,64,.35);
+  overflow: hidden;
+}
+.venture-card {
+  border-radius: 16px 16px 10px 10px;
+}
+
+.tags li,
+.edu-chips li,
+.edu-school {
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-color: #3a3244;
+}
+
+.metric-row strong,
+.cap-index,
+.timeline-date,
+.edu-minor,
+.degree span,
+.contact h2 span,
+.text-link { color: var(--accent); }
+
+/* About photo in a CRT bezel — face stays clear */
+.about-portrait {
+  border-radius: 18px 18px 12px 12px;
+  border: 10px solid #1a1a20;
+  box-shadow:
+    0 0 0 1px #444,
+    8px 0 0 -2px var(--bent-blue),
+    -8px 0 0 -2px var(--accent);
+  background: #0a0a0c;
+  overflow: hidden;
+}
+.about-portrait img { filter: contrast(1.05); }
+
+footer {
+  border: 0;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 -3px 0 var(--bent-blue);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  background: #050506;
+}
+.footer-links a:hover,
+.contact-email:hover { color: var(--accent); }
+
+/* Databend hover — never on cards that hold Graphic Art videos */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-card:not(:has(video)),
+  .about-panel,
+  .education-card,
+  .personal-grid article {
+    transition: none;
+  }
+  .project-card:not(:has(video)):hover,
+  .about-panel:hover,
+  .education-card:hover,
+  .personal-grid article:hover {
+    animation: databend .32s steps(2, end) 1;
+  }
+  .button:hover { transform: none; }
+}
+@keyframes databend {
+  0%   { transform: translateX(0); filter: none; }
+  20%  { transform: translateX(7px) skewX(-2deg); filter: hue-rotate(50deg) saturate(1.5); }
+  45%  { transform: translateX(-6px); filter: hue-rotate(-25deg) contrast(1.3); }
+  70%  { transform: translateX(3px) skewX(1deg); filter: saturate(1.4); }
+  100% { transform: none; filter: none; }
+}
+
+/* Keep Graphic Art videos uncropped and under the nav */
+.media-stage-art video { object-fit: contain; }
+main, .venture-media, .media-stage { position: relative; z-index: 0; }
+.site-header { z-index: 1000; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1::after { opacity: .7; }
+  .hero h1, h2 { filter: drop-shadow(3px 0 0 rgba(58,72,255,.55)) drop-shadow(-3px 0 0 rgba(255,74,224,.55)); }
+  .project-card:hover,
+  .about-panel:hover,
+  .education-card:hover { animation: none; }
+}
