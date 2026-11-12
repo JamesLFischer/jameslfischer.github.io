@@ -279,7 +279,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   padding: clamp(26px, 3.4vw, 48px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 10px;
