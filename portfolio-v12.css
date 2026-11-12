@@ -1191,10 +1191,17 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   min-width: 240px;
 }
 
-.about {
+/* Portrait grid is for the About page only. Education also uses
+   section.about, and must stay a single full-width column. */
+#about.about {
   grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
   align-items: stretch;
   gap: clamp(22px, 3vw, 42px);
+}
+#education.about {
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 18px;
 }
 .about-portrait {
   margin: 0;
@@ -1216,7 +1223,7 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 }
 
 @media (max-width: 1000px) {
-  .about {
+  #about.about {
     grid-template-columns: minmax(200px, 0.8fr) minmax(0, 1.2fr);
   }
 }
@@ -1233,7 +1240,7 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
     bottom: auto;
     min-width: 0;
   }
-  .about { grid-template-columns: 1fr; }
+  #about.about { grid-template-columns: 1fr; }
   .about-portrait {
     order: -1;
     width: 100%;

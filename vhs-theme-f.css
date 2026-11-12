@@ -200,34 +200,97 @@ h2 {
 .hero h1 span {
   color: transparent;
   background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
   -webkit-background-clip: text;
   background-clip: text;
 }
 h3 { font-family: "IBM Plex Sans", Inter, sans-serif; color: #f3eef8; }
 
-.hero h1 { position: relative; }
-.hero h1::after {
-  content: "";
-  position: absolute;
-  left: -6%;
-  width: 72%;
-  top: 44%;
-  height: 28px;
-  background: linear-gradient(90deg,
-    #ff4ae0 0 22%,
-    #3a48ff 22% 48%,
-    #00d040 48% 62%,
-    #e07a38 62% 78%,
-    #0020f0 78% 100%);
-  mix-blend-mode: screen;
-  pointer-events: none;
-  opacity: .9;
-  animation: bent-slice 3.6s steps(3, end) infinite;
+/* Name glitch: the previous bent-slice only nudged a static color
+   bar for ~12% of a 3.6s loop, so the letters themselves never moved. */
+.hero h1 {
+  position: relative;
+  overflow: visible;
+  background-size: 100% 140%;
+  background-position: 0 0;
+  filter: none;
+  text-shadow:
+    5px 0 0 rgba(58,72,255,.8),
+    -5px 0 0 rgba(255,74,224,.8);
+  animation:
+    name-bands 1.15s steps(4, end) infinite,
+    name-rgb 0.42s steps(2, end) infinite;
 }
-@keyframes bent-slice {
-  0%, 80%, 100% { transform: translate(0, 0) scaleX(1); }
-  85% { transform: translate(10px, -3px) scaleX(1.04); }
-  92% { transform: translate(-14px, 2px) scaleX(.96); }
+.hero h1::before,
+.hero h1::after {
+  content: "James\A Fischer.";
+  white-space: pre;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-transform: none;
+  text-align: inherit;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  filter: none;
+  pointer-events: none;
+  overflow: visible;
+}
+.hero h1::before {
+  color: #3a48ff;
+  text-shadow: none;
+  clip-path: inset(12% -8% 58% -8%);
+  animation: name-slice-a 0.85s steps(2, end) infinite;
+}
+.hero h1::after {
+  color: #00d040;
+  text-shadow: none;
+  clip-path: inset(48% -8% 14% -8%);
+  animation: name-slice-b 0.7s steps(2, end) infinite;
+}
+@keyframes name-rgb {
+  0%   { text-shadow: 5px 0 0 rgba(58,72,255,.85), -4px 0 0 rgba(255,74,224,.85); }
+  25%  { text-shadow: -6px 1px 0 rgba(58,72,255,.9), 7px 0 0 rgba(255,74,224,.9); }
+  50%  { text-shadow: 8px -1px 0 rgba(0,208,64,.75), -5px 1px 0 rgba(255,74,224,.9); }
+  75%  { text-shadow: -7px 0 0 rgba(58,72,255,.85), 4px 2px 0 rgba(255,74,224,.8); }
+  100% { text-shadow: 5px 0 0 rgba(58,72,255,.85), -4px 0 0 rgba(255,74,224,.85); }
+}
+@keyframes name-bands {
+  0%   { background-position: 0 0; background-size: 100% 140%; }
+  25%  { background-position: 10px 18%; background-size: 130% 180%; }
+  50%  { background-position: -14px -8%; background-size: 100% 200%; }
+  75%  { background-position: 8px 28%; background-size: 140% 160%; }
+  100% { background-position: 0 0; background-size: 100% 140%; }
+}
+@keyframes name-slice-a {
+  0%   { transform: translate(0, 0); clip-path: inset(12% -8% 58% -8%); }
+  16%  { transform: translate(16px, -2px); clip-path: inset(8% -8% 62% -8%); }
+  32%  { transform: translate(-18px, 1px); clip-path: inset(20% -8% 46% -8%); }
+  48%  { transform: translate(10px, 2px); clip-path: inset(6% -8% 70% -8%); }
+  64%  { transform: translate(-8px, 0); clip-path: inset(24% -8% 40% -8%); }
+  72%  { transform: translate(34px, -5px) skewX(-10deg); clip-path: inset(10% -12% 50% -12%); }
+  80%  { transform: translate(-36px, 4px) skewX(8deg); clip-path: inset(30% -12% 20% -12%); }
+  88%  { transform: translate(8px, 0); clip-path: inset(14% -8% 56% -8%); }
+  100% { transform: translate(0, 0); clip-path: inset(12% -8% 58% -8%); }
+}
+@keyframes name-slice-b {
+  0%   { transform: translate(0, 0); clip-path: inset(48% -8% 14% -8%); }
+  18%  { transform: translate(-14px, 1px); clip-path: inset(52% -8% 10% -8%); }
+  36%  { transform: translate(20px, -2px); clip-path: inset(40% -8% 22% -8%); }
+  54%  { transform: translate(-10px, 0); clip-path: inset(58% -8% 8% -8%); }
+  66%  { transform: translate(-32px, 5px) skewX(9deg); clip-path: inset(36% -12% 18% -12%); }
+  74%  { transform: translate(30px, -3px) skewX(-7deg); clip-path: inset(50% -12% 6% -12%); }
+  86%  { transform: translate(-6px, 1px); clip-path: inset(46% -8% 16% -8%); }
+  100% { transform: translate(0, 0); clip-path: inset(48% -8% 14% -8%); }
 }
 
 .hero-role {
@@ -420,8 +483,17 @@ main, .venture-media, .media-stage { position: relative; z-index: 0; }
 @media (prefers-reduced-motion: reduce) {
   .hero--text,
   .hero--text::after,
+  .hero h1,
+  .hero h1::before,
   .hero h1::after { animation: none !important; }
   .hero--text { background-position: 0 0, 50% 30%; }
+  .hero h1::before,
+  .hero h1::after { content: none; }
+  .hero h1 {
+    text-shadow: 3px 0 0 rgba(58,72,255,.55), -3px 0 0 rgba(255,74,224,.55);
+    background-position: 0 0;
+    background-size: 100% 100%;
+  }
   .hero h1, h2 { filter: drop-shadow(3px 0 0 rgba(58,72,255,.55)) drop-shadow(-3px 0 0 rgba(255,74,224,.55)); }
   .project-card:hover,
   .about-panel:hover,
@@ -528,7 +600,7 @@ html[data-vhs="f"][data-page="experience"] body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .28;
+  opacity: .16;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='160' viewBox='0 0 400 160'><path fill='none' stroke='%2300d040' stroke-width='1.6' d='M0 80 C 25 20, 50 140, 80 80 S 140 20, 160 80 S 220 140, 240 80 S 300 20, 320 80 S 380 140, 400 80'/><path fill='none' stroke='%23ff4ae0' stroke-width='1.2' opacity='.8' d='M0 80 C 30 140, 60 20, 90 80 S 150 140, 180 80 S 240 20, 270 80 S 330 140, 360 80 S 390 20, 400 80'/></svg>");
   background-repeat: repeat;
   background-size: 400px 160px;
@@ -544,18 +616,26 @@ html[data-vhs="f"][data-page="education"] body::before,
 html[data-vhs="f"][data-page="education"] body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  width: min(9vw, 110px);
   z-index: 0;
   pointer-events: none;
-  mix-blend-mode: screen;
+  opacity: .4;
 }
 html[data-vhs="f"][data-page="education"] body::before {
-  background: linear-gradient(90deg, rgba(255,74,224,.18), transparent 45%);
+  left: 0;
+  background: linear-gradient(90deg, rgba(255,74,224,.45), transparent 100%);
   animation: chroma-drift 7s ease-in-out infinite alternate;
 }
 html[data-vhs="f"][data-page="education"] body::after {
-  background: linear-gradient(270deg, rgba(58,72,255,.18), transparent 45%);
+  right: 0;
+  left: auto;
+  background: linear-gradient(270deg, rgba(58,72,255,.45), transparent 100%);
   animation: chroma-drift 7s ease-in-out infinite alternate-reverse;
+}
+html[data-vhs="f"][data-page="education"] #education {
+  padding-top: clamp(28px, 3.5vw, 48px);
 }
 @keyframes chroma-drift {
   from { transform: translateX(-24px); }
@@ -579,7 +659,7 @@ html[data-vhs="f"][data-page="blog"] body::before {
     );
   background-size: 100% 240px;
   animation: hold-roll 6s linear infinite;
-  opacity: .8;
+  opacity: .45;
 }
 @keyframes hold-roll {
   0%   { background-position: 0 0; }
@@ -587,13 +667,18 @@ html[data-vhs="f"][data-page="blog"] body::before {
 }
 
 /* ----- Contact: phosphor bloom + creeping color-bar ----- */
+html[data-vhs="f"][data-page="contact"],
+html[data-vhs="f"][data-page="contact"] body {
+  overflow-x: hidden;
+}
 html[data-vhs="f"][data-page="contact"] .contact {
   position: relative;
+  overflow-x: hidden;
 }
 html[data-vhs="f"][data-page="contact"] .contact::before {
   content: "";
   position: absolute;
-  inset: -8% -6%;
+  inset: -8% 0;
   z-index: 0;
   pointer-events: none;
   background: radial-gradient(ellipse at 30% 40%, rgba(255,74,224,.22), rgba(58,72,255,.08) 42%, transparent 68%);
