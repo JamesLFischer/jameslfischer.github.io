@@ -331,7 +331,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-weight: 700;
 }
 .terminal-card {
-  align-self: end;
+  align-self: stretch;
+  width: 100%;
+  margin-top: 48px;
   background: #07090b;
   border: 1px solid #283039;
   border-radius: 8px;
@@ -342,7 +344,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .terminal-top { display: flex; gap: 7px; padding: 13px 16px; border-bottom: 1px solid #222930; }
 .terminal-top span { width: 8px; height: 8px; border-radius: 50%; background: #3b454d; }
 .terminal-card pre { margin: 0; padding: 28px; white-space: pre-wrap; color: #99e7cc; font: 500 .79rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-.metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 34px; }
+.metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 48px; }
 .metric-row div { padding-top: 18px; border-top: 1px solid var(--line); }
 .metric-row strong { display: block; font-size: clamp(2.1rem, 4vw, 4rem); letter-spacing: -.05em; color: var(--accent); }
 .metric-row span { color: var(--muted); font-size: .78rem; }
@@ -374,6 +376,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .timeline-stack { color: #7f8a93; font-size: .77rem; line-height: 1.7; }
 .text-link { margin-top: 30px; justify-self: start; color: var(--accent); font-weight: 800; }
 .text-link:hover { text-decoration: underline; }
+/* Project cards: links are inline, so margin-top never applied and sat on the tags. */
+.project-content .text-link { display: inline-block; margin-top: 48px; }
 
 .about {
   display: grid;
@@ -517,7 +521,7 @@ footer p { margin: 0; }
   .project-grid { grid-template-columns: 1fr; }
   .project-featured { grid-column: auto; grid-template-columns: 1fr; grid-template-rows: auto; }
   .project-meta { grid-column: auto; margin-bottom: 42px; }
-  .terminal-card { margin-top: 38px; }
+  .terminal-card { margin-top: 48px; }
   .project-card { min-height: 0; }
   .capability-grid { grid-template-columns: 1fr; }
   .capability-grid article, .capability-grid article + article { padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
