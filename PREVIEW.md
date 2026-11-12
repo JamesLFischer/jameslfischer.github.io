@@ -3,12 +3,12 @@
 This branch is a **preview only**. It is not on `main` and has not been pushed.
 The portrait lives on `About.html`. The homepage hero is typographic.
 
-V2 directions (built from James’s actual footage, after A/B were rejected):
+V3 directions (CSS/SVG only — no footage or stills from his clips, after C/D used his work as backgrounds):
 
-- **C Tape:** `index.html?theme=c` — VHS deck. Uses `vhs-loop-1`, tracking bars from that clip, plus `p1`/`p5` textures. Nav is a VCR OSD (`00:12:04  SP  CH 03`). Mobile brand shows `▶ PLAY`.
-- **D Bent:** `index.html?theme=d` — circuit-bending glitch. Hero uses `cb-gopro-1` (muted loop). Palette and smear from `cb-loop-1`; wavy tear from `cb-gopro-4`.
+- **E Tape:** `index.html?theme=e` — VHS-deck inspired. VCR OSD nav (▶ PLAY, 00:12:04, SP, CH 03), CSS tracking-roll bands, RGB-split headings, scanlines + SVG noise, a SMPTE / no-signal color-bar motif, and a generated color-bar spine.
+- **F Bent:** `index.html?theme=f` — circuit-bending inspired. Posterized magenta / electric-blue / phosphor-green heading bands, a CSS smear-and-tear field, CRT-bezel cards with a hover databend, palette sampled from the reference sheet but painted in CSS.
 
-Reference stills: `qa_local/vhs-style-preview-2026-11-12/v2-reference-sheet.png`
-Screenshots: `qa_local/vhs-style-preview-2026-11-12/C-*.png`, `D-*.png`, `compare-v2-*.png`
+Reference stills (study only, not used in E/F): `qa_local/vhs-style-preview-2026-11-12/v2-reference-sheet.png`
+Screenshots: `qa_local/vhs-style-preview-2026-11-12/E-*.png`, `F-*.png`, `compare-v3-*.png`
 
-Older A/B themes remain on the branch but are not the proposal.
+Older A–D themes remain on the branch but are not the proposal.

@@ -1,0 +1,509 @@
+/* Direction E — Tape (CSS only)
+   VHS-deck inspired. No footage, stills, or textures from his clips.
+   Scanlines, SVG noise, tracking-roll bands, RGB-split type, VCR OSD,
+   and a SMPTE / no-signal color-bar motif are all generated in CSS. */
+@import url("fonts/vhs-fonts.css");
+
+:root {
+  --bg: #07060b;
+  --surface: #101018;
+  --surface-2: #16141e;
+  --text: #efeae0;
+  --muted: #b7b0a4;
+  --line: #2c2a36;
+  --accent: #c6ff57;
+  --accent-2: #eaff9a;
+  --chroma: #7ee8e8;
+  --magenta: #e86bff;
+  --nosignal: #0033c8;
+  --ink: #05040a;
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  --bars: linear-gradient(90deg,
+      #c0c0c0 0 12.5%, #c0c000 12.5% 25%, #00c0c0 25% 37.5%, #00c000 37.5% 50%,
+      #c000c0 50% 62.5%, #c00000 62.5% 75%, #0000c0 75% 87.5%, #0a0a0a 87.5% 100%);
+  --track: linear-gradient(180deg,
+      rgba(232,107,255,.9) 0 2px,
+      #f4f1ea 2px 38%,
+      #ffffff 38% 62%,
+      rgba(126,232,232,.95) 62% 100%);
+  --track-spark: repeating-linear-gradient(90deg,
+      rgba(255,255,255,.95) 0 1px,
+      rgba(255,255,255,.15) 1px 3px,
+      #d0d0e8 3px 4px,
+      rgba(255,255,255,.5) 4px 6px,
+      transparent 6px 9px);
+}
+
+html { background: var(--bg); }
+
+html[data-vhs="e"] body {
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,.28) 0 1px,
+      transparent 1px 3px
+    ),
+    var(--noise);
+  background-size: auto, 180px 180px;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: "IBM Plex Sans", Inter, ui-sans-serif, "Segoe UI", sans-serif;
+}
+
+::selection { background: var(--accent); color: var(--ink); }
+
+/* ---------- VCR OSD header: color bars + PLAY / counter, then nav, then a tracking band ---------- */
+.site-header {
+  background: #05040a !important;
+  border-bottom: 0 !important;
+  min-height: 0;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 18px;
+  padding: 0 16px;
+  backdrop-filter: none;
+}
+.site-header::before {
+  content: "▶  PLAY";
+  flex: 0 0 auto;
+  width: calc(100% + 32px);
+  max-width: none;
+  order: -1;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  margin: 0 -16px;
+  padding: 0 18px 0 112px;
+  box-sizing: border-box;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-shadow: 1px 0 0 rgba(126,232,232,.5), -1px 0 0 rgba(232,107,255,.45);
+  white-space: nowrap;
+  overflow: hidden;
+  background:
+    var(--bars) 14px 50% / 86px 11px no-repeat,
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='14'><text x='260' y='11' text-anchor='end' font-family='Share Tech Mono, ui-monospace, monospace' font-size='11' letter-spacing='2.2' fill='%23ffffff'>00:12:04   SP   CH 03</text></svg>") right 16px center / 260px 14px no-repeat,
+    #05040a;
+  border-bottom: 1px solid #1c1b22;
+}
+.site-header::after {
+  content: "";
+  flex: 0 0 auto;
+  width: calc(100% + 32px);
+  max-width: none;
+  order: 5;
+  height: 14px;
+  margin: 0 -16px;
+  background:
+    var(--noise),
+    var(--track-spark),
+    var(--track);
+  background-size: 120px 14px, auto, auto;
+  pointer-events: none;
+}
+
+html { scroll-padding-top: 130px; }
+
+/* Broadcast color-bar spine — generated, not a still */
+html[data-vhs="e"] body::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 8px;
+  background: linear-gradient(180deg,
+    #c0c0c0 0 12.5%, #c0c000 12.5% 25%, #00c0c0 25% 37.5%, #00c000 37.5% 50%,
+    #c000c0 50% 62.5%, #c00000 62.5% 75%, #0000c0 75% 87.5%, #0a0a0a 87.5% 100%);
+  pointer-events: none;
+  z-index: 1100;
+}
+
+.brand {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(198,255,87,.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  flex: none;
+}
+.brand::before {
+  content: "▶  PLAY";
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  padding-right: 12px;
+  margin-right: 12px;
+  border-right: 1px solid rgba(198,255,87,.35);
+}
+.brand span { color: #fff; }
+
+.site-nav a {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d8d4c8;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+@media (min-width: 761px) {
+  .site-nav { display: flex; align-items: center; flex: 1; }
+}
+@media (max-width: 760px) {
+  .site-header { padding: 0 12px; min-height: 0; }
+  .site-header::before {
+    content: "";
+    height: 10px;
+    padding: 0;
+    margin: 0 -12px;
+    background: var(--bars);
+    background-size: 100% 100%;
+    border-bottom: 0;
+  }
+  .site-header::after { margin: 0 -12px; width: calc(100% + 24px); }
+  .site-nav { display: none; }
+  .site-nav.open { display: flex; }
+  .site-nav {
+    background: #05040a;
+    border-color: #222;
+    top: 96px;
+  }
+  .brand { font-size: 0.82rem; }
+  .brand::before { padding-right: 8px; }
+}
+
+@media (min-width: 901px) {
+  .site-header { padding-left: 24px; padding-right: 24px; justify-content: flex-start !important; }
+  .site-header::before,
+  .site-header::after {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+  .site-nav { max-width: none !important; margin: 0 !important; width: 100%; }
+  .site-nav a { padding: 16px 4px 14px; }
+  .brand::before { display: none; } /* OSD row already has PLAY */
+}
+
+.skip-link { background: var(--accent); color: var(--ink); }
+.menu-toggle { color: var(--accent); }
+
+/* ---------- Hero: typographic CRT + SMPTE panel + rolling tracking band ---------- */
+.hero--text {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: calc(100vh - 120px);
+  padding-top: clamp(40px, 6vw, 88px);
+  padding-bottom: clamp(56px, 6vw, 96px);
+  background-color: #07060b;
+  background-image:
+    var(--bars),
+    linear-gradient(90deg, #001a80 0 16%, #ffffff 16% 28%, #2a1470 28% 40%, #0a0a0a 40% 55%, #101018 55% 70%, #07060b 70% 100%),
+    linear-gradient(#0033c8, #0033c8);
+  background-repeat: no-repeat;
+  background-size: 320px 54%, 320px 12%, 320px 14%;
+  background-position:
+    right 4% top 10%,
+    right 4% top calc(10% + 54%),
+    right 4% top calc(10% + 66%);
+}
+.hero--text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg,
+      rgba(7,6,11,.96) 0%,
+      rgba(7,6,11,.94) 46%,
+      rgba(7,6,11,.4) 62%,
+      rgba(7,6,11,0) 72%,
+      rgba(7,6,11,0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+/* Rolling tracking tear — CSS sparkle, not a still from his tape */
+.hero--text::after {
+  content: "";
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  height: 56px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    var(--noise),
+    var(--track-spark),
+    var(--track);
+  background-size: 160px 56px, auto, auto;
+  mix-blend-mode: screen;
+  opacity: .92;
+  animation: tape-roll 6.5s linear infinite;
+  box-shadow: 0 -8px 10px rgba(0,0,0,.35), 0 8px 10px rgba(0,0,0,.35);
+}
+@keyframes tape-roll {
+  0%   { top: -60px; }
+  100% { top: 108%; }
+}
+
+.hero-copy { z-index: 3; max-width: min(740px, 100%); }
+.hero-status { z-index: 4; }
+
+.eyebrow,
+.project-kicker,
+.cap-index,
+.timeline-date,
+.status-card p,
+.edu-label,
+.edu-school,
+.section-number {
+  font-family: "Share Tech Mono", ui-monospace, monospace !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.hero h1 {
+  position: relative;
+  font-family: "IBM Plex Sans", Inter, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  color: #f5f1ea;
+  text-shadow:
+    6px 0 0 rgba(126, 232, 232, 0.85),
+    -6px 0 0 rgba(232, 107, 255, 0.85);
+}
+.hero h1 span { color: var(--accent); }
+.hero h1::after {
+  content: "";
+  position: absolute;
+  left: -6%;
+  width: 78%;
+  top: 46%;
+  height: 22px;
+  background: var(--track-spark), var(--track);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: .95;
+}
+
+.hero-role {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: clamp(0.78rem, 1.1vw, 0.92rem);
+  color: var(--chroma);
+}
+.hero-intro { color: #d9d3c8; max-width: 640px; }
+
+.button {
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.button-primary { background: var(--accent); color: var(--ink); }
+.button-primary:hover { background: var(--accent-2); }
+.button-secondary { border-color: var(--accent); color: var(--accent); background: rgba(0,0,0,.35); }
+.button-secondary:hover { background: rgba(198,255,87,.12); }
+
+.status-card {
+  background: rgba(5,4,10,.88);
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  position: relative;
+}
+.status-card::before {
+  content: "NO SIGNAL";
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 18px);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  color: #fff;
+  text-shadow: 2px 0 0 #ff4ad0, -2px 0 0 #7ee8e8;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.status-card p { color: var(--chroma); }
+.status-dot {
+  background: #ff2a2a;
+  border-radius: 0;
+  box-shadow: 0 0 0 4px rgba(255,42,42,.18);
+}
+
+.marquee {
+  background:
+    repeating-linear-gradient(to bottom, rgba(255,255,255,.08) 0 1px, transparent 1px 3px),
+    var(--track) 0 0 / 100% 8px no-repeat,
+    var(--track) 0 100% / 100% 8px no-repeat,
+    #05040a;
+  color: #fff;
+  border: 0;
+  text-shadow: 0 1px 0 #000, 1px 0 0 #000;
+}
+.marquee-track {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+
+h2, h3 { font-family: "IBM Plex Sans", Inter, sans-serif; }
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-shadow: 3px 0 0 rgba(126,232,232,.45), -3px 0 0 rgba(232,107,255,.45);
+}
+
+/* CSS tracking band as a section divider */
+.section-intro + .project-grid,
+.section-intro + .about,
+.capabilities,
+.experience,
+.personal {
+  border-top: 14px solid #000;
+  border-image: var(--track) 14 stretch;
+}
+
+.project-card,
+.about-panel,
+.education-card,
+.edu-panel,
+.personal-grid article,
+.venture-card {
+  border-radius: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  position: relative;
+}
+.project-card::before,
+.about-panel::before,
+.education-card::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 8px;
+  background: var(--track-spark), var(--track);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tags li,
+.edu-chips li,
+.edu-school {
+  border-radius: 0;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.metric-row strong,
+.cap-index,
+.timeline-date,
+.edu-minor,
+.degree span,
+.contact h2 span,
+.text-link { color: var(--accent); }
+
+/* About portrait: VCR viewfinder frame, face stays clear */
+.about-portrait {
+  border-radius: 0;
+  border: 2px solid #3a3844;
+  outline: 8px solid #121018;
+  box-shadow: inset 0 0 0 1px #000;
+  position: relative;
+  overflow: hidden;
+}
+.about-portrait::before {
+  content: "REC  ●";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 2;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: #ff2a2a;
+  text-shadow: 0 0 8px rgba(255,42,42,.5);
+  pointer-events: none;
+}
+.about-portrait::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 10px;
+  background: var(--track-spark), var(--track);
+  mix-blend-mode: screen;
+  opacity: .7;
+  pointer-events: none;
+  z-index: 1;
+}
+.about-portrait img { filter: contrast(1.04) saturate(.96); }
+
+/* Footer: no-signal blue, CSS static, color bars, OSD */
+footer {
+  border: 0;
+  border-top: 12px solid #000;
+  border-image: var(--bars) 12 stretch;
+  background:
+    var(--noise),
+    var(--nosignal);
+  background-size: 180px 180px, auto;
+  color: #e8eefc;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  position: relative;
+}
+footer::before {
+  content: "NO SIGNAL";
+  position: absolute;
+  right: var(--pad);
+  top: 22px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #fff;
+  text-shadow: 2px 0 0 #ff4ad0, -2px 0 0 #7ee8e8;
+}
+.footer-links a:hover { color: var(--accent); }
+.contact-email:hover { color: var(--accent); }
+
+/* Keep Graphic Art videos uncropped and under the nav */
+.media-stage-art video { object-fit: contain; }
+main, .venture-media, .media-stage { position: relative; z-index: 0; }
+.site-header { z-index: 1000; }
+
+@media (max-width: 900px) {
+  .hero--text {
+    background:
+      var(--bars) 0 0 / 100% 8px no-repeat,
+      #07060b;
+  }
+  .hero--text::before {
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, rgba(7,6,11,.2), rgba(7,6,11,.55));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--text::after { animation: none; top: 38%; }
+  .hero h1 { text-shadow: 3px 0 0 rgba(126,232,232,.5), -3px 0 0 rgba(232,107,255,.5); }
+  h2 { text-shadow: none; }
+}
