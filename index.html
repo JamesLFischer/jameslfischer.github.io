@@ -13,6 +13,18 @@
   <link rel="stylesheet" href="portfolio-v12.css?v=45">
   <script defer src="script.js?v=34"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      if (t === 'a' || t === 'b') {
+        document.documentElement.setAttribute('data-vhs', t);
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = 'vhs-theme-' + t + '.css?v=1';
+        document.head.appendChild(l);
+      }
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -34,10 +46,7 @@
   </header>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-backdrop" aria-hidden="true">
-        <img src="james-fischer.jpg" alt="" width="1536" height="2048">
-      </div>
+    <section class="hero hero--text" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow">Seattle, Washington · Open to new opportunities</p>
         <h1 id="hero-title">James<br><span>Fischer.</span></h1>

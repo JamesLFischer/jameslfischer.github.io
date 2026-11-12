@@ -1,0 +1,231 @@
+/* Direction A — Subtle / professional
+   Camcorder OSD typography, faint scanlines, warm amber + soft chroma. */
+@import url("fonts/vhs-fonts.css");
+
+:root {
+  --bg: #100e0c;
+  --surface: #191614;
+  --surface-2: #211e1a;
+  --text: #f3ece3;
+  --muted: #a89f93;
+  --line: #3a342c;
+  --accent: #e8c07a;
+  --accent-2: #f6d9a6;
+  --chroma: #7ec9bf;
+  --ink: #0c0a08;
+}
+
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Sans", Inter, ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+}
+
+::selection { background: var(--accent); color: var(--ink); }
+
+/* Faint scanlines + soft vignette over the whole screen. */
+html[data-vhs="a"]::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(8, 6, 4, 0.16) 0px,
+      rgba(8, 6, 4, 0.16) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  opacity: 0.45;
+}
+html[data-vhs="a"]::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2499;
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(8, 6, 4, 0.38) 100%);
+}
+
+.skip-link { background: var(--accent); color: var(--ink); }
+
+.site-header {
+  background: rgba(16, 14, 12, 0.94) !important;
+  border-bottom: 1px solid rgba(232, 192, 122, 0.16);
+}
+.brand {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+.brand span { color: var(--accent); }
+.site-nav a {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c4bbb0;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+@media (max-width: 760px) {
+  .site-nav {
+    background: #161310;
+    border-color: var(--line);
+  }
+}
+
+.eyebrow,
+.project-kicker,
+.cap-index,
+.timeline-date,
+.status-card p,
+.edu-label,
+.edu-school,
+.section-number {
+  font-family: "Share Tech Mono", ui-monospace, monospace !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.14em;
+}
+
+.eyebrow { color: var(--accent); }
+
+.hero--text::before {
+  background:
+    radial-gradient(circle at 16% 24%, rgba(232, 192, 122, 0.16), transparent 30%),
+    radial-gradient(circle at 84% 80%, rgba(126, 201, 191, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(16, 14, 12, 0.1), rgba(16, 14, 12, 0.55));
+}
+
+/* Subtle camcorder OSD in the hero corners */
+.hero--text .hero-copy::before {
+  content: "SP  ·  AUTO";
+  display: block;
+  margin: 0 0 22px;
+  color: var(--chroma);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+}
+.hero h1 {
+  font-family: "IBM Plex Sans", Inter, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-shadow: 1px 0 0 rgba(126, 201, 191, 0.18), -1px 0 0 rgba(232, 192, 122, 0.18);
+}
+.hero h1 span { color: var(--accent); }
+.hero-role {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+  color: #d9d0c5;
+}
+.hero-intro { color: #c9c0b5; }
+
+.button { border-radius: 2px; font-weight: 650; letter-spacing: 0.04em; }
+.button-primary { background: var(--accent); color: var(--ink); }
+.button-primary:hover { background: var(--accent-2); }
+.button-secondary { border-color: var(--line); color: var(--text); }
+.button-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.status-card {
+  background: rgba(16, 14, 12, 0.88);
+  border: 1px solid rgba(232, 192, 122, 0.28);
+  border-radius: 2px;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+}
+.status-dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(232, 192, 122, 0.12);
+  border-radius: 1px;
+}
+
+.marquee {
+  background: var(--accent);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.marquee-track {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+}
+
+h2, h3, .hero h1 {
+  font-family: "IBM Plex Sans", Inter, sans-serif;
+}
+
+.project-card,
+.about-panel,
+.education-card,
+.edu-panel,
+.status-card,
+.personal-grid article,
+.contact-card,
+.venture-card {
+  border-radius: 2px;
+}
+
+.project-card,
+.about-panel,
+.education-card,
+.edu-panel,
+.personal-grid article {
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.tags li,
+.edu-chips li,
+.edu-school {
+  border-radius: 2px;
+  border-color: var(--line);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metric-row strong,
+.cap-index,
+.timeline-date,
+.edu-minor,
+.degree span,
+.contact h2 span,
+.brand span {
+  color: var(--accent);
+}
+
+.about-portrait {
+  border-radius: 2px;
+  border-color: rgba(232, 192, 122, 0.28);
+  box-shadow: 8px 0 0 -4px rgba(126, 201, 191, 0.28), -8px 0 0 -4px rgba(232, 192, 122, 0.22);
+}
+.about-portrait img {
+  filter: saturate(0.92) contrast(1.04) sepia(0.08);
+}
+
+footer {
+  border-color: var(--line);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+}
+.footer-links a:hover { color: var(--accent); }
+
+.text-link { color: var(--accent); }
+.contact-email:hover { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-vhs="a"]::before,
+  html[data-vhs="a"]::after { opacity: 0.28; }
+  .hero h1 { text-shadow: none; }
+}

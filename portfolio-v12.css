@@ -1157,3 +1157,89 @@ html { scroll-padding-top: 88px; }
 main, .venture-media, .media-stage { position: relative; z-index: 0; }
 .video-toggle { z-index: 1; }
 section[id], article[id], [id] { scroll-margin-top: 96px; }
+
+/* -------------------------------------------------------------------------
+   Preview branch only: typographic hero (photo moved to About).
+   ------------------------------------------------------------------------- */
+.hero--text {
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: clamp(36px, 5vw, 80px);
+  padding-bottom: clamp(48px, 5vw, 88px);
+}
+.hero--text .hero-backdrop { display: none; }
+.hero--text::before {
+  background:
+    radial-gradient(circle at 14% 22%, rgba(86,245,198,.14), transparent 28%),
+    radial-gradient(circle at 86% 78%, rgba(86,245,198,.06), transparent 32%),
+    linear-gradient(180deg, rgba(11,13,16,.15) 0%, rgba(11,13,16,.35) 100%);
+}
+.hero--text .hero-copy {
+  max-width: min(780px, 100%);
+  padding: 0;
+  border: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.hero--text .hero-status {
+  position: absolute;
+  right: clamp(28px, 3.2vw, 46px);
+  bottom: clamp(28px, 3.4vw, 42px);
+  left: auto;
+  z-index: 3;
+  min-width: 240px;
+}
+
+.about {
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  align-items: stretch;
+  gap: clamp(22px, 3vw, 42px);
+}
+.about-portrait {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #14181c;
+  align-self: start;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  width: 100%;
+}
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 72%;
+  display: block;
+}
+
+@media (max-width: 1000px) {
+  .about {
+    grid-template-columns: minmax(200px, 0.8fr) minmax(0, 1.2fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero--text { align-items: start; min-height: 0; }
+  .hero--text .hero-copy { max-width: 100%; }
+  .hero--text .hero-status {
+    position: static;
+    margin-top: 28px;
+    width: 100%;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    min-width: 0;
+  }
+  .about { grid-template-columns: 1fr; }
+  .about-portrait {
+    order: -1;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    max-height: none;
+    min-height: 0;
+  }
+}

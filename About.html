@@ -13,6 +13,18 @@
   <link rel="stylesheet" href="portfolio-v12.css?v=45">
   <script defer src="script.js?v=34"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      if (t === 'a' || t === 'b') {
+        document.documentElement.setAttribute('data-vhs', t);
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = 'vhs-theme-' + t + '.css?v=1';
+        document.head.appendChild(l);
+      }
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -35,6 +47,9 @@
 
   <main id="main">
     <section class="about section" id="about">
+      <figure class="about-portrait reveal">
+        <img src="james-fischer.jpg" alt="James Fischer" width="1536" height="2048">
+      </figure>
       <div class="about-panel reveal">
         <p class="eyebrow">04 / About me</p>
         <h2>I’ve always liked figuring out how things work — and then figuring out how to make them work better.</h2>
