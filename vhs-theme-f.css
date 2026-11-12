@@ -102,9 +102,9 @@ html[data-vhs="f"] body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: calc(100vh - 76px);
-  padding-top: clamp(40px, 6vw, 88px);
-  padding-bottom: clamp(56px, 6vw, 96px);
+  min-height: calc(100vh - 76px - 96px);
+  padding-top: clamp(36px, 5vw, 72px);
+  padding-bottom: clamp(32px, 4vw, 56px);
   background:
     radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,.62) 100%),
     var(--smear);
@@ -367,12 +367,48 @@ footer {
   100% { transform: none; filter: none; }
 }
 
+
+/* Hero skill chips — same labels as the live homepage marquee */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 18px 0 6px;
+  padding: 0;
+  max-width: 640px;
+  position: relative;
+  z-index: 2;
+}
+.hero-tags li {
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  padding: 7px 10px;
+  color: #f3eef8;
+  background: rgba(5, 5, 6, .82);
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  box-shadow: 3px 0 0 var(--bent-blue), -3px 0 0 var(--bent-green);
+}
+.hero-tags li:nth-child(3n+2) {
+  border-color: var(--bent-blue);
+  box-shadow: 3px 0 0 var(--accent), -3px 0 0 var(--bent-green);
+}
+.hero-tags li:nth-child(3n) {
+  border-color: var(--bent-green);
+  box-shadow: 3px 0 0 var(--accent), -3px 0 0 var(--bent-blue);
+}
+
 /* Keep Graphic Art videos uncropped and under the nav */
 .media-stage-art video { object-fit: contain; }
 main, .venture-media, .media-stage { position: relative; z-index: 0; }
 .site-header { z-index: 1000; }
 
 @media (max-width: 760px) {
+  .hero--text { min-height: 0; }
   .brand {
     text-shadow: 1px 0 0 var(--bent-blue), -1px 0 0 var(--accent);
     overflow: visible;

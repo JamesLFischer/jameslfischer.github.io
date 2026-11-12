@@ -1243,3 +1243,7 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
     min-height: 0;
   }
 }
+
+
+/* Preview: hero skill chips are shown by theme F only. */
+.hero-tags { display: none; list-style: none; margin: 0; padding: 0; }
