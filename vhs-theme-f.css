@@ -102,13 +102,19 @@ html[data-vhs="f"] body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: calc(100vh - 76px - 96px);
-  padding-top: clamp(36px, 5vw, 72px);
-  padding-bottom: clamp(32px, 4vw, 56px);
+  min-height: calc(100vh - 76px - 112px);
+  padding-top: clamp(28px, 4vw, 56px);
+  padding-bottom: clamp(28px, 3.5vw, 48px);
   background:
     radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,.62) 100%),
     var(--smear);
-  background-size: auto, 100% 100%;
+  background-size: auto, 100% 180%;
+  background-position: 0 0, 50% 0%;
+  animation: smear-drift 10s linear infinite;
+}
+@keyframes smear-drift {
+  0%   { background-position: 0 0, 50% 0%; }
+  100% { background-position: 0 0, 50% 100%; }
 }
 .hero--text::before {
   content: "";
@@ -266,15 +272,30 @@ h3 { font-family: "IBM Plex Sans", Inter, sans-serif; color: #f3eef8; }
 }
 
 .marquee {
-  background: var(--accent);
-  color: #1a0a16;
+  position: relative;
+  z-index: 2;
+  background: #0a0a0e;
+  color: #f3eef8;
   border: 0;
-  box-shadow: 0 -3px 0 var(--bent-blue), 0 3px 0 var(--bent-green);
+  border-top: 3px solid var(--accent);
+  box-shadow:
+    0 -3px 0 var(--bent-blue),
+    0 3px 0 var(--bent-green);
+  overflow: hidden;
 }
 .marquee-track {
   font-family: "Share Tech Mono", ui-monospace, monospace;
   font-weight: 400;
   letter-spacing: 0.16em;
+  color: #f3eef8;
+}
+.marquee-track + .marquee-track {
+  border-top: 1px solid rgba(58, 72, 255, .55);
+  color: var(--accent);
+}
+.marquee i {
+  color: var(--bent-green);
+  font-style: normal;
 }
 
 /* Broken-CRT card frames with bent-color edges */
@@ -368,47 +389,19 @@ footer {
 }
 
 
-/* Hero skill chips — same labels as the live homepage marquee */
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  list-style: none;
-  margin: 18px 0 6px;
-  padding: 0;
-  max-width: 640px;
-  position: relative;
-  z-index: 2;
-}
-.hero-tags li {
-  font-family: "Share Tech Mono", ui-monospace, monospace;
-  font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  line-height: 1.2;
-  padding: 7px 10px;
-  color: #f3eef8;
-  background: rgba(5, 5, 6, .82);
-  border: 1px solid var(--accent);
-  border-radius: 0;
-  box-shadow: 3px 0 0 var(--bent-blue), -3px 0 0 var(--bent-green);
-}
-.hero-tags li:nth-child(3n+2) {
-  border-color: var(--bent-blue);
-  box-shadow: 3px 0 0 var(--accent), -3px 0 0 var(--bent-green);
-}
-.hero-tags li:nth-child(3n) {
-  border-color: var(--bent-green);
-  box-shadow: 3px 0 0 var(--accent), -3px 0 0 var(--bent-blue);
-}
-
 /* Keep Graphic Art videos uncropped and under the nav */
 .media-stage-art video { object-fit: contain; }
 main, .venture-media, .media-stage { position: relative; z-index: 0; }
 .site-header { z-index: 1000; }
 
 @media (max-width: 760px) {
-  .hero--text { min-height: 0; }
+  .hero--text {
+    min-height: 0;
+    padding-top: 12px;
+    padding-bottom: 10px;
+  }
+  .hero--text .hero-status { margin-top: 8px; }
+  .marquee-track { padding-top: 8px; padding-bottom: 8px; }
   .brand {
     text-shadow: 1px 0 0 var(--bent-blue), -1px 0 0 var(--accent);
     overflow: visible;
@@ -425,10 +418,234 @@ main, .venture-media, .media-stage { position: relative; z-index: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero--text,
   .hero--text::after,
-  .hero h1::after { animation: none; }
+  .hero h1::after { animation: none !important; }
+  .hero--text { background-position: 0 0, 50% 30%; }
   .hero h1, h2 { filter: drop-shadow(3px 0 0 rgba(58,72,255,.55)) drop-shadow(-3px 0 0 rgba(255,74,224,.55)); }
   .project-card:hover,
   .about-panel:hover,
   .education-card:hover { animation: none; }
+  .marquee-track,
+  .marquee-track + .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ========================================================================
+   Per-page motion (CSS/SVG only, no footage). Layers sit behind main
+   (z-index: 0) so they never cover nav, photos, or Graphic Art videos.
+   ======================================================================== */
+html[data-vhs="f"] main { position: relative; z-index: 1; isolation: isolate; }
+
+/* ----- About: rolling tracking band behind the layout ----- */
+html[data-vhs="f"][data-page="about"] body::before {
+  content: "";
+  position: fixed;
+  left: -2%;
+  right: -2%;
+  height: 28px;
+  top: -32px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.9) 0 1px,
+      rgba(255,74,224,.35) 1px 3px,
+      rgba(58,72,255,.4) 3px 5px,
+      rgba(255,255,255,.15) 5px 8px,
+      transparent 8px 12px),
+    linear-gradient(180deg,
+      rgba(255,74,224,.85) 0 2px,
+      #f4f1ea 2px 40%,
+      #fff 40% 62%,
+      rgba(58,72,255,.9) 62% 100%);
+  opacity: .9;
+  animation: page-track-roll 6.5s linear infinite;
+}
+@keyframes page-track-roll {
+  0%   { top: -36px; }
+  100% { top: 108%; }
+}
+
+/* ----- Projects: circuit-trace pulse in the margins ----- */
+html[data-vhs="f"][data-page="projects"] body::before,
+html[data-vhs="f"][data-page="projects"] body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: min(12vw, 140px);
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='400' viewBox='0 0 120 400'><g fill='none' stroke-width='1.4' stroke-linecap='square'><path stroke='%23ff4ae0' d='M20 0 V50 H70 V110 H20 V170 H90 V230 H40 V300 H70 V400'/><path stroke='%233a48ff' d='M50 0 V40 H100 V90 H50 V150 H15 V220 H80 V280 H50 V400'/><path stroke='%2300d040' d='M90 0 V70 H40 V130 H100 V200 H60 V270 H100 V400'/></g></svg>");
+  background-repeat: repeat-y;
+  background-size: 100% 400px;
+  opacity: .55;
+  animation: trace-pulse 4s linear infinite;
+}
+html[data-vhs="f"][data-page="projects"] body::before { left: 0; }
+html[data-vhs="f"][data-page="projects"] body::after { right: 0; transform: scaleX(-1); animation-duration: 5.2s; animation-direction: reverse; }
+@keyframes trace-pulse {
+  0%   { background-position: 0 0; filter: drop-shadow(0 0 0 transparent); }
+  50%  { background-position: 0 200px; filter: drop-shadow(0 0 6px rgba(255,74,224,.45)); }
+  100% { background-position: 0 400px; filter: drop-shadow(0 0 0 transparent); }
+}
+
+/* ----- Graphic Art: scanline sweep on section intros only (never on videos) ----- */
+html[data-vhs="f"][data-page="graphic-art"] .section-intro {
+  position: relative;
+  overflow: hidden;
+}
+html[data-vhs="f"][data-page="graphic-art"] .section-intro::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 42%;
+  top: -42%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,74,224,.28) 38%,
+    rgba(255,255,255,.22) 50%,
+    rgba(58,72,255,.3) 62%,
+    transparent 100%);
+  animation: scan-sweep 5.5s ease-in-out infinite;
+}
+html[data-vhs="f"][data-page="graphic-art"] .section-intro > * { position: relative; z-index: 1; }
+@keyframes scan-sweep {
+  0%   { top: -42%; }
+  100% { top: 110%; }
+}
+
+/* ----- Experience: oscilloscope waveforms behind the timeline ----- */
+html[data-vhs="f"][data-page="experience"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .28;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='160' viewBox='0 0 400 160'><path fill='none' stroke='%2300d040' stroke-width='1.6' d='M0 80 C 25 20, 50 140, 80 80 S 140 20, 160 80 S 220 140, 240 80 S 300 20, 320 80 S 380 140, 400 80'/><path fill='none' stroke='%23ff4ae0' stroke-width='1.2' opacity='.8' d='M0 80 C 30 140, 60 20, 90 80 S 150 140, 180 80 S 240 20, 270 80 S 330 140, 360 80 S 390 20, 400 80'/></svg>");
+  background-repeat: repeat;
+  background-size: 400px 160px;
+  animation: wave-scroll 8s linear infinite;
+}
+@keyframes wave-scroll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* ----- Education: chroma / RGB plate drift ----- */
+html[data-vhs="f"][data-page="education"] body::before,
+html[data-vhs="f"][data-page="education"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+html[data-vhs="f"][data-page="education"] body::before {
+  background: linear-gradient(90deg, rgba(255,74,224,.18), transparent 45%);
+  animation: chroma-drift 7s ease-in-out infinite alternate;
+}
+html[data-vhs="f"][data-page="education"] body::after {
+  background: linear-gradient(270deg, rgba(58,72,255,.18), transparent 45%);
+  animation: chroma-drift 7s ease-in-out infinite alternate-reverse;
+}
+@keyframes chroma-drift {
+  from { transform: translateX(-24px); }
+  to   { transform: translateX(24px); }
+}
+
+/* ----- Blog: vertical-hold / interlace drift ----- */
+html[data-vhs="f"][data-page="blog"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0 11px,
+      rgba(255,74,224,.14) 11px 12px,
+      transparent 12px 23px,
+      rgba(58,72,255,.14) 23px 24px
+    );
+  background-size: 100% 240px;
+  animation: hold-roll 6s linear infinite;
+  opacity: .8;
+}
+@keyframes hold-roll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 240px; }
+}
+
+/* ----- Contact: phosphor bloom + creeping color-bar ----- */
+html[data-vhs="f"][data-page="contact"] .contact {
+  position: relative;
+}
+html[data-vhs="f"][data-page="contact"] .contact::before {
+  content: "";
+  position: absolute;
+  inset: -8% -6%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 30% 40%, rgba(255,74,224,.22), rgba(58,72,255,.08) 42%, transparent 68%);
+  animation: phosphor-bloom 4.5s ease-in-out infinite;
+}
+html[data-vhs="f"][data-page="contact"] .contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 8px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    #ff4ae0 0 20%, #3a48ff 20% 40%, #00d040 40% 55%, #e07a38 55% 70%, #0020f0 70% 100%);
+  background-size: 200% 100%;
+  animation: bar-creep 6s linear infinite;
+}
+html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-index: 1; }
+@keyframes phosphor-bloom {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.08); }
+}
+@keyframes bar-creep {
+  0%   { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (max-width: 760px) {
+  html[data-vhs="f"][data-page="projects"] body::before,
+  html[data-vhs="f"][data-page="projects"] body::after {
+    width: 18px;
+    opacity: .35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-vhs="f"][data-page="about"] body::before,
+  html[data-vhs="f"][data-page="projects"] body::before,
+  html[data-vhs="f"][data-page="projects"] body::after,
+  html[data-vhs="f"][data-page="graphic-art"] .section-intro::after,
+  html[data-vhs="f"][data-page="experience"] body::before,
+  html[data-vhs="f"][data-page="education"] body::before,
+  html[data-vhs="f"][data-page="education"] body::after,
+  html[data-vhs="f"][data-page="blog"] body::before,
+  html[data-vhs="f"][data-page="contact"] .contact::before,
+  html[data-vhs="f"][data-page="contact"] .contact::after {
+    animation: none !important;
+  }
+  html[data-vhs="f"][data-page="about"] body::before { top: 38%; }
+  html[data-vhs="f"][data-page="education"] body::before,
+  html[data-vhs="f"][data-page="education"] body::after { transform: none; }
+  html[data-vhs="f"][data-page="contact"] .contact::before { opacity: .6; transform: none; }
 }

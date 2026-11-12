@@ -18,9 +18,12 @@
       var t = new URLSearchParams(location.search).get('theme');
       if (!t || !/^[a-f]$/.test(t)) return;
       document.documentElement.setAttribute('data-vhs', t);
+      var page = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/i, '').toLowerCase();
+      if (!page || page === 'index') page = 'home';
+      document.documentElement.setAttribute('data-page', page);
       var l = document.createElement('link');
       l.rel = 'stylesheet';
-      l.href = 'vhs-theme-' + t + '.css?v=6';
+      l.href = 'vhs-theme-' + t + '.css?v=8';
       document.head.appendChild(l);
       if (t === 'c' || t === 'd') {
         document.addEventListener('DOMContentLoaded', function () {
@@ -80,23 +83,6 @@
         <h1 id="hero-title">James<br><span>Fischer.</span></h1>
         <p class="hero-role">Computer Science · Software · IT Operations</p>
         <p class="hero-intro">I work where software, systems, and business operations meet — building useful tools, troubleshooting infrastructure, and turning repetitive technical work into repeatable processes.</p>
-        <ul class="hero-tags" aria-label="Areas of expertise">
-          <li>SOFTWARE ENGINEERING</li>
-          <li>LINUX</li>
-          <li>AUTOMATION</li>
-          <li>VMWARE</li>
-          <li>DNS</li>
-          <li>JAVA</li>
-          <li>PYTHON</li>
-          <li>BUSINESS OPERATIONS</li>
-          <li>GRAPHIC ART</li>
-          <li>VHS</li>
-          <li>CIRCUIT BENDING</li>
-          <li>CRT</li>
-          <li>AI</li>
-          <li>BLENDER</li>
-          <li>WEB DEVELOPMENT</li>
-        </ul>
         <div class="hero-actions">
           <a class="button button-primary" href="Projects.html">View my work</a>
           <a class="button button-secondary" href="James-Fischer-Resume.pdf" target="_blank" rel="noopener">View resume</a>
