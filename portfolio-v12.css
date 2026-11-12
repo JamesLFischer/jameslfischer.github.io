@@ -1036,7 +1036,7 @@ html { scroll-padding-top: 88px; }
 /* UW card: quick facts fill the identity column */
 .edu-facts { width: 100%; margin: auto 0 0; padding-top: 28px; display: grid; gap: 0; }
 .edu-facts > div { padding: 14px 0; border-top: 1px solid rgba(255,255,255,.07); }
-.edu-facts dt { margin: 0 0 4px; color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.edu-facts dt { margin: 0 0 13px; color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .edu-facts dd { margin: 0; font-size: .92rem; font-weight: 700; line-height: 1.4; }
 .edu-facts dd > span { display: block; color: var(--muted); font-size: .8rem; font-weight: 600; }
 .edu-facts .edu-focus { display: flex; flex-wrap: wrap; gap: 6px; }
