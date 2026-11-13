@@ -559,12 +559,6 @@ footer p { margin: 0; }
   footer { flex-direction: column; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .reveal { opacity: 1; transform: none; }
-}
-
 
 /* Venture cards and Discord server UI */
 .venture-grid {
@@ -1329,17 +1323,8 @@ html { scroll-padding-top: 88px; }
   .marquee-track + .marquee-track { animation-duration: 22s; }
   .marquee-run, .marquee-dup { gap: 18px; padding-right: 18px; }
 }
-/* The global reduced-motion rule above (line ~537) forces every animation to .01ms x1 with !important,
-   which froze the strip for anyone with Reduce Motion on. the strip should keep moving everywhere,
-   so the marquee is exempted with matching !important overrides (same speeds as normal). */
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation-duration: 30s !important; animation-iteration-count: infinite !important; }
-  .marquee-track + .marquee-track { animation-duration: 36s !important; }
-}
-@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
-  .marquee-track { animation-duration: 18s !important; }
-  .marquee-track + .marquee-track { animation-duration: 22s !important; }
-}
+/* Motion design runs the same for every visitor, including with reduced motion set in the OS. */
+
 
 /* Art video cards: per-video play/pause toggle. */
 .media-stage-art { position: relative; }
@@ -1920,9 +1905,6 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .channel-stack .ch-2 { left: 16%; }
   .channel-stack .ch-3 { left: 32%; }
   .channel-stack figcaption { font-size: 8px; right: 5px; top: 5px; padding: 3px 5px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .channel-stack .ch { animation: none; }
 }
 
 /* v62: Radmin Fleet Migration becomes a featured project card with a
