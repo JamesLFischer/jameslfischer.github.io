@@ -1524,3 +1524,73 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .jibblets-card .venture-body { align-items: stretch; }
   .jibblets-card .venture-copy { justify-content: center; }
 }
+
+
+/* v21: tagline is HTML text under a cropped logo, so it stays legible
+   in the widget. Exact wording, including FOR. */
+.jibbletes-server .jibbletes-banner {
+  height: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 12px 52px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(87,240,79,.10), transparent 58%),
+    #0a0c10;
+}
+.jibbletes-server .server-banner-wordmark {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.jibbletes-server .server-banner-tagline {
+  margin: 0;
+  width: 100%;
+  color: #39ff14;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .07em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+.jibbletes-server .server-icon {
+  top: -32px;
+  z-index: 1;
+}
+@media (max-width: 760px) {
+  .jibbletes-server .server-banner-tagline {
+    font-size: 9.5px;
+    letter-spacing: .05em;
+  }
+}
+
+.jibbletes-server .jibbletes-banner,
+.wicked-server .wicked-banner {
+  box-sizing: border-box;
+  min-height: 148px;
+}
+.wicked-server .wicked-banner {
+  height: 148px;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+  background: #0a0a0a;
+}
+.wicked-server .server-banner-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.wicked-server .server-icon {
+  top: -32px;
+  z-index: 1;
+}
