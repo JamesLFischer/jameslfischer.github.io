@@ -2022,3 +2022,23 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .course-works { grid-template-columns: 1fr; gap: 16px; }
   .course-works .course-work + .course-work { padding-left: 0; border-left: 0; padding-top: 16px; border-top: 1px solid var(--line); }
 }
+
+/* v65 (t173u): Graphic Art video cards are uniform. Every card is the same
+   width (grid column) and the same height: script.js gives each text block
+   (meta, kicker, title, description, tags) the min-height of the tallest one
+   across all cards, then the cards the tallest card height. The video frame is
+   a fixed 16:9 box, letterboxed on black with object-fit: contain, never cropped. */
+.project-card.ga-card { display: flex; flex-direction: column; }
+.project-card.ga-card .project-content { display: flex; flex-direction: column; flex: 1 1 auto; }
+.project-card.ga-card .project-content > p:not(.project-kicker) { margin-bottom: 0; }
+.project-card.ga-card .tags { margin-top: auto; padding-top: .9rem; align-content: flex-start; }
+.project-card.ga-card .venture-media,
+.project-card.ga-card .media-stage-art { background: #000; }
+.project-card.ga-card .venture-media { aspect-ratio: 16 / 9; flex: none; }
+.project-card.ga-card .media-stage-art video { object-fit: contain; background: #000; transform: translateZ(0); backface-visibility: hidden; }
+.project-card.ga-card h3 { font-size: clamp(1.18rem, 1.05rem + .55vw, 1.55rem); line-height: 1.22; overflow-wrap: break-word; hyphens: manual; }
+/* main is a flex column, so a grid with short copy shrank to fit (Rust series was 1242px wide at 1440). Fill the column. */
+.project-grid:has(> .project-card .media-stage-art video:not([data-ambient])) { width: 100%; box-sizing: border-box; }
+/* Even rhythm around the frame: less air above it, some below it (copy used to touch the video). */
+.project-card.ga-card .project-meta { margin-bottom: 26px; }
+.project-card.ga-card .project-content { margin-top: 22px; }

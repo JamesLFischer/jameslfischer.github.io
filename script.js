@@ -97,6 +97,34 @@ document.querySelectorAll('video[data-ambient]').forEach((video) => {
   }
 });
 
+// t173u: Graphic Art video cards share one size. Each text block gets the
+// min-height of the tallest matching block across all cards, then every card
+// the tallest card height, so the grid lines up at every breakpoint.
+(() => {
+  const cards = [...document.querySelectorAll('.project-card')]
+    .filter((c) => c.querySelector('.media-stage-art video:not([data-ambient])'));
+  if (cards.length < 2) return;
+  cards.forEach((c) => c.classList.add('ga-card'));
+  const parts = ['.project-meta', '.project-kicker', 'h3', '.project-content > p:not(.project-kicker)', '.tags'];
+  const equalize = () => {
+    cards.forEach((c) => { c.style.minHeight = ''; });
+    parts.forEach((sel) => {
+      const els = cards.map((c) => c.querySelector(sel)).filter(Boolean);
+      els.forEach((e) => { e.style.minHeight = ''; });
+      const max = Math.max(...els.map((e) => e.scrollHeight));
+      els.forEach((e) => { e.style.minHeight = max + 'px'; });
+    });
+    const tallest = Math.max(...cards.map((c) => c.offsetHeight));
+    cards.forEach((c) => { c.style.minHeight = tallest + 'px'; });
+  };
+  let raf = 0;
+  const schedule = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(equalize); };
+  equalize();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  window.addEventListener('load', schedule);
+  window.addEventListener('resize', schedule);
+})();
+
 document.querySelectorAll('.media-stage-art video:not([data-ambient])').forEach((video) => {
   const stage = video.closest('.venture-media') || video.closest('.media-stage');
   if (!stage || stage.querySelector('.video-toggle')) return;

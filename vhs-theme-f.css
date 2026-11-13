@@ -906,3 +906,13 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
   100% { filter: none; }
 }
 .radmin-card video[data-ambient] { transform: translateZ(0); backface-visibility: hidden; }
+
+/* v16 (t173u): Graphic Art video cards shake too, the Radmin way. The card
+   moves with transform only; the colour flicker runs on the text side
+   (meta + content), never on .venture-media or any ancestor of the video,
+   and the video sits on its own compositing layer (portfolio-v12.css). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-card:has(.media-stage-art video:not([data-ambient])) { transition: none; }
+  .project-card:has(.media-stage-art video:not([data-ambient])):hover { animation: databend-shift .32s steps(2, end) 1; }
+  .project-card:has(.media-stage-art video:not([data-ambient])):hover > :not(.venture-media) { animation: databend-tint .32s steps(2, end) 1; }
+}
