@@ -1594,3 +1594,52 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   top: -32px;
   z-index: 1;
 }
+
+/* v22: move server icons off the banner and into the right of the
+   name/stats row, so they fill the empty pane instead of covering art. */
+.server-panel {
+  padding: 14px 16px 18px;
+}
+.server-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.server-heading-copy {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.server-panel h4 {
+  margin: 0 0 4px;
+}
+.server-icon {
+  position: static;
+  left: auto;
+  top: auto;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  border-radius: 16px;
+  border: 3px solid #191c23;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28);
+  z-index: auto;
+}
+.server-glyph {
+  font-size: 1.28rem;
+}
+.jibbletes-server .server-icon,
+.wicked-server .server-icon {
+  top: auto;
+  z-index: auto;
+}
+/* Keep the 148px banner height; drop the leftover icon-clearance
+   padding so the Foundation wordmark stays centered in the banner. */
+.jibbletes-server .jibbletes-banner {
+  padding: 16px 12px;
+}
+@media (max-width: 760px) {
+  .server-panel h4 { margin-top: 0; }
+}
