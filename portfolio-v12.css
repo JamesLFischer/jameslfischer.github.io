@@ -1091,6 +1091,123 @@ html { scroll-padding-top: 88px; }
   }
 }
 
+/* v17: merge the community card into Jibblets; drop the stretching
+   logo column so cards hug text + widget; show the Foundation banner
+   full-width and keep the skull as an inline avatar. */
+.venture-grid .venture-card {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: none;
+  align-items: stretch;
+  height: auto;
+  min-height: 0;
+}
+.venture-grid .venture-media,
+.venture-grid .wicked-media,
+.venture-grid .jibbletes-media,
+.venture-grid .community-media {
+  height: auto;
+  min-height: 0;
+  width: auto;
+  align-self: start;
+}
+.venture-grid .venture-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 28px;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(108,255,91,.08), transparent 42%),
+    #050607;
+  border-bottom: 1px solid var(--line);
+}
+.venture-grid .venture-banner img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 148px;
+  object-fit: contain;
+}
+.venture-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+.venture-avatar {
+  width: 80px;
+  height: 80px;
+  flex: 0 0 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+.venture-avatar-art { border-radius: 10px; }
+.venture-heading-text { min-width: 0; }
+.venture-heading-text .project-kicker { margin: 0 0 6px; }
+.venture-heading-text h3 { margin: 0; }
+.venture-stat {
+  margin: 8px 0 0;
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+.venture-grid .venture-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
+  align-content: start;
+  flex: 0 1 auto;
+  padding: 24px 28px;
+}
+.venture-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.venture-copy > p:not(.project-kicker):not(.venture-stat) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+.venture-copy > .project-kicker + .tags { margin-top: -4px; }
+@media (min-width: 1024px) {
+  .venture-grid .venture-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    grid-template-rows: auto;
+    column-gap: 32px;
+    row-gap: 12px;
+    align-items: start;
+    padding: 28px 32px;
+  }
+  .venture-grid .venture-copy { grid-column: 1; grid-row: 1; }
+  .venture-grid .venture-body > .server-ui {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    max-width: none;
+    margin: 0;
+    width: 100%;
+  }
+}
+@media (max-width: 760px) {
+  .venture-grid .venture-card {
+    grid-template-columns: none;
+  }
+  .venture-grid .venture-banner { padding: 14px 16px; }
+  .venture-grid .venture-banner img { max-height: 96px; }
+  .venture-avatar { width: 64px; height: 64px; flex-basis: 64px; }
+  .venture-grid .venture-body { padding: 20px; }
+}
+
+
 
 /* Hamburger-only nav on all screen sizes (reuses mobile menu styling) */
 .menu-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; cursor: pointer; }
