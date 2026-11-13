@@ -146,14 +146,54 @@ document.querySelectorAll('.media-stage-art video:not([data-ambient])').forEach(
     btn.setAttribute('aria-label', (playing ? 'Pause ' : 'Play ') + (video.getAttribute('aria-label') || 'video'));
     stage.classList.toggle('is-paused', !playing);
   };
+  // Play watchdog: only while the visitor has asked this clip to play. If the
+  // clip claims to be playing but currentTime stops moving (a decoder stall,
+  // seen in WebView2), nudge it and call play() again; if something other than
+  // the visitor pauses it, resume. Never starts a clip on its own.
+  let wantPlay = false;
+  let lastT = -1;
+  let stuck = 0;
+  const resume = () => {
+    if (!wantPlay || document.hidden) return;
+    video.play().catch(() => {});
+  };
   const toggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (video.paused) { video.muted = false; video.volume = 1; video.play().catch(sync); } else { video.pause(); }
+    if (video.paused) {
+      wantPlay = true; lastT = -1; stuck = 0;
+      video.muted = false; video.volume = 1;
+      video.play().catch(() => { wantPlay = false; sync(); });
+    } else {
+      wantPlay = false;
+      video.pause();
+    }
   };
   btn.addEventListener('click', toggle);
   video.addEventListener('click', toggle);
   video.addEventListener('play', sync);
-  video.addEventListener('pause', sync);
+  video.addEventListener('pause', () => {
+    sync();
+    if (wantPlay && !video.ended) setTimeout(resume, 250);
+  });
+  video.addEventListener('stalled', resume);
+  video.addEventListener('waiting', () => setTimeout(resume, 500));
+  document.addEventListener('visibilitychange', resume);
+  setInterval(() => {
+    if (!wantPlay || document.hidden) { lastT = -1; stuck = 0; return; }
+    if (video.paused) { resume(); return; }
+    const t = video.currentTime;
+    if (lastT >= 0 && Math.abs(t - lastT) < 0.01 && video.readyState >= 2) {
+      stuck += 1;
+      if (stuck >= 2) {
+        stuck = 0;
+        try { video.currentTime = (t + 0.05) % (video.duration || Infinity); } catch (err) { /* ignore */ }
+        resume();
+      }
+    } else {
+      stuck = 0;
+    }
+    lastT = t;
+  }, 1000);
   sync();
 });
