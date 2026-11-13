@@ -34,9 +34,12 @@
 
 html { background: var(--bg); }
 
+/* Full-viewport CRT grain on html and body so short pages never fall
+   through to a solid black void, including the side gutters. The
+   colorful smear stays only on the homepage hero. */
+html[data-vhs="f"],
 html[data-vhs="f"] body {
-  /* Smear bands live only on the homepage hero, never as a page-wide
-     empty field behind the footer or other sections. */
+  min-height: 100vh;
   background-color: var(--bg);
   background-image:
     repeating-linear-gradient(to bottom, rgba(0,0,0,.25) 0 1px, transparent 1px 3px),
@@ -44,8 +47,44 @@ html[data-vhs="f"] body {
     linear-gradient(180deg, #050506, #0a0a0e);
   background-attachment: fixed;
   background-size: auto, 180px 180px, auto;
+}
+html[data-vhs="f"] body {
+  display: flex;
+  flex-direction: column;
   color: var(--text);
   font-family: "IBM Plex Sans", Inter, ui-sans-serif, "Segoe UI", sans-serif;
+}
+html[data-vhs="f"] main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+}
+html[data-vhs="f"] .site-header,
+html[data-vhs="f"] footer {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: none;
+}
+/* Homepage: hero grows to fill leftover height; marquee stays in
+   normal flow at the bottom of main, just above the footer. */
+html[data-vhs="f"][data-page="home"] .hero--text {
+  flex: 1 1 auto;
+  max-width: none;
+  width: 100%;
+  align-content: start;
+}
+@media (min-width: 761px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-status {
+    position: static;
+    margin: 0 0 0 clamp(16px, 2vw, 32px);
+  }
 }
 
 ::selection { background: var(--accent); color: #fff; }
