@@ -575,7 +575,7 @@ footer {
 
 /* Databend hover — never on cards that hold Graphic Art (click-to-play)
    videos. Ambient loops (data-ambient, e.g. the Radmin capture) still shake. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+@media (any-hover: hover) {
   .project-card:not(:has(video:not([data-ambient]))),
   .about-panel,
   .education-card,
@@ -887,7 +887,7 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
    never put a filter on an ancestor of the ambient video. Filters on a
    video's ancestor force it off the GPU video layer, and Chromium/WebView2
    on Windows can freeze the frame. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+@media (any-hover: hover) {
   .project-card.radmin-card.radmin-card:hover { animation: databend-shift .32s steps(2, end) 1; }
   .project-card.radmin-card:hover > :not(.radmin-figure) { animation: databend-tint .32s steps(2, end) 1; }
 }
@@ -911,8 +911,24 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
    moves with transform only; the colour flicker runs on the text side
    (meta + content), never on .venture-media or any ancestor of the video,
    and the video sits on its own compositing layer (portfolio-v12.css). */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+@media (any-hover: hover) {
   .project-card:has(.media-stage-art video:not([data-ambient])) { transition: none; }
   .project-card:has(.media-stage-art video:not([data-ambient])):hover { animation: databend-shift .32s steps(2, end) 1; }
   .project-card:has(.media-stage-art video:not([data-ambient])):hover > :not(.venture-media) { animation: databend-tint .32s steps(2, end) 1; }
+}
+
+/* v17 (t179u): James wants the hover databend everywhere, including when
+   Windows "Animation effects" is off (that turns on prefers-reduced-motion,
+   and the global reduce rule in portfolio-v12.css squashes every animation
+   to .01ms). Give the shake its real length back; it is a single 0.32s
+   pulse on hover only, never a loop. */
+@media (any-hover: hover) and (prefers-reduced-motion: reduce) {
+  .project-card:hover,
+  .project-card:hover > :not(.radmin-figure):not(.venture-media),
+  .about-panel:hover,
+  .education-card:hover,
+  .personal-grid article:hover {
+    animation-duration: .32s !important;
+    animation-iteration-count: 1 !important;
+  }
 }

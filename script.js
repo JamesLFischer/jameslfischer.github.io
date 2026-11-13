@@ -52,13 +52,12 @@ document.querySelectorAll('video[data-ambient]').forEach((video) => {
   video.defaultMuted = true;
   video.controls = false;
   video.disablePictureInPicture = true;
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) {
-    video.removeAttribute('autoplay');
-    video.autoplay = false;
-    video.pause();
-    video.load();
-  } else {
+  // t179u: the ambient loop plays even with reduced motion on (Windows
+  // "Animation effects" off); James wants it moving for everyone.
+  video.autoplay = true;
+  video.loop = true;
+  video.playsInline = true;
+  {
     // Keep the loop alive: some Chromium/WebView2 builds on Windows (Edge,
     // DuckDuckGo) can stall a video when its card animates, or after the
     // tab is hidden. Re-kick playback on those events and with a watchdog.
