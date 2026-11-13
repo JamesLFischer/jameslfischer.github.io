@@ -52,8 +52,8 @@ document.querySelectorAll('video[data-ambient]').forEach((video) => {
   video.defaultMuted = true;
   video.controls = false;
   video.disablePictureInPicture = true;
-  // t179u: the ambient loop plays even with reduced motion on (Windows
-  // "Animation effects" off); James wants it moving for everyone.
+  // The ambient loop plays even with reduced motion on (Windows
+  // "Animation effects" off).
   video.autoplay = true;
   video.loop = true;
   video.playsInline = true;
@@ -96,7 +96,7 @@ document.querySelectorAll('video[data-ambient]').forEach((video) => {
   }
 });
 
-// t173u: Graphic Art video cards share one size. Each text block gets the
+// Graphic Art video cards share one size. Each text block gets the
 // min-height of the tallest matching block across all cards, then every card
 // the tallest card height, so the grid lines up at every breakpoint.
 (() => {

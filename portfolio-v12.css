@@ -1227,7 +1227,7 @@ html { scroll-padding-top: 88px; }
 .site-nav.open { display: flex; }
 .site-nav a { padding: 12px 4px; width: 100%; }
 @media (max-width: 760px) { .site-nav { left: var(--pad); width: auto; top: 60px; } }
-/* Band for Band: text-only trailer placeholder, related posts, blog back-link */
+/* Text-only trailer block, related posts, blog back-link */
 .bfb-soon { display: flex; flex-direction: column; justify-content: center; gap: 8px; align-self: start; max-width: 360px; min-height: 160px; padding: 28px; border: 1px dashed var(--line); border-radius: 10px; }
 .bfb-soon-label { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
 .bfb-soon strong { font-size: 1.6rem; }
@@ -1330,7 +1330,7 @@ html { scroll-padding-top: 88px; }
   .marquee-run, .marquee-dup { gap: 18px; padding-right: 18px; }
 }
 /* The global reduced-motion rule above (line ~537) forces every animation to .01ms x1 with !important,
-   which froze the strip for anyone with Reduce Motion on. James wants the strip moving everywhere,
+   which froze the strip for anyone with Reduce Motion on. the strip should keep moving everywhere,
    so the marquee is exempted with matching !important overrides (same speeds as normal). */
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation-duration: 30s !important; animation-iteration-count: infinite !important; }
@@ -1366,7 +1366,7 @@ html { scroll-padding-top: 88px; }
 .venture-media.is-portrait:has(.media-stage-art video) { width: min(100%, 315px); margin-inline: auto; }
 .section-lede{max-width:46rem;margin-top:1.25rem;line-height:1.6;opacity:.85}
 .section-lede .text-link{display:inline;margin-right:.75rem}
-/* t70u: sticky header never overlays content; skip link only visible on keyboard focus. */
+/* Sticky header never overlays content; skip link only visible on keyboard focus. */
 .site-header { background: #0b0d10; backdrop-filter: none; z-index: 1000; }
 .skip-link { top: 16px; transform: translateY(-200%); opacity: 0; pointer-events: none; z-index: 1001; }
 .skip-link:focus, .skip-link:focus-visible { transform: none; opacity: 1; pointer-events: auto; }
@@ -1375,7 +1375,7 @@ main, .venture-media, .media-stage { position: relative; z-index: 0; }
 section[id], article[id], [id] { scroll-margin-top: 96px; }
 
 /* -------------------------------------------------------------------------
-   Preview branch only: typographic hero (photo moved to About).
+   Typographic hero (photo lives on About).
    ------------------------------------------------------------------------- */
 .hero--text {
   align-items: start;
@@ -2023,7 +2023,7 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .course-works .course-work + .course-work { padding-left: 0; border-left: 0; padding-top: 16px; border-top: 1px solid var(--line); }
 }
 
-/* v65 (t173u): Graphic Art video cards are uniform. Every card is the same
+/* Graphic Art video cards are uniform. Every card is the same
    width (grid column) and the same height: script.js gives each text block
    (meta, kicker, title, description, tags) the min-height of the tallest one
    across all cards, then the cards the tallest card height. The video frame is

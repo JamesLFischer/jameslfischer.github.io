@@ -1,5 +1,5 @@
 /* Direction F — Bent (CSS only)
-   Circuit-bending inspired. No footage, stills, or textures from his clips.
+   Circuit-bending inspired. No footage, stills, or textures from the video work.
    Palette and smear shapes nod to the reference sheet; every mark is
    CSS / SVG: posterized color-band headings, CRT bezels, a generated
    smear field, and a hover databend. */
@@ -907,7 +907,7 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
 }
 .radmin-card video[data-ambient] { transform: translateZ(0); backface-visibility: hidden; }
 
-/* v16 (t173u): Graphic Art video cards shake too, the Radmin way. The card
+/* Graphic Art video cards shake too, the Radmin way. The card
    moves with transform only; the colour flicker runs on the text side
    (meta + content), never on .venture-media or any ancestor of the video,
    and the video sits on its own compositing layer (portfolio-v12.css). */
@@ -917,7 +917,7 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
   .project-card:has(.media-stage-art video:not([data-ambient])):hover > :not(.venture-media) { animation: databend-tint .32s steps(2, end) 1; }
 }
 
-/* v17 (t179u): James wants the hover databend everywhere, including when
+/* The hover databend runs everywhere, including when
    Windows "Animation effects" is off (that turns on prefers-reduced-motion,
    and the global reduce rule in portfolio-v12.css squashes every animation
    to .01ms). Give the shake its real length back; it is a single 0.32s
