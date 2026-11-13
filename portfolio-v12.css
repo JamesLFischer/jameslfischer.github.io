@@ -992,6 +992,105 @@ html { scroll-padding-top: 88px; }
   .venture-grid .venture-body { padding: 20px; }
 }
 
+/* v16: venture cards hug their content. The previous 1024px body grid used
+   rows "auto auto 1fr" and placed MEDIA in a later row, so a tall Discord
+   panel or image column stretched a 1fr gap under the description. */
+.personal-grid.venture-grid article,
+.venture-grid .venture-card {
+  min-height: 0;
+  height: auto;
+  align-self: start;
+}
+.venture-grid .venture-card {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+}
+.venture-grid .venture-media,
+.venture-grid .wicked-media,
+.venture-grid .jibbletes-media,
+.venture-grid .community-media {
+  height: auto;
+  min-height: 0;
+  width: auto;
+  padding: 20px;
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: center;
+}
+.venture-grid .media-stage {
+  width: auto;
+  height: auto;
+  align-items: flex-start;
+  justify-content: center;
+}
+.venture-grid .media-stage img,
+.venture-grid .media-stage-logo img,
+.venture-grid .media-stage-art img {
+  width: 140px;
+  height: 140px;
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.venture-grid .media-stage-logo img { border-radius: 50%; }
+.venture-grid .media-stage-wordmark img {
+  width: 140px;
+  height: 140px;
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.venture-grid .venture-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-content: start;
+  flex: 0 1 auto;
+}
+.venture-copy { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.venture-copy > .project-kicker + .tags { margin-top: -4px; }
+@media (min-width: 1024px) {
+  .venture-grid .venture-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    grid-template-rows: auto;
+    column-gap: 32px;
+    row-gap: 12px;
+    align-items: start;
+  }
+  .venture-grid .venture-copy { grid-column: 1; grid-row: 1; }
+  .venture-grid .venture-body > .server-ui,
+  .venture-grid .venture-body > .community-stack {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    max-width: none;
+    margin: 0;
+  }
+}
+@media (max-width: 760px) {
+  .venture-grid .venture-card { grid-template-columns: 1fr; }
+  .venture-grid .venture-media,
+  .venture-grid .wicked-media {
+    height: auto;
+    min-height: 0;
+    padding: 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .venture-grid .media-stage img,
+  .venture-grid .media-stage-logo img,
+  .venture-grid .media-stage-art img,
+  .venture-grid .media-stage-wordmark img {
+    width: 120px;
+    height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+  }
+}
+
 
 /* Hamburger-only nav on all screen sizes (reuses mobile menu styling) */
 .menu-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; cursor: pointer; }
