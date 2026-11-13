@@ -45,7 +45,25 @@ const year = document.getElementById('year');
 if (year) year.textContent = String(new Date().getFullYear());
 
 // Art video cards: each video gets its own play/pause toggle that controls only that video.
-document.querySelectorAll('.media-stage-art video').forEach((video) => {
+// Ambient loops (e.g. the Radmin capture): silent, always playing, no toggle.
+// Reduced motion: stop and show the poster frame instead.
+document.querySelectorAll('video[data-ambient]').forEach((video) => {
+  video.muted = true;
+  video.defaultMuted = true;
+  video.controls = false;
+  video.disablePictureInPicture = true;
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    video.removeAttribute('autoplay');
+    video.autoplay = false;
+    video.pause();
+    video.load();
+  } else {
+    video.play().catch(() => {});
+  }
+});
+
+document.querySelectorAll('.media-stage-art video:not([data-ambient])').forEach((video) => {
   const stage = video.closest('.venture-media') || video.closest('.media-stage');
   if (!stage || stage.querySelector('.video-toggle')) return;
   video.removeAttribute('controls');

@@ -1982,3 +1982,7 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .radmin-card .radmin-metrics { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
   .radmin-card .radmin-metrics span { font-size: .7rem; }
 }
+
+/* v63: Radmin capture is an ambient loop, not a clickable player. */
+.radmin-card video[data-ambient] { cursor: default; pointer-events: none; }
+.radmin-card .video-toggle { display: none; }
