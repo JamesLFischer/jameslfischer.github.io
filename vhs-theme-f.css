@@ -881,3 +881,28 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
   html[data-vhs="f"][data-page="education"] body::after { transform: none; }
   html[data-vhs="f"][data-page="contact"] .contact::before { opacity: .6; transform: none; }
 }
+
+
+/* Radmin card: shake the card with transform only and tint the copy, but
+   never put a filter on an ancestor of the ambient video. Filters on a
+   video's ancestor force it off the GPU video layer, and Chromium/WebView2
+   on Windows can freeze the frame. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-card.radmin-card.radmin-card:hover { animation: databend-shift .32s steps(2, end) 1; }
+  .project-card.radmin-card:hover > :not(.radmin-figure) { animation: databend-tint .32s steps(2, end) 1; }
+}
+@keyframes databend-shift {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(7px) skewX(-2deg); }
+  45%  { transform: translateX(-6px); }
+  70%  { transform: translateX(3px) skewX(1deg); }
+  100% { transform: none; }
+}
+@keyframes databend-tint {
+  0%   { filter: none; }
+  20%  { filter: hue-rotate(50deg) saturate(1.5); }
+  45%  { filter: hue-rotate(-25deg) contrast(1.3); }
+  70%  { filter: saturate(1.4); }
+  100% { filter: none; }
+}
+.radmin-card video[data-ambient] { transform: translateZ(0); backface-visibility: hidden; }

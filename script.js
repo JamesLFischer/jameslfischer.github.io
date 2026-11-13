@@ -59,7 +59,41 @@ document.querySelectorAll('video[data-ambient]').forEach((video) => {
     video.pause();
     video.load();
   } else {
-    video.play().catch(() => {});
+    // Keep the loop alive: some Chromium/WebView2 builds on Windows (Edge,
+    // DuckDuckGo) can stall a video when its card animates, or after the
+    // tab is hidden. Re-kick playback on those events and with a watchdog.
+    const kick = () => {
+      if (document.hidden) return;
+      if (video.paused || video.ended) video.play().catch(() => {});
+    };
+    let last = -1;
+    let stuck = 0;
+    const watchdog = () => {
+      if (document.hidden) return;
+      if (!video.paused && video.readyState >= 2) {
+        stuck = (video.currentTime === last) ? stuck + 1 : 0;
+        if (stuck >= 2) {
+          // Frozen frame: nudge the decoder and restart playback.
+          const t = video.currentTime;
+          video.pause();
+          video.currentTime = t + 0.05 < (video.duration || 0) ? t + 0.05 : 0;
+          stuck = 0;
+        }
+      }
+      last = video.currentTime;
+      kick();
+    };
+    ['loadeddata', 'canplay', 'pause', 'stalled', 'suspend'].forEach((ev) => video.addEventListener(ev, kick));
+    document.addEventListener('visibilitychange', kick);
+    window.addEventListener('pageshow', kick);
+    window.addEventListener('focus', kick);
+    const card = video.closest('.project-card');
+    if (card) {
+      card.addEventListener('mouseleave', kick);
+      card.addEventListener('animationend', kick);
+    }
+    setInterval(watchdog, 1000);
+    kick();
   }
 });
 
