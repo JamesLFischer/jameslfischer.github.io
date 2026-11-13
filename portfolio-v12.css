@@ -1986,3 +1986,39 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 /* v63: Radmin capture is an ambient loop, not a clickable player. */
 .radmin-card video[data-ambient] { cursor: default; pointer-events: none; }
 .radmin-card .video-toggle { display: none; }
+
+/* v64: CS coursework cards lead with the course (code + name) and the
+   whole card opens its GitHub repo. TCSS 360 spans the row with both of
+   its works; the other three courses sit three-up. */
+.coursework-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.coursework-grid .course-card { position: relative; display: flex; flex-direction: column; padding: 22px 24px 22px; min-height: 0; cursor: pointer; }
+.coursework-grid .course-card-wide { grid-column: 1 / -1; }
+.coursework-grid .course-card .project-meta { margin-bottom: 14px; }
+.course-head { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.course-code { margin: 0 0 4px; font: 700 clamp(1.5rem, 2.2vw, 2rem)/1.05 "Share Tech Mono", ui-monospace, monospace; letter-spacing: .04em; color: var(--accent, #ff4ae0); text-shadow: 1px 0 rgba(58,72,255,.55), -1px 0 rgba(0,208,64,.35); }
+.course-head h3 { margin: 0; font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.15; letter-spacing: -.02em; }
+.course-work h4 { margin: 0 0 8px; font-size: 1.02rem; color: var(--text, #f3eef8); letter-spacing: -.01em; }
+.course-work .project-kicker { margin-bottom: 6px; font-size: .68rem; }
+.course-work > p:not(.project-kicker) { margin: 0; color: var(--muted); line-height: 1.6; font-size: .95rem; }
+.course-work .tags { margin-top: 12px; }
+.course-works { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+.course-works .course-work + .course-work { padding-left: 28px; border-left: 1px solid var(--line); }
+.course-sublink { position: relative; z-index: 2; display: inline-block; margin-top: 10px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.course-sublink:hover, .course-sublink:focus-visible { color: var(--accent, #ff4ae0); text-decoration: underline; }
+.coursework-grid .course-link { margin-top: auto; padding-top: 16px; position: static; }
+.coursework-grid .course-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.coursework-grid .course-link:focus-visible { outline: none; text-decoration: underline; }
+.coursework-grid .course-card:has(.course-link:focus-visible) { outline: 2px solid var(--accent, #ff4ae0); outline-offset: 4px; }
+.course-sublink:focus-visible { outline: 2px solid var(--accent, #ff4ae0); outline-offset: 2px; }
+.coursework-grid .course-card:hover .course-link { text-decoration: underline; }
+@media (max-width: 1180px) {
+  .coursework-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coursework-grid .course-card:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .coursework-grid { grid-template-columns: 1fr; }
+  .coursework-grid .course-card:last-child { grid-column: auto; }
+  .coursework-grid .course-card { padding: 16px; }
+  .course-works { grid-template-columns: 1fr; gap: 16px; }
+  .course-works .course-work + .course-work { padding-left: 0; border-left: 0; padding-top: 16px; border-top: 1px solid var(--line); }
+}
