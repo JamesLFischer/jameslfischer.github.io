@@ -1162,10 +1162,11 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
    Preview branch only: typographic hero (photo moved to About).
    ------------------------------------------------------------------------- */
 .hero--text {
-  align-items: center;
+  align-items: start;
   box-sizing: border-box;
-  padding-top: clamp(36px, 5vw, 80px);
-  padding-bottom: clamp(48px, 5vw, 88px);
+  min-height: 0;
+  padding-top: clamp(24px, 3vw, 48px);
+  padding-bottom: clamp(24px, 3vw, 48px);
 }
 .hero--text .hero-backdrop { display: none; }
 .hero--text::before {

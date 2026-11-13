@@ -35,15 +35,15 @@
 html { background: var(--bg); }
 
 html[data-vhs="f"] body {
+  /* Smear bands live only on the homepage hero, never as a page-wide
+     empty field behind the footer or other sections. */
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse at 50% 0%, transparent 45%, rgba(0,0,0,.55) 100%),
     repeating-linear-gradient(to bottom, rgba(0,0,0,.25) 0 1px, transparent 1px 3px),
     var(--noise),
-    linear-gradient(180deg, rgba(5,5,6,.82), rgba(5,5,6,.9)),
-    var(--smear);
+    linear-gradient(180deg, #050506, #0a0a0e);
   background-attachment: fixed;
-  background-size: auto, auto, 180px 180px, auto, 100% 140%;
+  background-size: auto, 180px 180px, auto;
   color: var(--text);
   font-family: "IBM Plex Sans", Inter, ui-sans-serif, "Segoe UI", sans-serif;
 }
@@ -102,9 +102,12 @@ html[data-vhs="f"] body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: calc(100vh - 76px - 112px);
-  padding-top: clamp(28px, 4vw, 56px);
-  padding-bottom: clamp(28px, 3.5vw, 48px);
+  /* Hug the hero content. A near-viewport min-height turned the smear
+     into an empty band of its own and pushed the marquee off-screen. */
+  min-height: 0;
+  align-items: start;
+  padding-top: clamp(16px, 2.2vw, 36px);
+  padding-bottom: clamp(16px, 2vw, 28px);
   background:
     radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(0,0,0,.62) 100%),
     var(--smear);
@@ -300,8 +303,17 @@ h3 { font-family: "IBM Plex Sans", Inter, sans-serif; color: #f3eef8; }
   text-transform: uppercase;
   font-size: clamp(0.78rem, 1.1vw, 0.92rem);
   color: var(--bent-green);
+  margin: clamp(12px, 1.8vw, 22px) 0 8px;
 }
 .hero-intro { color: #dcd4e6; max-width: 640px; }
+.hero--text .eyebrow { margin: 0 0 10px; }
+.hero--text .hero-actions { margin-top: clamp(14px, 1.8vw, 22px); }
+.hero--text .hero-links { margin-top: clamp(12px, 1.6vw, 20px); }
+@media (min-width: 761px) {
+  .hero--text h1 {
+    font-size: clamp(3.8rem, 6.5vw + 2vh, 6.8rem);
+  }
+}
 
 .button {
   border-radius: 0;
