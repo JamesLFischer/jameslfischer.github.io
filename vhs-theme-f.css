@@ -876,19 +876,24 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
 
 
 
-/* About headline: "signal lock" glitch. Its own rhythm, unlike the home
-   name's constant slicing: the colour bands roll down in posterized steps,
-   the RGB split breathes and jitters, and about every 4s one band of the
-   line tears sideways for a few frames, then the signal locks again.
-   The tear layers are absolutely positioned copies (same box, same wrap),
-   so nothing reflows; the panel's overflow: hidden keeps them inside. */
+/* About headline glitch. At rest it is a crisp white headline with a faint
+   static magenta offset. Every 3.2s a ~290ms digital burst hits: the line
+   jerks and skews for a frame or two, an RGB split opens, and two slices of
+   the headline are torn sideways (a panel-coloured slice hides the original
+   strip so it reads as displaced, and a magenta/blue ghost slice overshoots).
+   steps() timing so it snaps instead of easing. The slice layers are
+   absolutely positioned copies in the same box, so nothing reflows. */
 .about-panel h2.about-glitch {
   position: relative;
   isolation: isolate;
-  background-size: 100% 130%;
-  animation:
-    about-roll 3.2s steps(8, end) infinite,
-    about-split 2.6s steps(1, end) infinite;
+  color: #f6f2fa;
+  -webkit-text-fill-color: #f6f2fa;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  filter: none;
+  text-shadow: 2px 0 0 rgba(255, 74, 224, .45);
+  animation: about-burst 3.2s steps(1, end) infinite;
 }
 .about-panel h2.about-glitch::before,
 .about-panel h2.about-glitch::after {
@@ -900,65 +905,74 @@ html[data-vhs="f"][data-page="contact"] .contact > * { position: relative; z-ind
   letter-spacing: inherit;
   line-height: inherit;
   white-space: normal;
-  background: none;
   -webkit-background-clip: border-box;
   background-clip: border-box;
-  -webkit-text-fill-color: currentColor;
   filter: none;
   pointer-events: none;
   opacity: 0;
   z-index: 1;
 }
+/* Displaced slice: panel-coloured background covers the original strip. */
 .about-panel h2.about-glitch::before {
-  color: #3a48ff;
-  clip-path: inset(30% 0 52% 0);
-  animation: about-tear-a 4.1s steps(1, end) infinite;
+  color: #f6f2fa;
+  -webkit-text-fill-color: #f6f2fa;
+  background: #0c0c10;
+  text-shadow: -4px 0 0 rgba(58, 72, 255, .9), 4px 0 0 rgba(255, 74, 224, .9);
+  animation: about-slice-a 3.2s steps(1, end) infinite;
 }
+/* Ghost slice in a hard channel colour, shoved the other way. */
 .about-panel h2.about-glitch::after {
-  color: #00d040;
-  clip-path: inset(64% 0 20% 0);
-  animation: about-tear-b 4.1s steps(1, end) infinite;
+  color: #ff4ae0;
+  -webkit-text-fill-color: #ff4ae0;
+  background: none;
+  text-shadow: 3px 0 0 rgba(0, 208, 64, .85);
+  mix-blend-mode: screen;
+  animation: about-slice-b 3.2s steps(1, end) infinite;
 }
-@keyframes about-roll {
-  0%   { background-position: 0 0; }
-  100% { background-position: 0 100%; }
+@keyframes about-burst {
+  0%     { transform: none; text-shadow: 2px 0 0 rgba(255,74,224,.45); }
+  70%    { transform: translateX(-4px) skewX(-6deg); text-shadow: 7px 0 0 #ff4ae0, -7px 0 0 #3a48ff; }
+  72.5%  { transform: translateX(6px); text-shadow: -10px 0 0 #ff4ae0, 8px 0 0 #00d040; }
+  75%    { transform: translateX(-2px) skewX(4deg); text-shadow: 5px 0 0 #3a48ff, -9px 0 0 #ff4ae0; opacity: .82; }
+  77%    { transform: translateX(3px); text-shadow: -6px 0 0 #00d040, 6px 0 0 #ff4ae0; opacity: 1; }
+  79%    { transform: none; text-shadow: 2px 0 0 rgba(255,74,224,.45); }
+  100%   { transform: none; text-shadow: 2px 0 0 rgba(255,74,224,.45); }
 }
-@keyframes about-split {
-  0%   { filter: drop-shadow(4px 0 0 rgba(58,72,255,.75)) drop-shadow(-4px 0 0 rgba(255,74,224,.75)); }
-  18%  { filter: drop-shadow(-3px 1px 0 rgba(58,72,255,.8)) drop-shadow(5px 0 0 rgba(255,74,224,.8)); }
-  22%  { filter: drop-shadow(4px 0 0 rgba(58,72,255,.75)) drop-shadow(-4px 0 0 rgba(255,74,224,.75)); }
-  57%  { filter: drop-shadow(7px -1px 0 rgba(0,208,64,.7)) drop-shadow(-6px 1px 0 rgba(255,74,224,.85)); }
-  61%  { filter: drop-shadow(-6px 0 0 rgba(58,72,255,.85)) drop-shadow(3px 1px 0 rgba(255,74,224,.8)); }
-  65%  { filter: drop-shadow(4px 0 0 rgba(58,72,255,.75)) drop-shadow(-4px 0 0 rgba(255,74,224,.75)); }
-  100% { filter: drop-shadow(4px 0 0 rgba(58,72,255,.75)) drop-shadow(-4px 0 0 rgba(255,74,224,.75)); }
+@keyframes about-slice-a {
+  0%    { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+  70%   { opacity: 1; transform: translateX(28px); clip-path: inset(18% -4% 64% -4%); }
+  72.5% { opacity: 1; transform: translateX(-38px); clip-path: inset(46% -4% 38% -4%); }
+  75%   { opacity: 1; transform: translateX(16px) skewX(-8deg); clip-path: inset(8% -4% 80% -4%); }
+  77%   { opacity: 1; transform: translateX(-22px); clip-path: inset(62% -4% 22% -4%); }
+  79%   { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+  100%  { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
 }
-@keyframes about-tear-a {
-  0%, 71%, 82%, 100% { opacity: 0; transform: none; clip-path: inset(30% 0 52% 0); }
-  72% { opacity: .95; transform: translateX(22px); clip-path: inset(30% 0 52% 0); }
-  75% { opacity: .95; transform: translateX(-14px) skewX(-6deg); clip-path: inset(26% 0 58% 0); }
-  78% { opacity: .9;  transform: translateX(30px); clip-path: inset(34% 0 48% 0); }
-  80% { opacity: .8;  transform: translateX(6px); clip-path: inset(30% 0 54% 0); }
-}
-@keyframes about-tear-b {
-  0%, 73%, 84%, 100% { opacity: 0; transform: none; clip-path: inset(64% 0 20% 0); }
-  74% { opacity: .9;  transform: translateX(-26px); clip-path: inset(64% 0 20% 0); }
-  77% { opacity: .95; transform: translateX(18px) skewX(7deg); clip-path: inset(60% 0 24% 0); }
-  80% { opacity: .85; transform: translateX(-10px); clip-path: inset(68% 0 16% 0); }
-  82% { opacity: .7;  transform: translateX(4px); clip-path: inset(64% 0 22% 0); }
+@keyframes about-slice-b {
+  0%    { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+  70%   { opacity: .95; transform: translateX(-24px); clip-path: inset(34% -4% 52% -4%); }
+  72.5% { opacity: .95; transform: translateX(42px); clip-path: inset(70% -4% 14% -4%); }
+  75%   { opacity: .9;  transform: translateX(-12px); clip-path: inset(24% -4% 66% -4%); }
+  77%   { opacity: .95; transform: translateX(30px) skewX(6deg); clip-path: inset(52% -4% 30% -4%); }
+  79%   { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+  100%  { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
 }
 @media (max-width: 760px) {
-  @keyframes about-tear-a {
-    0%, 71%, 82%, 100% { opacity: 0; transform: none; clip-path: inset(30% 0 52% 0); }
-    72% { opacity: .95; transform: translateX(10px); clip-path: inset(30% 0 52% 0); }
-    75% { opacity: .95; transform: translateX(-8px) skewX(-5deg); clip-path: inset(26% 0 58% 0); }
-    78% { opacity: .9;  transform: translateX(14px); clip-path: inset(34% 0 48% 0); }
-    80% { opacity: .8;  transform: translateX(3px); clip-path: inset(30% 0 54% 0); }
+  @keyframes about-slice-a {
+    0%    { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+    70%   { opacity: 1; transform: translateX(14px); clip-path: inset(18% -4% 64% -4%); }
+    72.5% { opacity: 1; transform: translateX(-18px); clip-path: inset(46% -4% 38% -4%); }
+    75%   { opacity: 1; transform: translateX(8px) skewX(-8deg); clip-path: inset(8% -4% 80% -4%); }
+    77%   { opacity: 1; transform: translateX(-11px); clip-path: inset(62% -4% 22% -4%); }
+    79%   { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+    100%  { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
   }
-  @keyframes about-tear-b {
-    0%, 73%, 84%, 100% { opacity: 0; transform: none; clip-path: inset(64% 0 20% 0); }
-    74% { opacity: .9;  transform: translateX(-12px); clip-path: inset(64% 0 20% 0); }
-    77% { opacity: .95; transform: translateX(9px) skewX(6deg); clip-path: inset(60% 0 24% 0); }
-    80% { opacity: .85; transform: translateX(-6px); clip-path: inset(68% 0 16% 0); }
-    82% { opacity: .7;  transform: translateX(2px); clip-path: inset(64% 0 22% 0); }
+  @keyframes about-slice-b {
+    0%    { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+    70%   { opacity: .95; transform: translateX(-12px); clip-path: inset(34% -4% 52% -4%); }
+    72.5% { opacity: .95; transform: translateX(20px); clip-path: inset(70% -4% 14% -4%); }
+    75%   { opacity: .9;  transform: translateX(-6px); clip-path: inset(24% -4% 66% -4%); }
+    77%   { opacity: .95; transform: translateX(15px) skewX(6deg); clip-path: inset(52% -4% 30% -4%); }
+    79%   { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
+    100%  { opacity: 0; transform: none; clip-path: inset(0 0 100% 0); }
   }
 }
