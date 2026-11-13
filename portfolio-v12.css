@@ -1924,3 +1924,61 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 @media (prefers-reduced-motion: reduce) {
   .channel-stack .ch { animation: none; }
 }
+
+/* v62: Radmin Fleet Migration becomes a featured project card with a
+   click-to-play verification capture; DNS + VM fleet day-to-day work
+   moves to the Experience timeline as bullets. */
+.timeline-main p:not(.company):has(+ .timeline-ops) { margin: 0; color: var(--muted); max-width: 720px; line-height: 1.7; }
+.timeline-ops { margin: 12px 0 0; padding: 0 0 0 18px; max-width: 720px; color: var(--muted); line-height: 1.65; font-size: .95rem; }
+.timeline-ops li + li { margin-top: 6px; }
+.timeline-ops li::marker { color: var(--accent, #ff4ae0); }
+
+.project-card.project-featured.radmin-card {
+  padding: 22px 26px 24px;
+  column-gap: 32px;
+  row-gap: 0;
+  align-items: start;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  grid-template-rows: auto auto auto;
+}
+.radmin-card .project-meta { margin-bottom: 16px; }
+.radmin-card .radmin-figure { margin: 0; align-self: start; min-width: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #07060a; }
+.radmin-card .radmin-media { margin: 0; border: 0; border-radius: 0; }
+.radmin-card .radmin-media .media-stage { inset: 0 0 auto 0; aspect-ratio: 720 / 706; height: auto; }
+.radmin-card .venture-media:has(.media-stage-art video) { aspect-ratio: auto; display: flex; flex-direction: column; }
+.radmin-card .venture-media:has(.media-stage-art video) .media-stage { position: relative; inset: auto; }
+.radmin-caption { margin: 0; background: #07060a; padding: 8px 12px; border-top: 1px solid var(--line); font: 11px/1.3 "Share Tech Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.radmin-card .project-content h3 { margin-top: 6px; }
+.project-brief { margin: 14px 0 0; display: grid; gap: 10px; }
+.project-brief div { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.project-brief dt { margin: 0; font: 11px/1.6 "Share Tech Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--accent, #ff4ae0); }
+.project-brief dd { margin: 0; color: var(--muted); line-height: 1.6; }
+.radmin-card .tags { margin-top: 16px; }
+.radmin-card .radmin-metrics { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); margin-top: 20px; }
+.radmin-card .radmin-metrics div { padding-top: 12px; }
+.radmin-card .radmin-metrics strong { font-size: clamp(1.8rem, 3vw, 2.8rem); }
+@media (min-width: 900px) and (max-width: 1280px) {
+  /* Metrics stack under the video so the left column matches the copy. */
+  .project-card.project-featured.radmin-card {
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); grid-column: 1 / -1;
+    grid-template-areas: "meta meta" "media content" "metrics content";
+    grid-template-rows: auto auto 1fr;
+  }
+  .radmin-card .project-meta { grid-area: meta; }
+  .radmin-card .radmin-figure { grid-area: media; margin: 0; }
+  .radmin-card .project-content { grid-area: content; }
+  .radmin-card .radmin-metrics { grid-area: metrics; grid-template-columns: 1fr; gap: 0; margin-top: 14px; align-self: start; }
+  .radmin-card .radmin-metrics div { display: flex; align-items: baseline; gap: 12px; padding: 8px 0; }
+  .radmin-card .radmin-metrics strong { font-size: 1.9rem; flex: none; min-width: 64px; }
+}
+@media (max-width: 899px) {
+  .project-card.project-featured.radmin-card { grid-template-columns: 1fr; }
+  .radmin-card .radmin-figure { margin: 0 0 18px; width: min(100%, 520px); }
+}
+@media (max-width: 760px) {
+  .project-card.project-featured.radmin-card { padding: 16px; }
+  .radmin-card .project-meta { margin-bottom: 12px; }
+  .project-brief div { grid-template-columns: 1fr; gap: 2px; }
+  .radmin-card .radmin-metrics { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .radmin-card .radmin-metrics span { font-size: .7rem; }
+}

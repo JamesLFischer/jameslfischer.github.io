@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="james-fischer.jpg">
   <title>Projects | James Fischer</title>
-  <link rel="stylesheet" href="portfolio-v12.css?v=61">
+  <link rel="stylesheet" href="portfolio-v12.css?v=62">
   <script defer src="script.js?v=34"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script>
@@ -113,36 +113,35 @@ posterior: normalized
 status: reasoning under uncertainty_</code></pre>
         </div>
       </article>
-      <article class="project-card reveal">
+      <article class="project-card project-featured radmin-card reveal" id="radmin-migration">
         <div class="project-meta">
-          <span>IT Operations</span>
+          <span>Infrastructure Project</span>
           <span>2026</span>
         </div>
-        <div class="project-content">
-          <p class="project-kicker">Infrastructure automation</p>
-          <h3>VM Fleet Administration</h3>
-          <p>Developed repeatable command-line procedures and scripts for maintaining a large fleet of Linux virtual machines, including remote audits, software deployment, configuration checks, and troubleshooting.</p>
-          <ul class="tags"><li>Linux</li><li>Bash</li><li>VMware ESXi</li><li>SSH</li></ul>
-        </div>
-        <div class="metric-row" aria-label="Project highlights">
-          <div><strong>Dozens</strong><span>of Linux VMs</span></div>
-          <div><strong>Repeatable</strong><span>admin workflows</span></div>
-        </div>
-      </article>
-      <article class="project-card reveal">
-        <div class="project-meta">
-          <span>Infrastructure</span>
-          <span>2026</span>
+        <div class="radmin-figure">
+          <div class="venture-media radmin-media" style="--video-ar: 720 / 706">
+          <div class="media-stage media-stage-art">
+            <video src="media/radmin-migration-verify.mp4" poster="media/radmin-migration-verify-poster.webp" loop playsinline preload="metadata" width="720" height="706" aria-label="Redacted terminal capture of a post-upgrade verification on one Radmin VM"></video>
+          </div>
+          </div>
+          <p class="radmin-caption">Redacted verification capture · one VM after its upgrade</p>
         </div>
         <div class="project-content">
-          <p class="project-kicker">DNS + automation</p>
-          <h3>Multi-Domain Verification Deployment</h3>
-          <p>Automated TXT-record deployment across a 25-domain ownership-verification project while preserving existing production DNS configurations and validating the resulting records.</p>
-          <ul class="tags"><li>DNS</li><li>eNom</li><li>Automation</li><li>Cloud platforms</li></ul>
+          <p class="project-kicker">Linux · VMware ESXi · Automation</p>
+          <h3>Radmin Fleet Migration</h3>
+          <p>An in-place operating-system migration for the Radmin fleet, Linux virtual machines on VMware ESXi, moving them off end-of-life CentOS 7 to AlmaLinux 8.10.</p>
+          <dl class="project-brief">
+            <div><dt>Problem</dt><dd>A 146-VM fleet was still on CentOS 7 after it reached end of life.</dd></div>
+            <div><dt>Built</dt><dd>Python (paramiko) and PowerShell tooling that scans the network, finds fleet VMs, and pushes updates in parallel, with staged test VMs and batch queues running 4 concurrent workers.</dd></div>
+            <div><dt>Verified</dt><dd>A post-upgrade gate on each VM checks the OS release, kernel, firewall policy, and required services before it is marked done.</dd></div>
+            <div><dt>Outcome</dt><dd>Most of the fleet now runs AlmaLinux 8.10, with every upgrade logged and verified per VM.</dd></div>
+          </dl>
+          <ul class="tags"><li>Python</li><li>PowerShell</li><li>Bash</li><li>AlmaLinux</li><li>VMware ESXi</li><li>SSH</li></ul>
         </div>
-        <div class="metric-row" aria-label="Project highlights">
-          <div><strong>25</strong><span>domains updated</span></div>
-          <div><strong>Preserved</strong><span>existing DNS records</span></div>
+        <div class="metric-row radmin-metrics" aria-label="Project highlights">
+          <div><strong>146</strong><span>VMs in the fleet</span></div>
+          <div><strong>131</strong><span>VMs enrolled in fleet SSH keys</span></div>
+          <div><strong>70</strong><span>VMs standardized in batches of 10, zero unresolved failures</span></div>
         </div>
       </article>
       <article class="project-card project-featured portfolio-card reveal">
