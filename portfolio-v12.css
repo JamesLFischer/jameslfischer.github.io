@@ -1729,3 +1729,57 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
     gap: 12px;
   }
 }
+
+/* v24: add THE to the Foundation tagline and keep it one line on
+   desktop; render the Wicked slogan as crisp HTML under a tight
+   wordmark crop so both stay legible in the compact banner. */
+.jibbletes-server .jibbletes-banner,
+.wicked-server .wicked-banner {
+  box-sizing: border-box;
+  height: 110px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 10px;
+  overflow: hidden;
+}
+.wicked-server .server-banner-art,
+.jibbletes-server .server-banner-wordmark {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 62px;
+  object-fit: contain;
+  object-position: center center;
+}
+.jibbletes-server .server-banner-tagline,
+.wicked-server .server-banner-tagline {
+  margin: 0;
+  width: 100%;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-shadow: none;
+}
+.jibbletes-server .server-banner-tagline { color: #39ff14; }
+.wicked-server .server-banner-tagline {
+  color: #f2f2f2;
+  text-shadow: 0 1px 2px rgba(0,0,0,.75);
+}
+@media (max-width: 760px) {
+  .jibbletes-server .server-banner-tagline,
+  .wicked-server .server-banner-tagline {
+    white-space: normal;
+    letter-spacing: .02em;
+    font-size: 9px;
+  }
+}
