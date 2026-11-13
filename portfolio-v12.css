@@ -1494,3 +1494,33 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
     max-width: 100%;
   }
 }
+
+
+/* v20: move the Foundation wordmark into the Jibblets Discord widget
+   banner, and keep the left column as role / title / label / copy. */
+.jibbletes-server .jibbletes-banner {
+  height: auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px 44px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(87,240,79,.12), transparent 58%),
+    #0a0c10;
+}
+.jibbletes-server .server-banner-wordmark {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.jibbletes-server .server-icon {
+  top: -32px;
+  z-index: 1;
+}
+@media (min-width: 1024px) {
+  .jibblets-card .venture-body { align-items: stretch; }
+  .jibblets-card .venture-copy { justify-content: center; }
+}
