@@ -573,15 +573,16 @@ footer {
 .footer-links a:hover,
 .contact-email:hover { color: var(--accent); }
 
-/* Databend hover — never on cards that hold Graphic Art videos */
+/* Databend hover — never on cards that hold Graphic Art (click-to-play)
+   videos. Ambient loops (data-ambient, e.g. the Radmin capture) still shake. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .project-card:not(:has(video)),
+  .project-card:not(:has(video:not([data-ambient]))),
   .about-panel,
   .education-card,
   .personal-grid article {
     transition: none;
   }
-  .project-card:not(:has(video)):hover,
+  .project-card:not(:has(video:not([data-ambient]))):hover,
   .about-panel:hover,
   .education-card:hover,
   .personal-grid article:hover {
