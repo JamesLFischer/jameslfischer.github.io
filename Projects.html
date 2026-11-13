@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-vhs="f" data-page="projects">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,49 +11,15 @@
   <meta property="og:image" content="james-fischer.jpg">
   <title>Projects | James Fischer</title>
   <link rel="stylesheet" href="portfolio-v12.css?v=65">
+  <link rel="stylesheet" href="vhs-theme-f.css?v=16">
   <script defer src="script.js?v=38"></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script>
     (function () {
-      var t = new URLSearchParams(location.search).get('theme');
-      if (!t || !/^[a-f]$/.test(t)) return;
-      document.documentElement.setAttribute('data-vhs', t);
+      document.documentElement.setAttribute('data-vhs', 'f');
       var page = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/i, '').toLowerCase();
       if (!page || page === 'index') page = 'home';
       document.documentElement.setAttribute('data-page', page);
-      var l = document.createElement('link');
-      l.rel = 'stylesheet';
-      l.href = 'vhs-theme-' + t + '.css?v=16';
-      document.head.appendChild(l);
-      if (t === 'c' || t === 'd') {
-        document.addEventListener('DOMContentLoaded', function () {
-          var hero = document.querySelector('.hero');
-          if (!hero || hero.querySelector('.deck-stage')) return;
-          var stage = document.createElement('div');
-          stage.className = 'deck-stage';
-          stage.setAttribute('aria-hidden', 'true');
-          var img = document.createElement('img');
-          img.className = 'deck-poster';
-          img.alt = '';
-          img.src = t === 'c' ? 'theme-media/tape-hero-poster.webp' : 'theme-media/bent-hero-poster.webp';
-          stage.appendChild(img);
-          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (!reduce) {
-            var v = document.createElement('video');
-            v.className = 'deck-video';
-            v.muted = true;
-            v.defaultMuted = true;
-            v.loop = true;
-            v.playsInline = true;
-            v.setAttribute('playsinline', '');
-            v.preload = 'metadata';
-            v.src = t === 'c' ? 'theme-media/tape-hero.webm' : 'theme-media/bent-hero.webm';
-            v.addEventListener('canplay', function () { v.play().catch(function () {}); });
-            stage.appendChild(v);
-          }
-          hero.insertBefore(stage, hero.firstChild);
-        });
-      }
     })();
   </script>
 </head>

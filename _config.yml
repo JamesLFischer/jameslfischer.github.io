@@ -1,2 +1,12 @@
 title: James Fischer
 description: Software, infrastructure, automation, and business-minded problem solving.
+# Repo-only files: the old style-preview notes and the unused A-E theme
+# experiments (C/D used project stills as backgrounds) are not published.
+exclude:
+  - PREVIEW.md
+  - vhs-theme-a.css
+  - vhs-theme-b.css
+  - vhs-theme-c.css
+  - vhs-theme-d.css
+  - vhs-theme-e.css
+  - theme-media
