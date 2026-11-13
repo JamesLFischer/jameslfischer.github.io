@@ -1467,3 +1467,27 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
     min-height: 0;
   }
 }
+
+
+/* v18: drop the Discord pfp and the heavy full-width Foundation banner.
+   The wordmark is a modest heading logo, aligned with the Wicked card. */
+.venture-grid .venture-banner { display: none; }
+.venture-heading--wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.venture-wordmark {
+  display: block;
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+@media (min-width: 1024px) {
+  .venture-wordmark { width: 260px; }
+}
+@media (max-width: 760px) {
+  .venture-wordmark { width: 180px; }
+}
