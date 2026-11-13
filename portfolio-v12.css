@@ -1478,16 +1478,19 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   align-items: flex-start;
   gap: 12px;
 }
+/* v19: size the Foundation wordmark to most of the text column so
+   it no longer leaves a wide empty gap to the right. Aspect ratio
+   is preserved; the cap keeps it from reading as a full-card banner. */
 .venture-wordmark {
   display: block;
-  width: 250px;
+  width: clamp(260px, 70%, 520px);
   max-width: 100%;
   height: auto;
   object-fit: contain;
 }
-@media (min-width: 1024px) {
-  .venture-wordmark { width: 260px; }
-}
 @media (max-width: 760px) {
-  .venture-wordmark { width: 180px; }
+  .venture-wordmark {
+    width: 100%;
+    max-width: 100%;
+  }
 }
