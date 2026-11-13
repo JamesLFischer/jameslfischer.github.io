@@ -78,7 +78,7 @@ html[data-vhs="f"][data-page="home"] .hero--text {
 @media (min-width: 761px) {
   html[data-vhs="f"][data-page="home"] .hero--text {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: auto auto 1fr;
     align-items: end;
   }
   html[data-vhs="f"][data-page="home"] .hero--text .hero-status {
@@ -351,6 +351,101 @@ h3 { font-family: "IBM Plex Sans", Inter, sans-serif; color: #f3eef8; }
 @media (min-width: 761px) {
   .hero--text h1 {
     font-size: clamp(3.8rem, 6.5vw + 2vh, 6.8rem);
+  }
+}
+
+/* Large monitors: scale the hero copy so it fills the left column
+   and sits in the vertical center. 1024x768 and 1280x800 keep the
+   tighter sizes above so the marquee stays on the first screen. */
+@media (min-width: 1440px) and (min-height: 880px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    align-content: center;
+    grid-template-columns: minmax(0, 58%) auto 1fr;
+    padding-top: clamp(28px, 3vw, 56px);
+    padding-bottom: clamp(28px, 3vw, 56px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-copy {
+    max-width: none;
+    width: 100%;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-status {
+    margin-left: clamp(20px, 1.5vw, 32px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text::after {
+    width: min(44%, 980px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text::before {
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+      linear-gradient(90deg,
+        rgba(5,5,6,.96) 0%,
+        rgba(5,5,6,.9) 50%,
+        rgba(5,5,6,.4) 64%,
+        rgba(5,5,6,.08) 100%);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text h1 {
+    font-size: clamp(6.8rem, 6.8vw + 1.2vh, 8.5rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .eyebrow {
+    margin: 0 0 16px;
+    font-size: clamp(0.8rem, 0.55vw + 0.45rem, 1rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero-role {
+    font-size: clamp(0.88rem, 0.55vw + 0.5rem, 1.12rem);
+    margin: clamp(18px, 1.8vw, 32px) 0 10px;
+  }
+  html[data-vhs="f"][data-page="home"] .hero-intro {
+    max-width: none;
+    font-size: clamp(1.12rem, 0.7vw + 0.55rem, 1.42rem);
+    line-height: 1.55;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-actions {
+    margin-top: clamp(22px, 2vw, 36px);
+    gap: 14px 16px;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .button {
+    min-height: 54px;
+    padding: 0 24px;
+    font-size: clamp(0.92rem, 0.4vw + 0.55rem, 1.08rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-links {
+    margin-top: clamp(16px, 1.5vw, 28px);
+    font-size: clamp(0.92rem, 0.35vw + 0.55rem, 1.08rem);
+    gap: 12px 28px;
+  }
+}
+@media (min-width: 1920px) and (min-height: 1000px) {
+  html[data-vhs="f"][data-page="home"] .hero--text {
+    grid-template-columns: minmax(0, 60%) auto 1fr;
+    padding-top: clamp(36px, 3.2vw, 72px);
+    padding-bottom: clamp(36px, 3.2vw, 72px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text h1 {
+    font-size: clamp(8.2rem, 6.4vw + 1.5vh, 10.6rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .eyebrow {
+    margin: 0 0 20px;
+    font-size: clamp(0.9rem, 0.45vw + 0.5rem, 1.08rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero-role {
+    font-size: clamp(1rem, 0.5vw + 0.55rem, 1.22rem);
+    margin: clamp(22px, 2vw, 40px) 0 14px;
+  }
+  html[data-vhs="f"][data-page="home"] .hero-intro {
+    font-size: clamp(1.22rem, 0.55vw + 0.6rem, 1.55rem);
+    line-height: 1.55;
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-actions {
+    margin-top: clamp(28px, 2.2vw, 44px);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .button {
+    min-height: 58px;
+    padding: 0 28px;
+    font-size: clamp(1rem, 0.3vw + 0.65rem, 1.15rem);
+  }
+  html[data-vhs="f"][data-page="home"] .hero--text .hero-links {
+    margin-top: clamp(20px, 1.6vw, 32px);
+    font-size: clamp(1rem, 0.28vw + 0.62rem, 1.15rem);
   }
 }
 
