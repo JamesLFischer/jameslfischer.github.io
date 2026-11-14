@@ -2109,7 +2109,6 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 .vhs-card .tags { margin-top: 16px; }
 .vhs-card .related-posts { margin-top: 18px; }
 .vhs-card .related-posts .text-link { display: inline; margin-top: 0; }
-.vhs-card .project-content > .text-link { margin-top: 16px; }
 @media (max-width: 899px) {
   .project-card.project-featured.vhs-card { grid-template-columns: 1fr; }
   .project-card.project-featured.vhs-card .project-shot { margin: 0 0 18px; max-width: 240px; }
