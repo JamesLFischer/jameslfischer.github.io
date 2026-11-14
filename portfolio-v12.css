@@ -2024,3 +2024,99 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 /* Even rhythm around the frame: less air above it, some below it (copy used to touch the video). */
 .project-card.ga-card .project-meta { margin-bottom: 26px; }
 .project-card.ga-card .project-content { margin-top: 22px; }
+
+/* Skull World VHS pipeline. The blog post spans the notes grid so a
+   long entry stays readable. Clips use native controls, so they stay
+   outside .media-stage-art (script.js rewrites those players). */
+.capability-grid article.blog-post {
+  grid-column: 1 / -1;
+  max-width: 44rem;
+  border-right: 0;
+  padding: 32px 0 8px;
+}
+.capability-grid article.blog-post h3 {
+  margin: 10px 0 8px;
+  font-size: clamp(1.55rem, 2.2vw, 2.05rem);
+  line-height: 1.18;
+  letter-spacing: -.03em;
+}
+.capability-grid article.blog-post .post-date {
+  margin: 0 0 1.15rem;
+  color: var(--muted);
+  font-size: .88rem;
+}
+.capability-grid article.blog-post p {
+  margin: 0 0 1rem;
+  max-width: 42rem;
+}
+.capability-grid article.blog-post h4 {
+  margin: 1.7rem 0 .7rem;
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-weight: 400;
+  font-size: .75rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.post-video { margin: .35rem 0 1.25rem; max-width: 420px; }
+.post-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.post-video figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.post-links {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  max-width: 42rem;
+}
+.post-links li { margin: 0; padding: 11px 0; border-top: 1px solid var(--line); }
+.post-links li:last-child { border-bottom: 1px solid var(--line); }
+.post-links a { color: var(--accent); font-weight: 700; }
+.post-links a:hover { text-decoration: underline; }
+.blog-post .project-backlink { max-width: 42rem; }
+
+.project-card.project-featured.vhs-card {
+  padding: 22px 26px 24px;
+  column-gap: 32px;
+  row-gap: 0;
+  align-items: start;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+}
+.vhs-card .project-meta { margin-bottom: 16px; }
+.project-card.project-featured.vhs-card .project-shot {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  align-self: start;
+}
+.vhs-card .project-shot img { object-fit: cover; object-position: center; }
+.vhs-card .project-content h3 { margin-top: 6px; }
+.vhs-card .tags { margin-top: 16px; }
+.vhs-card .related-posts { margin-top: 18px; }
+.vhs-card .related-posts .text-link { display: inline; margin-top: 0; }
+@media (max-width: 899px) {
+  .project-card.project-featured.vhs-card { grid-template-columns: 1fr; }
+  .project-card.project-featured.vhs-card .project-shot { margin: 0 0 18px; max-width: 240px; }
+}
+@media (max-width: 760px) {
+  .capability-grid article.blog-post,
+  .capability-grid article.blog-post + article { padding: 28px 0; border-right: 0; }
+  .project-card.project-featured.vhs-card { padding: 16px; }
+  .vhs-card .project-meta { margin-bottom: 12px; }
+  .post-video { max-width: 100%; }
+}
