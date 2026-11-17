@@ -20,4 +20,6 @@ Then open `http://localhost:8000`.
 - `james-fischer.jpg` — profile photo
 - `James-Fischer-Resume.pdf` — current résumé
 
+Blog posts: `Blog.html` is the card index and each post is its own page in `blog/`. See `BLOG-HOWTO.md` to add one.
+
 Legacy HTML pages redirect to the relevant sections so old links remain useful.

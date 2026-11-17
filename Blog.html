@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="James Fischer — Computer Science student and IT Operations Manager in Seattle. Portfolio featuring software, infrastructure, automation, and business experience.">
   <meta name="theme-color" content="#0b0d10">
+  <link rel="canonical" href="https://jameslfischer.github.io/Blog.html">
   <meta property="og:title" content="James Fischer | Software & IT Operations">
   <meta property="og:description" content="Software, infrastructure, automation, and business-minded problem solving.">
   <meta property="og:type" content="website">
@@ -19,6 +20,7 @@
   <title>Blog | James Fischer</title>
   <link rel="stylesheet" href="portfolio-v12.css?v=68">
   <link rel="stylesheet" href="vhs-theme-f.css?v=23">
+  <link rel="stylesheet" href="blog.css?v=1">
   <link rel="preload" href="fonts/05-zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/06-J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2" as="font" type="font/woff2" crossorigin>
   <script defer src="script.js?v=40"></script>
@@ -52,51 +54,35 @@
   </header>
 
   <main id="main">
-    <section class="blog section reveal" id="blog" aria-labelledby="blog-title">
+    <section class="blog blog-home section reveal" id="blog" aria-labelledby="blog-title">
       <div class="section-number">06</div>
       <div class="section-heading">
         <p class="eyebrow">Blog</p>
         <h2 id="blog-title">Notes from the<br>server room.</h2>
       </div>
-      <div class="capability-grid">
-        <article class="blog-post" id="skull-world-vhs-renders" data-project="skull-world-vhs">
-          <span class="cap-index">01</span>
-          <h3>Building a VHS Render Pipeline for Skull World: Renders 01 and 02</h3>
-          <p class="post-date"><time datetime="2026-11-14">November 14, 2026</time></p>
-          <p>Skull World is a game I’m building. These two renders are visual direction for it. The pipeline that made them runs locally, on a laptop GPU with 8 GB of VRAM.</p>
-          <h4>The pipeline</h4>
-          <p>Stills come from a custom SDXL LoRA, skullworld_sdxl_v1, trained on about 4,000 captioned frames from my own VHS and art datasets. I generate in ComfyUI. ControlNet locks a 3D skeleton model I built, so the character stays consistent. Photoreal scenes use RealVisXL.</p>
-          <p>A custom animated VHS filter, written in Python, adds tracking bars, dropouts, head-switch noise, dot crawl, and tape warble. The filter is piped into ffmpeg.</p>
-          <p>An ownership watermark, the King’s Coin, is baked into the scene before the tape filter. It’s a crowned skull with my name on the rim. Because it goes in first, the tape treatment degrades the mark along with the footage.</p>
-          <h4>Render 01</h4>
-          <p>12 seconds, 768×1024. No AI video model. The motion is a scripted camera move on a still: a push-in, handheld sway, and parallax, rendered frame by frame in Python. The soundtrack, Dead Channel Lullaby, is fully synthesized in code. No samples.</p>
-          <figure class="post-video">
-            <video controls muted playsinline loop poster="media/skull-world-vhs-render-01-poster.webp" preload="metadata" width="768" height="1024" src="media/skull-world-vhs-render-01.mp4" aria-label="Render 01. A 12 second VHS push-in on a skeleton beside a row of CRT televisions."></video>
-            <figcaption>Render 01 · 12 s · 768×1024</figcaption>
-          </figure>
-          <h4>Render 02</h4>
-          <p>12 seconds. The skeleton walks toward the camera in front of a wall of CRTs and says “You shouldn’t have pressed play.”</p>
-          <p>The skeleton is matted out of the still and animated as a 2.5D cut-out puppet: walk bob, leg stretch, opposite arm swing, a contact shadow, and screen-light flicker on the bones. The background is a RealVisXL-inpainted plate, so the CRTs stay locked. 26 screens are masked to flicker independently, with a rolling scan band and flashes.</p>
-          <p>The voice is local TTS (Piper), processed in code: a pitch drop, vocal fry, tape wow and flutter, hiss, hum, and footsteps. The jaw is driven by the voice’s loudness envelope, for automatic lip sync.</p>
-          <p>An earlier attempt used an AI video model (Wan 2.1). The motion wasn’t right, so I moved to the puppet approach.</p>
-          <figure class="post-video">
-            <video controls muted playsinline loop poster="media/skull-world-vhs-render-02-poster.webp" preload="metadata" width="576" height="768" src="media/skull-world-vhs-render-02.mp4" aria-label="Render 02. A skeleton walks toward the camera in front of a wall of CRT televisions and speaks."></video>
-            <figcaption>Render 02 · 12 s · CRT wall</figcaption>
-          </figure>
-          <p>Voice: Piper TTS, en_GB northern_english_male voice (OpenSLR 83, CC BY-SA 4.0)</p>
-          <h4>Where it was posted</h4>
-          <ul class="post-links">
-            <li><a href="https://x.com/JamesFischerOps/status/2121447506366390452" target="_blank" rel="noopener noreferrer">Render 01 on X ↗</a></li>
-            <li><a href="https://x.com/JamesFischerOps/status/2121520909085536349" target="_blank" rel="noopener noreferrer">Render 02 on X ↗</a></li>
-            <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7527223449241579520/" target="_blank" rel="noopener noreferrer">Render 01 on LinkedIn ↗</a></li>
-            <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7527300192845357056/" target="_blank" rel="noopener noreferrer">Render 02 on LinkedIn ↗</a></li>
-            <li><a href="https://x.com/JamesFischerOps" target="_blank" rel="noopener noreferrer">X profile ↗</a></li>
-          </ul>
-          <div class="project-backlink">
-            <span>Part of the <strong>Skull World: VHS Render Pipeline</strong> project</span>
-            <a class="backlink-button" href="Projects.html#skull-world-vhs">View the project →</a>
-          </div>
-        </article>
+      <div class="blog-index">
+        <!-- Newest first. To add a post: copy blog/_post-template.html, then
+             copy one <li class="post-card"> below to the TOP of this list.
+             See BLOG-HOWTO.md. -->
+        <ol class="post-grid" id="post-list" reversed>
+          <li class="post-card" data-slug="skull-world-vhs-renders">
+            <a href="blog/skull-world-vhs-renders.html">
+              <figure class="post-thumb"><img src="media/skull-world-vhs-render-01-poster.webp" alt="" width="768" height="1024" loading="lazy" decoding="async"></figure>
+              <div class="post-card-body">
+                <span class="cap-index">01</span>
+                <h3>Building a VHS Render Pipeline for Skull World: Renders 01 and 02</h3>
+                <p class="post-date"><time datetime="2026-11-14">November 14, 2026</time></p>
+                <p class="post-excerpt">Skull World is a game I’m building. These two renders are visual direction for it. The pipeline that made them runs locally, on a laptop GPU with 8 GB of VRAM.</p>
+                <span class="post-read">Read post ▶</span>
+              </div>
+            </a>
+          </li>
+        </ol>
+        <nav class="post-pager" aria-label="Blog pages" hidden>
+          <button type="button" data-dir="-1">◀ Newer</button>
+          <output aria-live="polite">Page 1 / 1</output>
+          <button type="button" data-dir="1">Older ▶</button>
+        </nav>
       </div>
     </section>
   </main>
@@ -111,5 +97,38 @@
     </nav>
     <p>Seattle, WA · <span id="year">2026</span></p>
   </footer>
+  <script>
+    // Blog index: old Blog.html#post-id links open that post's page, and
+    // the card list pages at 9 cards (5 on phones) so the index never becomes a long scroll.
+    (function () {
+      var cards = Array.prototype.slice.call(document.querySelectorAll('#post-list .post-card'));
+      var id = decodeURIComponent(location.hash.slice(1));
+      if (id) {
+        for (var i = 0; i < cards.length; i++) {
+          if (cards[i].getAttribute('data-slug') === id) { location.replace(cards[i].querySelector('a').href); return; }
+        }
+      }
+      var PER = window.matchMedia('(max-width: 640px)').matches ? 5 : 9, pages = Math.ceil(cards.length / PER), page = 0;
+      var pager = document.querySelector('.post-pager');
+      if (!pager || pages < 2) return;
+      var out = pager.querySelector('output');
+      var btns = pager.querySelectorAll('button');
+      function show(p) {
+        page = Math.max(0, Math.min(pages - 1, p));
+        cards.forEach(function (c, i) { c.hidden = Math.floor(i / PER) !== page; });
+        out.textContent = 'Page ' + (page + 1) + ' / ' + pages;
+        btns[0].disabled = page === 0;
+        btns[1].disabled = page === pages - 1;
+      }
+      Array.prototype.forEach.call(btns, function (b) {
+        b.addEventListener('click', function () {
+          show(page + Number(b.getAttribute('data-dir')));
+          document.getElementById('blog-title').scrollIntoView({ block: 'start' });
+        });
+      });
+      pager.hidden = false;
+      show(0);
+    })();
+  </script>
 </body>
 </html>

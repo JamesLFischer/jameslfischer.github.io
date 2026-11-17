@@ -4,6 +4,7 @@ description: Software, infrastructure, automation, and business-minded problem s
 # experiments (C/D used project stills as backgrounds) are not published.
 exclude:
   - PREVIEW.md
+  - BLOG-HOWTO.md
   - vhs-theme-a.css
   - vhs-theme-b.css
   - vhs-theme-c.css
