@@ -68,7 +68,6 @@
           <h4>The pipeline</h4>
           <p>Stills come from a custom SDXL LoRA, skullworld_sdxl_v1, trained on about 4,000 captioned frames from my own VHS and art datasets. I generate in ComfyUI. ControlNet locks a 3D skeleton model I built, so the character stays consistent. Photoreal scenes use RealVisXL.</p>
           <p>A custom animated VHS filter, written in Python, adds tracking bars, dropouts, head-switch noise, dot crawl, and tape warble. The filter is piped into ffmpeg.</p>
-          <p>An ownership watermark, the King’s Coin, is baked into the scene before the tape filter. It’s a crowned skull with my name on the rim. Because it goes in first, the tape treatment degrades the mark along with the footage.</p>
           <h4>Render 01</h4>
           <p>12 seconds, 768×1024. No AI video model. The motion is a scripted camera move on a still: a push-in, handheld sway, and parallax, rendered frame by frame in Python. The soundtrack, Dead Channel Lullaby, is fully synthesized in code. No samples.</p>
           <figure class="post-video">
