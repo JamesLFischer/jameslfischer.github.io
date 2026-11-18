@@ -2087,6 +2087,9 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 .post-links li:last-child { border-bottom: 1px solid var(--line); }
 .post-links a { color: var(--accent); font-weight: 700; }
 .post-links a:hover { text-decoration: underline; }
+.post-links--line { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.post-links--line li,
+.post-links--line li:last-child { padding: 0; border: 0; }
 .blog-post .project-backlink { max-width: 42rem; }
 
 .project-card.project-featured.vhs-card {
@@ -2145,7 +2148,8 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   font-size: clamp(1.7rem, 3vw, 2.8rem);
 }
 .blnt-card .tags { margin-top: 16px; }
-.blnt-card .project-content .text-link { margin-top: 16px; }
+.blnt-card .piece-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; margin-top: 16px; }
+.blnt-card .piece-links .text-link { margin-top: 0; }
 @media (max-width: 899px) {
   .project-card.project-featured.blnt-card { grid-template-columns: 1fr; }
   .blnt-card .venture-media { margin-bottom: 18px; }
