@@ -2059,7 +2059,9 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   color: var(--accent);
 }
 .post-video { margin: .35rem 0 1.25rem; max-width: 420px; }
-.post-video video {
+.post-video.post-video--wide { max-width: 42rem; }
+.post-video video,
+.post-video img {
   display: block;
   width: 100%;
   height: auto;
@@ -2085,6 +2087,9 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
 .post-links li:last-child { border-bottom: 1px solid var(--line); }
 .post-links a { color: var(--accent); font-weight: 700; }
 .post-links a:hover { text-decoration: underline; }
+.post-links--line { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.post-links--line li,
+.post-links--line li:last-child { padding: 0; border: 0; }
 .blog-post .project-backlink { max-width: 42rem; }
 
 .project-card.project-featured.vhs-card {
@@ -2119,4 +2124,37 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .project-card.project-featured.vhs-card { padding: 16px; }
   .vhs-card .project-meta { margin-bottom: 12px; }
   .post-video { max-width: 100%; }
+}
+
+/* BetterLuckNextTime on Graphic Art: one featured still, 3:2 like the frame. */
+.project-card.project-featured.blnt-card {
+  padding: 22px 26px 24px;
+  column-gap: 32px;
+  align-items: start;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+}
+.blnt-card .project-meta { margin-bottom: 16px; }
+.blnt-card .venture-media {
+  aspect-ratio: 3 / 2;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  align-self: start;
+  padding: 0;
+}
+.blnt-card .venture-media .media-stage { position: absolute; inset: 0; }
+.blnt-card .project-content h3 {
+  margin-top: 6px;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+}
+.blnt-card .tags { margin-top: 16px; }
+.blnt-card .piece-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; margin-top: 16px; }
+.blnt-card .piece-links .text-link { margin-top: 0; }
+@media (max-width: 899px) {
+  .project-card.project-featured.blnt-card { grid-template-columns: 1fr; }
+  .blnt-card .venture-media { margin-bottom: 18px; }
+}
+@media (max-width: 760px) {
+  .project-card.project-featured.blnt-card { padding: 16px; }
+  .blnt-card .project-meta { margin-bottom: 12px; }
 }
