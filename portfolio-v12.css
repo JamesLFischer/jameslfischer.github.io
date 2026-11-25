@@ -2162,20 +2162,95 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .blnt-card .project-meta { margin-bottom: 12px; }
 }
 
-/* Date Night: same featured card as BetterLuckNextTime, portrait still. */
-.project-card.project-featured.blnt-card.date-night-card {
-  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+/* Date Night: portrait clip at its true 720×1248 ratio (the poster is
+   572×1000, the same shape to a hair). Cap the frame so this featured
+   card is not much taller than the other ComfyUI cards, size the box
+   from the media itself so nothing is cropped or letterboxed, and let
+   the text column fill the height. */
+.project-card.project-featured.blnt-card.date-night-card,
+.project-card.project-featured.vhs-card.date-night-card {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+  column-gap: 36px;
 }
-.blnt-card.date-night-card .venture-media {
-  aspect-ratio: 572 / 1000;
-  max-width: 300px;
-}
+.blnt-card.date-night-card .venture-media,
 .project-card.project-featured.vhs-card.date-night-card .project-shot {
-  aspect-ratio: 572 / 1000;
+  aspect-ratio: auto;
+  width: min(100%, 240px);
+  max-width: 240px;
+  height: auto;
+  min-height: 0;
+  align-self: start;
+  position: relative;
+  overflow: hidden;
 }
+.blnt-card.date-night-card .venture-media .media-stage,
+.project-featured.blnt-card.date-night-card .venture-media:has(.media-stage-still) .media-stage {
+  position: static;
+  inset: auto;
+}
+.blnt-card.date-night-card .media-stage-art.media-stage-still img,
+.blnt-card.date-night-card .venture-media img,
+.blnt-card.date-night-card .venture-media video,
+.project-card.project-featured.vhs-card.date-night-card .project-shot img,
+.project-card.project-featured.vhs-card.date-night-card .project-shot video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.date-night-card .project-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: stretch;
+  min-height: 0;
+}
+.date-night-card .tags {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.blnt-card.date-night-card .project-content h3 {
+  margin-top: 4px;
+  font-size: clamp(2rem, 3.6vw, 3.15rem);
+  line-height: 1.05;
+}
+.date-night-card .piece-specs {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.date-night-card .piece-specs li {
+  font: 700 .78rem/1.2 "Share Tech Mono", ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(86, 245, 198, .35);
+  border-radius: 999px;
+  padding: 7px 11px;
+}
+.blnt-card.date-night-card .tags { margin-top: 20px; }
+.blnt-card.date-night-card .piece-links { margin-top: 18px; }
 @media (max-width: 899px) {
-  .project-card.project-featured.blnt-card.date-night-card { grid-template-columns: 1fr; }
-  .blnt-card.date-night-card .venture-media { max-width: 240px; }
+  .project-card.project-featured.blnt-card.date-night-card,
+  .project-card.project-featured.vhs-card.date-night-card { grid-template-columns: 1fr; align-items: start; }
+  .blnt-card.date-night-card .venture-media,
+  .project-card.project-featured.vhs-card.date-night-card .project-shot {
+    width: min(100%, 220px);
+    max-width: 220px;
+    margin: 0 0 18px;
+  }
+  .date-night-card .project-content { justify-content: flex-start; }
+  .blnt-card.date-night-card .project-content h3 { font-size: clamp(1.7rem, 8vw, 2.4rem); }
 }
 
 /* VHS low-poly renders on Graphic Art: portrait 3:4 stills, same featured card as Date Night. */
