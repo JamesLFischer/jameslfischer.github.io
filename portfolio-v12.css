@@ -2265,3 +2265,44 @@ section[id], article[id], [id] { scroll-margin-top: 96px; }
   .project-card.project-featured.blnt-card.vhs-portrait-card { grid-template-columns: 1fr; }
   .blnt-card.vhs-portrait-card .venture-media { max-width: 240px; }
 }
+
+/* clyno project card: 16:9 trailer full-width above the copy.
+   A two-column layout left a large empty well under the video. */
+.project-card.project-featured.clyno-card {
+  padding: 22px 26px 24px;
+  row-gap: 16px;
+  column-gap: 0;
+  align-items: start;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+}
+.clyno-card .project-meta { margin-bottom: 4px; }
+.clyno-figure { margin: 0; max-width: 100%; }
+.clyno-figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.clyno-figure figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.clyno-card .project-content h3 { margin-top: 6px; }
+.clyno-card .tags { margin-top: 16px; }
+.clyno-card .related-posts { margin-top: 18px; }
+.clyno-card .related-posts .text-link { display: inline; margin-top: 0; }
+@media (max-width: 899px) {
+  .clyno-figure { max-width: 100%; }
+}
+@media (max-width: 760px) {
+  .project-card.project-featured.clyno-card { padding: 16px; }
+  .clyno-card .project-meta { margin-bottom: 8px; }
+}
